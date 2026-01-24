@@ -3,47 +3,43 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>IMTIAZ AI PRO - PREMIUM EDITION</title>
+<title>IMTIAZ AI PRO - PREMIUM</title>
 <style>
-  :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', sans-serif; }
   
-  html, body { 
-    margin: 0; padding: 0; width: 100%; height: 100%;
-    background: var(--bg); color: #fff; font-family: sans-serif; 
-    overflow: hidden; position: fixed;
-  }
+  body { margin: 0; background: var(--bg); color: #fff; overflow: hidden; position: fixed; width: 100%; height: 100%; }
 
-  /* LOGIN SCREEN DESIGN */
-  #loginScreen { position: fixed; inset: 0; background: #050a10; display: flex; align-items: center; justify-content: center; z-index: 99999; flex-direction: column; }
-  
-  .login-logo {
-    width: 130px; height: 130px; border-radius: 50%;
-    border: 4px solid var(--glow); box-shadow: 0 0 30px var(--glow);
-    margin-bottom: 25px; object-fit: cover;
-  }
-
-  .pass-box { width: 300px; background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 20px; text-align: center; border: 1px solid var(--glow); box-shadow: 0 0 20px rgba(0,242,255,0.2); }
-  
-  .brand-title { 
-    font-size: 26px; font-weight: bold; color: var(--glow); 
-    margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;
-    text-shadow: 0 0 15px var(--glow);
-  }
-
-  .pass-box input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #333; background: #000; color: #fff; text-align: center; outline: none; }
-  .pass-box button { width: 100%; padding: 12px; background: linear-gradient(90deg, var(--glow), #0062ff); border: none; border-radius: 10px; color: #fff; font-weight: bold; cursor: pointer; font-size: 16px; }
+  /* LOGIN SCREEN */
+  #loginScreen { position: fixed; inset: 0; background: radial-gradient(circle, #0f1c2e 0%, #050a10 100%); display: flex; align-items: center; justify-content: center; z-index: 99999; flex-direction: column; }
+  .login-logo { width: 150px; height: 150px; border-radius: 50%; border: 5px solid var(--glow); box-shadow: 0 0 40px var(--glow); margin-bottom: 30px; object-fit: cover; }
+  .brand-title { font-size: 28px; font-weight: bold; color: var(--glow); margin-bottom: 25px; text-shadow: 0 0 15px var(--glow); letter-spacing: 2px; }
+  .pass-box { width: 320px; background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 25px; border: 1px solid rgba(0,242,255,0.3); backdrop-filter: blur(10px); text-align: center; }
+  input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #333; background: #000; color: #fff; text-align: center; outline: none; }
+  .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, var(--glow), #0062ff); border: none; border-radius: 12px; color: #fff; font-weight: bold; font-size: 16px; box-shadow: 0 5px 15px rgba(0,242,255,0.4); cursor: pointer; }
 
   /* MAIN PANEL */
-  .main-panel { 
-    width: 100%; height: 40vh; display: flex; flex-direction: column; align-items: center; justify-content: space-around;
-    background: linear-gradient(180deg, #1a2c4e 0%, #050a10 100%); border-bottom: 2px solid var(--glow);
-  }
-  .profile-pic { width: 70px; height: 70px; border-radius: 50%; border: 3px solid var(--glow); box-shadow: 0 0 20px var(--glow); object-fit: cover; }
-  .result-main { font-size: 60px; font-weight: 900; margin: 5px 0; text-shadow: 0 0 25px currentColor; }
-  .num-circle { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; background: #000; }
+  .main-panel { height: 45vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(180deg, #0f1c2e 0%, #050a10 100%); border-bottom: 3px solid var(--glow); position: relative; }
+  
+  /* CENTERED PHOTO */
+  .profile-container { position: absolute; top: 15px; }
+  .profile-pic { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--glow); box-shadow: 0 0 25px var(--glow); object-fit: cover; }
 
-  .game-box { width: 100%; height: 60vh; background: #000; overflow: hidden; }
+  .timer { position: absolute; top: 20px; right: 20px; color: var(--red); font-size: 22px; font-weight: bold; background: rgba(0,0,0,0.5); padding: 5px 15px; border-radius: 20px; border: 1px solid var(--red); }
+
+  .prediction-box { margin-top: 60px; text-align: center; }
+  .game-name { color: var(--glow); letter-spacing: 3px; font-weight: bold; font-size: 18px; margin-bottom: 5px; }
+  .result-text { font-size: 75px; font-weight: 900; margin: 10px 0; text-shadow: 0 0 30px currentColor; }
+  .number-ball { width: 55px; height: 55px; border-radius: 50%; border: 4px solid #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 900; background: #000; box-shadow: 0 0 15px rgba(255,255,255,0.3); }
+
+  /* BADGES */
+  .badge-container { display: flex; gap: 10px; margin-top: 15px; }
+  .badge { padding: 6px 12px; border-radius: 30px; font-size: 12px; font-weight: bold; text-transform: uppercase; border: 1px solid currentColor; }
+  .winrate { color: var(--gold); }
+  .fastest { color: var(--green); }
+
+  /* GAME BOX */
+  .game-box { height: 55vh; background: #000; }
   .game-iframe { width: 112%; height: 112%; border: 0; transform: scale(0.895); transform-origin: top left; }
 </style>
 </head>
@@ -51,58 +47,66 @@
 
 <div id="loginScreen">
   <img src="https://i.ibb.co/23fFNTSD/image.jpg" class="login-logo">
+  <div class="brand-title">IMTIAZ AI PRO</div>
   <div class="pass-box">
-    <div class="brand-title">IMTIAZ AI PRO</div>
-    <input type="text" id="userInput" placeholder="USERNAME">
-    <input type="password" id="passInput" placeholder="PASSWORD">
-    <button onclick="checkLogin()">START HACK</button>
+    <input type="text" id="userInput" placeholder="ENTER USERNAME">
+    <input type="password" id="passInput" placeholder="ENTER PASSWORD">
+    <button class="login-btn" onclick="checkLogin()">UNLOCK SYSTEM</button>
   </div>
 </div>
 
 <div id="mainContent" style="display:none;">
     <div class="main-panel">
-        <div style="display:flex; justify-content:space-between; width:92%; align-items:center; padding-top:10px;">
+        <div class="profile-container">
             <img src="https://i.ibb.co/23fFNTSD/image.jpg" class="profile-pic">
-            <div id="timerDisplay" style="color:var(--red); font-size:24px; font-weight:bold;">00:30</div>
         </div>
-        <div style="text-align:center;">
-            <div style="color:var(--glow); letter-spacing:2px; font-weight:bold;">WINGO 30S</div>
-            <div id="bigSmallText" class="result-main">---</div>
-            <div class="num-circle" id="luckyNumber">?</div>
+        
+        <div id="timerDisplay" class="timer">00:30</div>
+
+        <div class="prediction-box">
+            <div class="game-name">WINGO 30S</div>
+            <div id="bigSmallText" class="result-text">---</div>
+            <div class="number-ball" id="luckyNumber">?</div>
+        </div>
+
+        <div class="badge-container">
+            <div class="badge winrate">👑 90% WINRATE</div>
+            <div class="badge fastest">⚡ FASTEST SIGNAL</div>
         </div>
     </div>
+
     <div class="game-box">
         <iframe class="game-iframe" src="https://dkwin9.com/#/register?invitationCode=24764633446"></iframe>
     </div>
 </div>
 
 <script>
-let lastSeed = 500;
+let seed = 500;
 function checkLogin() {
     const u = document.getElementById('userInput').value;
     const p = document.getElementById('passInput').value;
-    // আপনি চাইলে এখানে নিচের কোটেশনের ভেতর পাসওয়ার্ড পরিবর্তন করতে পারেন
     if(u === "IMTIAZ01" && p === "IMTIAZ01") {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
         setInterval(updateSystem, 1000);
         generateSignal();
-    } else { alert("Login Failed!"); }
+    } else { alert("Access Denied!"); }
 }
 
 function updateSystem() {
     const sec = new Date().getSeconds();
     const remaining = 30 - (sec % 30);
     document.getElementById('timerDisplay').innerText = `00:${remaining < 10 ? '0'+remaining : remaining}`;
-    if (remaining === 30) { lastSeed++; generateSignal(); }
+    if (remaining === 30) { seed++; generateSignal(); }
 }
 
 function generateSignal() {
-    const logic = Math.floor(Math.abs(Math.sin(lastSeed * 12.5) * 10)) % 10;
-    const prediction = logic >= 5 ? "BIG" : "SMALL";
+    const logic = Math.floor(Math.abs(Math.sin(seed * 12.5) * 10)) % 10;
+    const res = logic >= 5 ? "BIG" : "SMALL";
     document.getElementById('luckyNumber').innerText = logic;
-    document.getElementById('bigSmallText').innerText = prediction;
-    document.getElementById('bigSmallText').style.color = prediction === "BIG" ? "var(--red)" : "var(--glow)";
+    const textElem = document.getElementById('bigSmallText');
+    textElem.innerText = res;
+    textElem.style.color = res === "BIG" ? "var(--red)" : "var(--glow)";
 }
 </script>
 </body>
