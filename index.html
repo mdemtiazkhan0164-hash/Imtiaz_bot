@@ -13,22 +13,24 @@
   /* MAIN PANEL (Top 35%) */
   .main-panel { height: 35vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(180deg, #0f1c2e 0%, #050a10 100%); border-bottom: 2px solid var(--glow); position: relative; }
   
-  /* CENTERED PHOTO */
-  .profile-pic { width: 85px; height: 85px; border-radius: 50%; border: 3px solid var(--glow); box-shadow: 0 0 25px var(--glow); object-fit: cover; margin-bottom: 5px; }
+  .profile-pic { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--glow); box-shadow: 0 0 20px var(--glow); object-fit: cover; margin-bottom: 2px; }
 
-  /* TOP BUTTONS (Left & Right) */
-  .top-badge { position: absolute; top: 40%; transform: translateY(-50%); padding: 5px 10px; border-radius: 10px; font-size: 10px; font-weight: bold; border: 1px solid currentColor; background: rgba(0,0,0,0.5); text-transform: uppercase; }
-  .winrate-top { left: 15px; color: var(--gold); }
-  .fastest-top { right: 15px; color: var(--green); }
+  /* TOP BUTTONS */
+  .top-badge { position: absolute; top: 40%; transform: translateY(-50%); padding: 5px 8px; border-radius: 10px; font-size: 9px; font-weight: bold; border: 1px solid currentColor; background: rgba(0,0,0,0.5); text-transform: uppercase; }
+  .winrate-top { left: 10px; color: var(--gold); }
+  .fastest-top { right: 10px; color: var(--green); }
 
-  .timer { position: absolute; top: 15px; right: 15px; color: var(--red); font-size: 18px; font-weight: bold; }
+  .timer { position: absolute; top: 12px; right: 15px; color: var(--red); font-size: 18px; font-weight: bold; }
 
-  .game-name { color: var(--glow); letter-spacing: 2px; font-weight: bold; font-size: 16px; margin-top: 5px; }
-  .result-text { font-size: 55px; font-weight: 900; margin: 0; text-shadow: 0 0 20px currentColor; line-height: 1; }
-  .number-ball { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; background: #000; margin-top: 5px; }
+  .game-name { color: var(--glow); letter-spacing: 2px; font-weight: bold; font-size: 15px; margin-top: 2px; }
+  .result-text { font-size: 50px; font-weight: 900; margin: 0; text-shadow: 0 0 20px currentColor; line-height: 1; }
+  
+  /* TWO NUMBERS STYLE */
+  .number-container { display: flex; gap: 15px; margin-top: 8px; }
+  .number-ball { width: 42px; height: 42px; border-radius: 50%; border: 2px solid #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; background: #000; box-shadow: 0 0 10px rgba(255,255,255,0.2); }
 
-  /* GAME BOX (Bottom 65%) - স্ক্রিন বড় করা হয়েছে */
-  .game-box { height: 65vh; background: #000; overflow: hidden; position: relative; }
+  /* GAME BOX (Bottom 65%) */
+  .game-box { height: 65vh; background: #000; overflow: hidden; }
   .game-iframe { width: 100%; height: 100%; border: 0; }
 
   /* LOGIN SCREEN */
@@ -62,7 +64,11 @@
         <div class="game-name">WINGO 30S</div>
 
         <div id="bigSmallText" class="result-text">---</div>
-        <div class="number-ball" id="luckyNumber">?</div>
+        
+        <div class="number-container">
+            <div class="number-ball" id="luckyNumber1">?</div>
+            <div class="number-ball" id="luckyNumber2" style="border-color: var(--gold);">?</div>
+        </div>
     </div>
 
     <div class="game-box">
@@ -91,12 +97,22 @@ function updateSystem() {
 }
 
 function generateSignal() {
-    const logic = Math.floor(Math.abs(Math.sin(seed * 12.5) * 10)) % 10;
-    const res = logic >= 5 ? "BIG" : "SMALL";
-    document.getElementById('luckyNumber').innerText = logic;
+    // প্রথম নাম্বার (প্রেডিকশন)
+    const logic1 = Math.floor(Math.abs(Math.sin(seed * 12.5) * 10)) % 10;
+    // দ্বিতীয় নাম্বার (র্যান্ডম স্ট্যাট)
+    const logic2 = Math.floor(Math.abs(Math.cos(seed * 7.5) * 10)) % 10;
+    
+    const res = logic1 >= 5 ? "BIG" : "SMALL";
+    
+    document.getElementById('luckyNumber1').innerText = logic1;
+    document.getElementById('luckyNumber2').innerText = logic2;
+    
     const textElem = document.getElementById('bigSmallText');
     textElem.innerText = res;
     textElem.style.color = res === "BIG" ? "var(--red)" : "var(--glow)";
+    
+    // নাম্বার বলের বর্ডার কালার পরিবর্তন
+    document.getElementById('luckyNumber1').style.borderColor = res === "BIG" ? "var(--red)" : "var(--green)";
 }
 </script>
 </body>
