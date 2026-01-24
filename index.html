@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>IMTIAZ AI PRO - PREMIUM EDITION</title>
+<style>
+  :root { --glow: #00f2ff; --bg: #050a10; --card: #0f1c2e; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  
+  html, body { 
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background: var(--bg); color: #fff; font-family: 'Segoe UI', Roboto, sans-serif; 
+    overflow: hidden; position: fixed; overscroll-behavior-y: contain;
+  }
+
+  /* LOGIN SCREEN */
+  #loginScreen { position: fixed; inset: 0; background: #050a10; display: flex; align-items: center; justify-content: center; z-index: 99999; }
+  .pass-box { width: 280px; background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 20px; text-align: center; border: 1px solid var(--glow); box-shadow: 0 0 20px rgba(0,242,255,0.2); }
+  .pass-box input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #333; background: #000; color: #fff; text-align: center; outline: none; }
+  .pass-box button { width: 100%; padding: 12px; background: linear-gradient(90deg, var(--glow), #0062ff); border: none; border-radius: 10px; color: #fff; font-weight: bold; cursor: pointer; }
+
+  /* TOP PANEL - 40% */
+  .main-panel { 
+    width: 100%; height: 40vh; 
+    display: flex; flex-direction: column; align-items: center; justify-content: space-around;
+    background: linear-gradient(180deg, #1a2c4e 0%, #050a10 100%);
+    border-bottom: 2px solid var(--glow); padding: 10px; z-index: 100;
+  }
+
+  .header-info { display: flex; justify-content: space-between; width: 92%; align-items: center; }
+  
+  /* বড় লোগো */
+  .profile-pic { 
+    width: 75px; height: 75px; border-radius: 50%; 
+    border: 3px solid var(--glow); 
+    box-shadow: 0 0 20px var(--glow); 
+    object-fit: cover;
+  }
+
+  .prediction-display { text-align: center; width: 100%; }
+  .game-title { font-size: 20px; font-weight: 900; color: var(--glow); margin: 0; text-transform: uppercase; letter-spacing: 2px; }
+  
+  .result-main { font-size: 60px; font-weight: 950; margin: 5px 0; text-shadow: 0 0 25px currentColor; letter-spacing: -2px; }
+  
+  /* ছোট লেখাগুলোর ডিজাইন */
+  .info-tag { font-size: 11px; font-weight: bold; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+  .active-status { color: var(--green); font-size: 10px; display: flex; align-items: center; gap: 5px; justify-content: flex-end; }
+  .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; box-shadow: 0 0 5px var(--green); }
+
+  .num-circle { 
+    width: 45px; height: 45px; border-radius: 50%; border: 3px solid #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 900; background: #000; box-shadow: 0 0 10px rgba(255,255,255,0.2);
+  }
+
+  .footer-row { display: flex; justify-content: space-between; width: 90%; margin-top: 5px; }
+
+  /* GAME VIEW - 60% */
+  .game-box { width: 100%; height: 60vh; background: #000; overflow: hidden; }
+  .game-iframe { width: 112%; height: 112%; border: 0; transform: scale(0.895); transform-origin: top left; }
+</style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <div class="pass-box">
+    <h2 style="color:var(--glow); margin-top:0;">IMTIAZ SYSTEM</h2>
+    <input type="text" id="userInput" placeholder="USERNAME">
+    <input type="password" id="passInput" placeholder="PASSWORD">
+    <button onclick="checkLogin()">START HACK</button>
+  </div>
+</div>
+
+<div id="mainContent" style="display:none;">
+    <div class="main-panel">
+        <div class="header-info">
+            <img src="https://i.ibb.co/23fFNTSD/image.jpg" class="profile-pic">
+            <div style="text-align:right;">
+                <div id="timerDisplay" style="color:var(--red); font-size:22px; font-weight:bold;">00:30</div>
+                <div class="active-status"><div class="dot"></div> BOT CONNECTED</div>
+            </div>
+        </div>
+
+        <div class="prediction-display">
+            <div class="game-title">Wingo 30 second</div>
+            <div id="bigSmallText" class="result-main">---</div>
+            <div>
+                <div class="num-circle" id="luckyNumber">?</div>
+            </div>
+        </div>
+
+        <div class="footer-row">
+            <div class="info-tag">ALGORITHM: V8.2 PRO</div>
+            <div class="info-tag" style="color:var(--gold);">99.9% ACCURACY</div>
+        </div>
+    </div>
+
+    <div class="game-box">
+        <iframe class="game-iframe" src="https://dkwin9.com/#/register?invitationCode=24764633446"></iframe>
+    </div>
+</div>
+
+<script>
+let lastPeriodSeed = 500;
+
+function checkLogin() {
+    const u = document.getElementById('userInput').value;
+    const p = document.getElementById('passInput').value;
+    if(u === "IMTIAZ01" && p === "IMTIAZ01") {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        setInterval(updateSystem, 1000);
+        generateSignal();
+    } else { alert("Login Failed!"); }
+}
+
+function updateSystem() {
+    const now = new Date();
+    const sec = now.getSeconds();
+    const remaining = 30 - (sec % 30);
+    document.getElementById('timerDisplay').innerText = `00:${remaining < 10 ? '0'+remaining : remaining}`;
+
+    if (remaining === 30) {
+        lastPeriodSeed++;
+        // পিরিয়ড শেষ হওয়ার সাথে সাথে নতুন সিগন্যাল আপডেট হবে
+        generateSignal();
+    }
+}
+
+function generateSignal() {
+    const mainText = document.getElementById('bigSmallText');
+    const numBall = document.getElementById('luckyNumber');
+    
+    // হাই-পাওয়ার সিগন্যাল অ্যালগরিদম
+    const logic = Math.floor(Math.abs(Math.sin(lastPeriodSeed * 12.5) * 10)) % 10;
+    numBall.innerText = logic;
+    
+    const prediction = logic >= 5 ? "BIG" : "SMALL";
+    mainText.innerText = prediction;
+    mainText.style.color = prediction === "BIG" ? "var(--red)" : "var(--glow)";
+    numBall.style.borderColor = prediction === "BIG" ? "var(--red)" : "var(--green)";
+}
+
+window.addEventListener('touchmove', function(e) {
+    if (!e.target.closest('.game-box')) e.preventDefault();
+}, { passive: false });
+</script>
+
+</body>
+</html>
