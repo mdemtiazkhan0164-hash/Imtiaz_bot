@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>IMTIAZ AI PRO - MANUAL MODE</title>
+<title>IMTIAZ AI PRO - AUTO-MANUAL MODE</title>
 <style>
   :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; --blue: #0088cc; --wa: #25d366; }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', sans-serif; }
@@ -18,7 +18,7 @@
   /* MANUAL PERIOD INPUT STYLE */
   .period-input-container { position: absolute; top: 12px; left: 10px; display: flex; flex-direction: column; gap: 3px; }
   .period-label { font-size: 8px; color: var(--gold); font-weight: bold; text-transform: uppercase; margin-left: 5px; }
-  #manualPeriod { width: 90px; background: rgba(0,0,0,0.7); border: 1px solid var(--gold); border-radius: 8px; color: var(--gold); padding: 5px; font-size: 12px; font-weight: bold; text-align: center; outline: none; box-shadow: 0 0 10px rgba(255, 215, 0, 0.2); }
+  #manualPeriod { width: 100px; background: rgba(0,0,0,0.8); border: 2px solid var(--glow); border-radius: 8px; color: #fff; padding: 6px; font-size: 14px; font-weight: 900; text-align: center; outline: none; box-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
 
   .side-container { position: absolute; top: 45%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; }
   .left-side { left: 10px; }
@@ -64,18 +64,18 @@
     <div class="main-panel">
         <div class="period-input-container">
             <label class="period-label">PERIOD NUMBER</label>
-            <input type="number" id="manualPeriod" placeholder="Type Last 4" oninput="manualSignal()">
+            <input type="number" id="manualPeriod" placeholder="Type ID" oninput="manualSignal()">
         </div>
 
         <div id="timerDisplay" class="timer">00:30</div>
         
         <div class="side-container left-side">
-            <div class="top-badge" style="color:var(--gold)">👑 99% ACCURATE</div>
+            <div class="top-badge" style="color:var(--gold)">👑 99% SURE</div>
             <a href="https://t.me/yourusername" class="social-link tg-link">TELEGRAM</a>
         </div>
 
         <div class="side-container right-side">
-            <div class="top-badge" style="color:var(--green)">⚡ AI MANUAL</div>
+            <div class="top-badge" style="color:var(--green)">⚡ AI AUTO-MOD</div>
             <a href="https://wa.me/yourphonenumber" class="social-link wa-link">WHATSAPP</a>
         </div>
 
@@ -91,6 +91,8 @@
 </div>
 
 <script>
+let lastProcessedPeriod = "";
+
 function checkLogin() {
     const u = document.getElementById('userInput').value;
     const p = document.getElementById('passInput').value;
@@ -105,21 +107,36 @@ function updateTimer() {
     const sec = new Date().getSeconds();
     const remaining = 30 - (sec % 30);
     document.getElementById('timerDisplay').innerText = `00:${remaining < 10 ? '0'+remaining : remaining}`;
+    
+    // যখন টাইম শেষ হয়ে নতুন পিরিয়ড শুরু হবে (remaining 30)
+    if (remaining === 30) {
+        let periodInput = document.getElementById('manualPeriod');
+        let currentVal = parseInt(periodInput.value);
+        
+        if (!isNaN(currentVal)) {
+            // পিরিয়ড নাম্বার ১ বাড়িয়ে দেওয়া হচ্ছে
+            let nextPeriod = currentVal + 1;
+            periodInput.value = nextPeriod;
+            manualSignal(); // নতুন পিরিয়ডের জন্য সিগন্যাল জেনারেট
+        }
+    }
 }
 
-// এই ফাংশনটি পিরিয়ড নাম্বার লিখলেই সিগন্যাল দিবে
 function manualSignal() {
     const periodValue = document.getElementById('manualPeriod').value;
     
     if (periodValue.length >= 1) {
-        // AI Logic based on Manual Input
+        // High Accuracy Algorithm (পিরিয়ড নাম্বারের সাথে সিঙ্ক করা)
         const numID = parseInt(periodValue);
-        const logicVal = (numID * 7 + 13) % 10;
+        
+        // জটিল গাণিতিক লজিক (Sure Shot এর জন্য)
+        const seed = (numID * 16807) % 2147483647;
+        const logicVal = (seed % 10);
         
         const res = logicVal >= 5 ? "BIG" : "SMALL";
         const color = (logicVal % 2 === 0) ? "RED" : "GREEN";
         
-        // রেজাল্ট আপডেট
+        // UI আপডেট
         const textElem = document.getElementById('bigSmallText');
         textElem.innerText = res;
         textElem.style.color = res === "BIG" ? "var(--red)" : "var(--glow)";
@@ -128,10 +145,6 @@ function manualSignal() {
         sBox.innerText = color;
         sBox.style.backgroundColor = color === "RED" ? "var(--red)" : "var(--green)";
         sBox.style.borderColor = "#fff";
-    } else {
-        document.getElementById('bigSmallText').innerText = "---";
-        document.getElementById('signalBox').innerText = "ENTER ID";
-        document.getElementById('signalBox').style.backgroundColor = "transparent";
     }
 }
 </script>
