@@ -3,26 +3,36 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>IMTIAZ AI PRO - V16 VIP LOCK</title>
+<title>IMTIAZ AI PRO - V17 GESTURE LOCK</title>
 <style>
   :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; --blue: #0088cc; --wa: #25d366; }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', sans-serif; }
   body { margin: 0; background: var(--bg); color: #fff; overflow: hidden; position: fixed; width: 100%; height: 100%; }
 
-  /* GREETING LIGHTING */
   .neon-text { font-size: 20px; font-weight: 900; text-align: center; margin-bottom: 10px; text-shadow: 0 0 10px var(--glow); animation: glow 1.5s infinite alternate; }
   @keyframes glow { from { opacity: 0.6; } to { opacity: 1; color: var(--glow); } }
 
-  /* LOGIN */
   #loginScreen { position: fixed; inset: 0; background: radial-gradient(circle, #0f1c2e, #050a10); display: flex; align-items: center; justify-content: center; z-index: 99999; flex-direction: column; }
-  .pass-box { width: 320px; background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 25px; border: 1px solid var(--glow); text-align: center; backdrop-filter: blur(10px); }
+  .pass-box { width: 320px; background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 25px; border: 1px solid var(--glow); text-align: center; backdrop-filter: blur(10px); position: relative; }
   .id-box { font-size: 11px; color: #aaa; background: #000; padding: 8px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed #333; }
   
   input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #1a3a4a; background: #000; color: var(--glow); text-align: center; font-weight: bold; outline: none; font-size: 16px; }
   .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, #00c3ff, #0062ff); border: none; border-radius: 12px; color: #fff; font-weight: 900; cursor: pointer; text-transform: uppercase; }
   .get-key { margin-top: 15px; display: inline-block; color: var(--gold); text-decoration: none; font-size: 13px; font-weight: bold; border-bottom: 1px solid; }
 
-  /* MAIN PANEL */
+  /* SECRET GESTURE AREA */
+  #secretAdminArea {
+    width: 100%;
+    height: 80px;
+    margin-top: 10px;
+    background: transparent; /* এটি অদৃশ্য থাকবে */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.03); /* খুবই হালকা লেখা যা বোঝা যাবে না */
+    font-size: 10px;
+  }
+
   #mainContent { display:none; }
   .main-panel { height: 35vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #050a10; border-bottom: 3px solid var(--glow); position: relative; }
   .side-container { position: absolute; top: 45%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 5px; }
@@ -47,7 +57,8 @@
     <input type="text" id="vkey" placeholder="PASTE VIP KEY HERE">
     <button class="login-btn" onclick="checkAccess()">LOGIN NOW</button>
     <a href="https://t.me/emtiaz0099" class="get-key">GET VIP KEY</a>
-    <div onclick="adminGen()" style="margin-top:20px; font-size:8px; color:#222; cursor:pointer;">ADMIN CONTROL</div>
+    
+    <div id="secretAdminArea">TAP WITH 3 FINGERS</div>
   </div>
 </div>
 
@@ -76,6 +87,14 @@
 </div>
 
 <script>
+// ১. ৩ আঙ্গুলের টাচ ডিটেকশন (Secret Gesture)
+const secretArea = document.getElementById('secretAdminArea');
+secretArea.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 3) {
+        adminGen(); // ৩ আঙ্গুল দিয়ে টাচ করলে এই ফাংশন কল হবে
+    }
+}, false);
+
 function generateID() {
     let id = localStorage.getItem('my_device_id');
     if(!id) {
@@ -96,14 +115,17 @@ function checkAccess() {
     } else { alert("Invalid Key for this device!"); }
 }
 
-// অ্যাডমিন পাসওয়ার্ড এখানে আপডেট করা হয়েছে
+// অ্যাডমিন প্যানেল পাসওয়ার্ড: 016450
 function adminGen() {
-    if(prompt("Admin Password:") === "016450") {
+    let pass = prompt("Enter Admin Password:");
+    if(pass === "016450") {
         let user_id = prompt("Enter User Device ID:");
         if(user_id) {
             let generatedKey = user_id + "-VIP";
-            alert("Generated Key:\n" + generatedKey);
+            alert("SUCCESS!\n\nUser ID: " + user_id + "\nGenerated Key: " + generatedKey);
         }
+    } else if(pass !== null) {
+        alert("Wrong Admin Password!");
     }
 }
 
