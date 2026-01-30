@@ -3,45 +3,64 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>IMTIAZ AI PRO - V11 ULTRA</title>
+<title>IMTIAZ AI PRO - V13 PREMIUM</title>
 <style>
   :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; --blue: #0088cc; --wa: #25d366; }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', sans-serif; }
   
   body { margin: 0; background: var(--bg); color: #fff; overflow: hidden; position: fixed; width: 100%; height: 100%; }
 
+  /* LIGHTING TEXT ANIMATION */
+  .greeting-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+    animation: glowText 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowText {
+    from { text-shadow: 0 0 5px #fff, 0 0 10px var(--glow), 0 0 15px var(--glow); }
+    to { text-shadow: 0 0 10px #fff, 0 0 20px var(--glow), 0 0 30px var(--glow); color: var(--glow); }
+  }
+
   /* VIP LOGIN SCREEN */
   #loginScreen { position: fixed; inset: 0; background: #050a10; display: flex; align-items: center; justify-content: center; z-index: 99999; flex-direction: column; }
-  .login-logo { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--glow); box-shadow: 0 0 25px var(--glow); margin-bottom: 25px; object-fit: cover; }
+  .login-logo { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--glow); box-shadow: 0 0 20px var(--glow); margin-bottom: 20px; object-fit: cover; }
   .pass-box { width: 310px; background: rgba(255, 255, 255, 0.03); padding: 30px 20px; border-radius: 25px; border: 1px solid rgba(0, 242, 255, 0.3); text-align: center; backdrop-filter: blur(10px); }
   
-  .key-input { width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 12px; border: 1px solid #1a3a4a; background: #000; color: var(--glow); text-align: center; outline: none; font-size: 18px; font-weight: bold; }
-  .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, #00c3ff, #0062ff); border: none; border-radius: 12px; color: #fff; font-weight: 800; font-size: 16px; cursor: pointer; text-transform: uppercase; }
+  .key-input { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #1a3a4a; background: #000; color: var(--glow); text-align: center; outline: none; font-size: 18px; font-weight: bold; }
+  .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, #00c3ff, #0062ff); border: none; border-radius: 12px; color: #fff; font-weight: 800; font-size: 16px; cursor: pointer; text-transform: uppercase; margin-bottom: 12px; }
+  .get-key-btn { width: 100%; padding: 12px; background: transparent; border: 1px solid var(--gold); border-radius: 12px; color: var(--gold); font-weight: bold; font-size: 14px; cursor: pointer; text-decoration: none; display: inline-block; }
 
   /* MAIN PANEL */
   #mainContent { display:none; }
   .main-panel { height: 35vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(180deg, #0f1c2e 0%, #050a10 100%); border-bottom: 2px solid var(--glow); position: relative; }
   
-  /* SIDE BUTTONS & LABELS */
+  /* SIDE BUTTONS & NEW LOGOS */
   .side-container { position: absolute; top: 40%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 5px; width: 85px; }
   .left-side { left: 10px; }
   .right-side { right: 10px; }
 
-  .social-btn { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; font-size: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); }
-  .tg-bg { background: var(--blue); }
-  .wa-bg { background: var(--wa); }
+  .icon-box { width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 0 15px rgba(0,0,0,0.5); border: 1.5px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); }
+  .icon-img { width: 28px; height: 28px; object-fit: contain; }
   
-  .badge-text { font-size: 9px; font-weight: bold; text-align: center; color: #ddd; line-height: 1.2; text-transform: uppercase; }
-  .acc-text { color: var(--gold); text-shadow: 0 0 5px var(--gold); }
-  .trust-text { color: var(--green); font-style: italic; }
+  .badge-text { font-size: 9px; font-weight: bold; text-align: center; color: #fff; line-height: 1.2; text-transform: uppercase; margin-top: 4px; }
+  .acc-text { color: var(--gold); text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+  .trust-text { color: var(--green); }
 
   .period-input-container { position: absolute; top: 12px; left: 10px; }
   #manualPeriod { width: 90px; background: #000; border: 2px solid var(--glow); border-radius: 8px; color: #fff; padding: 5px; font-size: 18px; font-weight: 900; text-align: center; outline: none; }
   
   .timer { position: absolute; top: 12px; right: 15px; color: var(--red); font-size: 18px; font-weight: bold; }
-  .profile-pic { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--glow); margin-bottom: 5px; }
-  .result-text { font-size: 55px; font-weight: 900; margin: 0; line-height: 1; }
-  .signal-indicator { margin-top: 8px; padding: 5px 35px; border-radius: 20px; font-size: 18px; font-weight: bold; border: 2px solid #fff; }
+  .profile-pic { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--glow); margin-bottom: 5px; box-shadow: 0 0 10px var(--glow); }
+  
+  /* SIGNAL AREA */
+  .result-text { font-size: 55px; font-weight: 900; margin: 0; line-height: 1; letter-spacing: -2px; }
+  .expected-label { color: var(--gold); font-weight: bold; font-size: 12px; margin-top: 5px; background: rgba(0,0,0,0.3); padding: 2px 10px; border-radius: 10px; }
+  .signal-indicator { margin-top: 10px; padding: 6px 40px; border-radius: 20px; font-size: 18px; font-weight: 800; border: 2px solid #fff; text-shadow: 0 0 5px #000; }
   
   .game-box { height: 65vh; background: #000; }
   iframe { width: 100%; height: 100%; border: 0; }
@@ -50,23 +69,31 @@
 <body>
 
 <div id="loginScreen">
+  <div class="greeting-text">আসসালামু আলাইকুম</div>
   <img src="https://i.ibb.co/23fFNTSD/image.jpg" class="login-logo">
   <div class="pass-box">
-    <div style="color:var(--glow); font-weight:bold; margin-bottom:20px;">VIP KEY ACCESS</div>
+    <div style="color:var(--glow); font-weight:bold; margin-bottom:15px; font-size: 14px;">VIP KEY REQUIRED</div>
     <input type="text" id="vkey" class="key-input" placeholder="ENTER KEY">
-    <button class="login-btn" onclick="validateKey()">LOGIN NOW</button>
+    <button class="login-btn" onclick="validateKey()">LOGIN</button>
+    <a href="https://t.me/emtiaz0099" class="get-key-btn">GET VIP KEY</a>
   </div>
 </div>
 
 <div id="mainContent">
     <div class="main-panel">
+        <div class="greeting-text" style="font-size: 12px;">আসসালামু আলাইকুম</div>
+
         <div class="side-container left-side">
-            <a href="https://t.me/emtiaz0099" class="social-btn tg-bg">TG</a>
+            <a href="https://t.me/emtiaz0099" class="icon-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="icon-img">
+            </a>
             <div class="badge-text acc-text">99%<br>ACCURACY</div>
         </div>
 
         <div class="side-container right-side">
-            <a href="https://wa.me/8801612788539" class="social-btn wa-bg">WA</a>
+            <a href="https://wa.me/8801612788539" class="icon-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="icon-img">
+            </a>
             <div class="badge-text trust-text">BY IMTIAZ<br>VERIFIED</div>
         </div>
 
@@ -77,7 +104,7 @@
         
         <img src="https://i.ibb.co/23fFNTSD/image.jpg" class="profile-pic">
         <div id="bigSmallText" class="result-text">---</div>
-        <div id="expectedNumbers" style="color:var(--gold); font-weight:bold; font-size: 13px; margin-top: 3px;">EXPECTED: ? & ?</div>
+        <div id="expectedNumbers" class="expected-label">EXPECTED: ? & ?</div>
         <div id="signalBox" class="signal-indicator">WAITING</div>
     </div>
     
@@ -89,14 +116,13 @@
 <script>
 let lastUpdate = -1;
 
-// লগইন কী: vip01
 function validateKey() {
-    const key = document.getElementById('vkey').value.trim();
-    if(key === "vip01" || key === "VIP01") {
+    const key = document.getElementById('vkey').value.trim().toLowerCase();
+    if(key === "vip01") {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
         setInterval(autoEngine, 1000);
-    } else { alert("Invalid Key!"); }
+    } else { alert("Wrong Key! Contact Admin."); }
 }
 
 function autoEngine() {
@@ -124,14 +150,13 @@ function limitDigits(el) {
 }
 
 function generateVIPSureShot(num) {
-    // Advanced Probability Logic for 99% Accuracy
     const seed = (num * 16807) % 2147483647;
     const logic = seed % 10;
     const res = logic >= 5 ? "BIG" : "SMALL";
     const color = (logic % 2 === 0) ? "RED" : "GREEN";
     
     let n1 = logic;
-    let n2 = (logic + 2) % 10;
+    let n2 = (logic + 4) % 10;
     if(res === "BIG" && n2 < 5) n2 += 5;
     if(res === "SMALL" && n2 > 4) n2 -= 5;
 
