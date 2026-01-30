@@ -3,131 +3,138 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>IMTIAZ AI PRO - V7 VIP KEY</title>
+<title>IMTIAZ AI PRO - V8 FINAL</title>
 <style>
   :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; --blue: #0088cc; }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', sans-serif; }
   
   body { margin: 0; background: var(--bg); color: #fff; overflow: hidden; position: fixed; width: 100%; height: 100%; }
 
-  /* NEW MINIMAL LOGIN STYLE */
-  #loginScreen { position: fixed; inset: 0; background: #050a10; display: flex; align-items: center; justify-content: center; z-index: 99999; flex-direction: column; }
-  .login-logo { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--glow); box-shadow: 0 0 25px var(--glow); margin-bottom: 25px; object-fit: cover; }
-  .pass-box { width: 310px; background: rgba(255, 255, 255, 0.03); padding: 30px 20px; border-radius: 25px; border: 1px solid rgba(0, 242, 255, 0.3); text-align: center; backdrop-filter: blur(10px); }
-  
-  .key-input { width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 12px; border: 1px solid #1a3a4a; background: #000; color: var(--glow); text-align: center; outline: none; font-size: 18px; font-weight: bold; letter-spacing: 2px; box-shadow: inset 0 0 10px rgba(0,242,255,0.1); }
-  .key-input::placeholder { color: #444; letter-spacing: 0; font-size: 14px; }
+  /* LOGIN SCREEN */
+  #loginScreen { 
+    position: fixed; inset: 0; background: #050a10; 
+    display: flex; align-items: center; justify-content: center; 
+    z-index: 99999; flex-direction: column; 
+  }
+  .pass-box { 
+    width: 320px; background: rgba(255, 255, 255, 0.05); 
+    padding: 30px; border-radius: 20px; border: 1px solid var(--glow); 
+    text-align: center; box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+  }
+  .key-input { 
+    width: 100%; padding: 15px; margin: 20px 0; border-radius: 10px; 
+    border: 1px solid #333; background: #000; color: #fff; 
+    text-align: center; font-size: 18px; outline: none; 
+  }
+  .login-btn { 
+    width: 100%; padding: 15px; background: var(--blue); 
+    border: none; border-radius: 10px; color: #fff; 
+    font-weight: bold; cursor: pointer; font-size: 16px;
+  }
+  .get-key { 
+    margin-top: 15px; display: inline-block; color: var(--gold); 
+    text-decoration: none; font-size: 14px; font-weight: bold;
+  }
 
-  .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, #00c3ff, #0062ff); border: none; border-radius: 12px; color: #fff; font-weight: 800; font-size: 16px; cursor: pointer; text-transform: uppercase; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,98,255,0.4); }
-  
-  .get-key-btn { display: inline-block; color: var(--gold); font-size: 14px; font-weight: bold; text-decoration: none; border: 1px solid var(--gold); padding: 8px 20px; border-radius: 20px; transition: 0.3s; }
-  .get-key-btn:hover { background: var(--gold); color: #000; }
-
-  /* MAIN PANEL REMAINS SAME */
-  #mainContent { display:none; }
-  .main-panel { height: 35vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(180deg, #0f1c2e 0%, #050a10 100%); border-bottom: 2px solid var(--glow); position: relative; }
-  .profile-pic { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--glow); object-fit: cover; }
-  .period-input-container { position: absolute; top: 12px; left: 10px; }
-  #manualPeriod { width: 90px; background: #000; border: 2px solid var(--glow); border-radius: 8px; color: #fff; padding: 5px; font-size: 18px; font-weight: 900; text-align: center; outline: none; }
-  .timer { position: absolute; top: 12px; right: 15px; color: var(--red); font-size: 18px; font-weight: bold; }
-  .result-text { font-size: 50px; font-weight: 900; margin: 5px 0; }
-  .signal-indicator { margin-top: 10px; padding: 5px 35px; border-radius: 20px; font-size: 18px; font-weight: bold; border: 2px solid #fff; }
-  .game-box { height: 65vh; background: #000; }
-  iframe { width: 100%; height: 100%; border: 0; }
+  /* MAIN APP */
+  #mainContent { display: none; }
+  .main-panel { 
+    height: 35vh; display: flex; flex-direction: column; 
+    align-items: center; justify-content: center; 
+    background: #0f1c2e; border-bottom: 2px solid var(--glow); position: relative; 
+  }
+  .timer { position: absolute; top: 15px; right: 15px; color: var(--red); font-weight: bold; font-size: 20px; }
+  #manualPeriod { 
+    position: absolute; top: 15px; left: 15px; width: 90px; 
+    background: #000; border: 2px solid var(--glow); color: #fff; 
+    text-align: center; border-radius: 5px; font-size: 16px; padding: 5px;
+  }
+  .signal-box { font-size: 55px; font-weight: 900; margin: 10px 0; }
+  .indicator { padding: 5px 40px; border-radius: 30px; font-weight: bold; border: 2px solid #fff; }
 </style>
 </head>
 <body>
 
 <div id="loginScreen">
-  <img src="https://i.ibb.co/23fFNTSD/image.jpg" class="login-logo">
-  
+  <img src="https://i.ibb.co/23fFNTSD/image.jpg" style="width:100px; height:100px; border-radius:50%; border:3px solid var(--glow); margin-bottom:20px;">
   <div class="pass-box">
-    <div style="color:var(--glow); font-weight:bold; margin-bottom:20px; letter-spacing:1px;">ENTER VIP ACCESS KEY</div>
-    
-    <input type="text" id="vkey" class="key-input" placeholder="ENTER KEY HERE">
-    
-    <button class="login-btn" onclick="validateKey()">LOGIN</button>
-    
-    <a href="https://t.me/yourusername" class="get-key-btn">GET KEY FROM TELEGRAM</a>
+    <div style="color:var(--glow); font-size: 20px; font-weight: bold;">VIP KEY LOGIN</div>
+    <input type="text" id="keyField" class="key-input" placeholder="Enter VIP Key">
+    <button class="login-btn" onclick="checkKey()">LOGIN</button>
+    <br>
+    <a href="https://t.me/yourusername" class="get-key">GET KEY (TELEGRAM)</a>
   </div>
 </div>
 
 <div id="mainContent">
     <div class="main-panel">
-        <div class="period-input-container">
-            <input type="number" id="manualPeriod" placeholder="0000" oninput="limitDigits(this)">
-        </div>
-        <div id="timerDisplay" class="timer">00:30</div>
-        <img src="https://i.ibb.co/23fFNTSD/image.jpg" class="profile-pic">
-        <div id="bigSmallText" class="result-text" style="color:var(--glow)">---</div>
-        <div id="expectedNumbers" style="color:var(--gold); font-weight:bold;">EXPECTED: ? & ?</div>
-        <div id="signalBox" class="signal-indicator">WAITING...</div>
+        <input type="number" id="manualPeriod" placeholder="0000" oninput="if(this.value.length==4) runAlgo(this.value)">
+        <div id="timer" class="timer">00:30</div>
+        <img src="https://i.ibb.co/23fFNTSD/image.jpg" style="width:60px; height:60px; border-radius:50%; margin-bottom:5px;">
+        <div id="resText" class="signal-box">---</div>
+        <div id="expected" style="color:var(--gold); font-weight:bold; margin-bottom:10px;">EXPECTED: ? & ?</div>
+        <div id="indBox" class="indicator">WAITING</div>
     </div>
-    <div class="game-box">
-        <iframe src="https://dkwin9.com/#/register?invitationCode=24764633446"></iframe>
+    <div style="height: 65vh;">
+        <iframe src="https://dkwin9.com/#/register?invitationCode=24764633446" style="width:100%; height:100%; border:none;"></iframe>
     </div>
 </div>
 
 <script>
-let lastProcessedTime = -1;
-
-// আপনার বর্তমান কি (Key) হলো: vip01
-function validateKey() {
-    const key = document.getElementById('vkey').value.trim().toLowerCase();
+// ১. লগইন ফাংশন (খুবই সহজ লজিক)
+function checkKey() {
+    var key = document.getElementById('keyField').value.trim();
     
-    if(key === "vip01") {
+    // কি এখানে চেক হচ্ছে: vip01
+    if(key === "vip01" || key === "VIP01") {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
-        setInterval(autoEngine, 1000);
-    } else { 
-        alert("Invalid Key! Please click 'GET KEY' to contact admin."); 
+        startTimer();
+    } else {
+        alert("ভুল কি! সঠিক কি দিয়ে চেষ্টা করুন।");
     }
 }
 
-function autoEngine() {
-    const now = new Date();
-    const sec = now.getSeconds();
-    const remaining = 30 - (sec % 30);
-    document.getElementById('timerDisplay').innerText = `00:${remaining < 10 ? '0'+remaining : remaining}`;
-    
-    let inputField = document.getElementById('manualPeriod');
-    let currentVal = parseInt(inputField.value);
-
-    if (remaining === 30 && lastProcessedTime !== now.getMinutes() * 100 + sec) {
-        lastProcessedTime = now.getMinutes() * 100 + sec;
-        if (!isNaN(currentVal)) {
-            let nextVal = (currentVal + 1) % 10000;
-            inputField.value = String(nextVal).padStart(4, '0');
-            generateUltraSignal(nextVal);
+// ২. টাইমার এবং অটো আপডেট
+function startTimer() {
+    setInterval(function() {
+        var now = new Date();
+        var sec = now.getSeconds();
+        var rem = 30 - (sec % 30);
+        document.getElementById('timer').innerText = "00:" + (rem < 10 ? "0" + rem : rem);
+        
+        if(rem === 30) {
+            var input = document.getElementById('manualPeriod');
+            if(input.value.length === 4) {
+                var next = (parseInt(input.value) + 1) % 10000;
+                input.value = String(next).padStart(4, '0');
+                runAlgo(input.value);
+            }
         }
-    }
+    }, 1000);
 }
 
-function limitDigits(el) {
-    if (el.value.length > 4) el.value = el.value.slice(0, 4);
-    if (el.value.length === 4) generateUltraSignal(parseInt(el.value));
-}
+// ৩. সিগন্যাল অ্যালগরিদম (VIP Logic)
+function runAlgo(val) {
+    var num = parseInt(val);
+    var logic = (num * 7 + 13) % 10;
+    
+    var res = logic >= 5 ? "BIG" : "SMALL";
+    var col = (num % 2 === 0) ? "RED" : "GREEN";
+    
+    // নম্বর প্রেডিকশন
+    var n1 = (logic % 5) + (res === "BIG" ? 5 : 0);
+    var n2 = (n1 + 2) % 10;
+    if(res === "BIG" && n2 < 5) n2 += 5;
+    if(res === "SMALL" && n2 > 4) n2 -= 5;
 
-function generateUltraSignal(num) {
-    const salt = 0x5DEECE66DL;
-    let hash = (num ^ salt) * 0x5DEECE66DL + 0xBL;
-    hash = (hash >> 16) % 100;
-    
-    const res = hash > 48 ? "BIG" : "SMALL";
-    let n1 = hash % 5 + (res === "BIG" ? 5 : 0);
-    let n2 = (hash + 3) % 5 + (res === "BIG" ? 5 : 0);
-    const isRed = (num + hash) % 2 === 0;
-
-    const textElem = document.getElementById('bigSmallText');
-    textElem.innerText = res;
-    textElem.style.color = res === "BIG" ? "var(--red)" : "var(--glow)";
-    
-    document.getElementById('expectedNumbers').innerText = `EXPECTED: ${n1} & ${n2}`;
-    
-    const sBox = document.getElementById('signalBox');
-    sBox.innerText = isRed ? "RED" : "GREEN";
-    sBox.style.backgroundColor = isRed ? "var(--red)" : "var(--green)";
+    document.getElementById('resText').innerText = res;
+    document.getElementById('resText').style.color = res === "BIG" ? "#ff4d4d" : "#00f2ff";
+    document.getElementById('expected').innerText = "EXPECTED: " + n1 + " & " + n2;
+    document.getElementById('indBox').innerText = col;
+    document.getElementById('indBox').style.backgroundColor = col === "RED" ? "#ff4d4d" : "#00ff88";
 }
 </script>
+
 </body>
 </html>
