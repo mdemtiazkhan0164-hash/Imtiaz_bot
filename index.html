@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>IMTIAZ AI PRO - V17 GESTURE LOCK</title>
+<title>IMTIAZ AI PRO - V19 ELITE</title>
 <style>
-  :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; --blue: #0088cc; --wa: #25d366; }
+  :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; --blue: #0088cc; }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', sans-serif; }
   body { margin: 0; background: var(--bg); color: #fff; overflow: hidden; position: fixed; width: 100%; height: 100%; }
 
@@ -13,126 +13,100 @@
   @keyframes glow { from { opacity: 0.6; } to { opacity: 1; color: var(--glow); } }
 
   #loginScreen { position: fixed; inset: 0; background: radial-gradient(circle, #0f1c2e, #050a10); display: flex; align-items: center; justify-content: center; z-index: 99999; flex-direction: column; }
-  .pass-box { width: 320px; background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 25px; border: 1px solid var(--glow); text-align: center; backdrop-filter: blur(10px); position: relative; }
-  .id-box { font-size: 11px; color: #aaa; background: #000; padding: 8px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed #333; }
+  .pass-box { width: 320px; background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 30px; border: 1.5px solid rgba(0, 242, 255, 0.2); text-align: center; backdrop-filter: blur(15px); box-shadow: 0 0 30px rgba(0,0,0,0.5); }
   
-  input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #1a3a4a; background: #000; color: var(--glow); text-align: center; font-weight: bold; outline: none; font-size: 16px; }
-  .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, #00c3ff, #0062ff); border: none; border-radius: 12px; color: #fff; font-weight: 900; cursor: pointer; text-transform: uppercase; }
-  .get-key { margin-top: 15px; display: inline-block; color: var(--gold); text-decoration: none; font-size: 13px; font-weight: bold; border-bottom: 1px solid; }
+  /* PREMIUM MESSAGES */
+  .status-badge { background: rgba(255, 215, 0, 0.1); color: var(--gold); font-size: 9px; padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 10px; border: 1px solid var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+  .elite-msg { font-size: 13px; color: #e0e0e0; margin-bottom: 18px; font-weight: 500; line-height: 1.5; }
+  .elite-msg span { color: var(--glow); font-weight: 800; }
+  
+  .id-box { font-size: 12px; color: #fff; background: rgba(0,0,0,0.6); padding: 12px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #1a3a4a; font-family: 'Courier New', monospace; letter-spacing: 1px; }
+  
+  input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #1a3a4a; background: #000; color: var(--glow); text-align: center; font-weight: bold; outline: none; font-size: 16px; transition: 0.3s; }
+  input:focus { border-color: var(--glow); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
+  
+  .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, #00c3ff, #0062ff); border: none; border-radius: 12px; color: #fff; font-weight: 900; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0, 98, 255, 0.4); }
+  .get-key { margin-top: 18px; display: inline-block; color: var(--gold); text-decoration: none; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
 
-  /* SECRET GESTURE AREA */
-  #secretAdminArea {
-    width: 100%;
-    height: 80px;
-    margin-top: 10px;
-    background: transparent; /* এটি অদৃশ্য থাকবে */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,0.03); /* খুবই হালকা লেখা যা বোঝা যাবে না */
-    font-size: 10px;
-  }
+  #secretAdminArea { width: 100%; height: 50px; margin-top: 10px; }
 
   #mainContent { display:none; }
   .main-panel { height: 35vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #050a10; border-bottom: 3px solid var(--glow); position: relative; }
-  .side-container { position: absolute; top: 45%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 5px; }
-  .icon-circle { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border: 1.5px solid rgba(255,255,255,0.2); }
-  .icon-circle img { width: 28px; height: 28px; }
-  
-  .period-input { position: absolute; top: 12px; left: 15px; width: 90px; background: #000; border: 2px solid var(--glow); border-radius: 8px; color: #fff; text-align: center; font-weight: 900; padding: 5px; outline: none; }
-  .timer { position: absolute; top: 12px; right: 20px; color: var(--red); font-size: 18px; font-weight: 900; }
-  .profile-pic { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--glow); margin-bottom: 5px; box-shadow: 0 0 10px var(--glow); }
-  .result-text { font-size: 55px; font-weight: 900; margin: 0; line-height: 1; }
-  .signal-badge { margin-top: 8px; padding: 5px 40px; border-radius: 20px; font-weight: 900; border: 2px solid #fff; }
 </style>
 </head>
 <body>
 
 <div id="loginScreen">
   <div class="neon-text">আসসালামু আলাইকুম</div>
-  <img src="https://i.ibb.co/23fFNTSD/image.jpg" style="width:90px; border-radius:50%; margin-bottom:15px; border:2px solid var(--glow);">
+  <img src="https://i.ibb.co/23fFNTSD/image.jpg" style="width:80px; height:80px; border-radius:50%; margin-bottom:15px; border:2px solid var(--glow); box-shadow: 0 0 15px var(--glow);">
+  
   <div class="pass-box">
-    <div style="font-size: 11px; color: var(--glow); margin-bottom: 5px;">YOUR DEVICE ID:</div>
-    <div id="deviceID" class="id-box">...</div>
-    <input type="text" id="vkey" placeholder="PASTE VIP KEY HERE">
-    <button class="login-btn" onclick="checkAccess()">LOGIN NOW</button>
-    <a href="https://t.me/emtiaz0099" class="get-key">GET VIP KEY</a>
+    <div class="status-badge">System Secure</div>
+    <div class="elite-msg">
+      আপনার এক্সেস বর্তমানে <span>RESTRICTED</span> অবস্থায় আছে। নিচের আইডিটি পাঠিয়ে অ্যাডমিনের কাছ থেকে <span>VIP APPROVAL</span> সংগ্রহ করুন।
+    </div>
     
-    <div id="secretAdminArea">TAP WITH 3 FINGERS</div>
+    <div style="font-size: 9px; color: #888; margin-bottom: 5px; text-transform: uppercase;">Unique Hardware ID:</div>
+    <div id="deviceID" class="id-box">...</div>
+    
+    <input type="text" id="vkey" placeholder="PASTE ACCESS KEY HERE">
+    <button class="login-btn" onclick="checkAccess()">ACTIVATE ELITE ACCESS</button>
+    <a href="https://t.me/emtiaz0099" class="get-key">REQUEST VIP APPROVAL</a>
+    
+    <div id="secretAdminArea"></div>
   </div>
 </div>
 
 <div id="mainContent">
     <div class="main-panel">
         <div class="neon-text" style="font-size:12px">আসসালামু আলাইকুম</div>
-        <input type="number" id="manualPeriod" class="period-input" placeholder="0000" oninput="if(this.value.length==4)runEngine(this.value)">
-        <div id="timer" class="timer">00:30</div>
-
-        <div class="side-container" style="left:12px">
-            <a href="https://t.me/emtiaz0099" class="icon-circle"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></a>
-            <div style="font-size:9px; color:var(--gold); font-weight:bold">99% ACCURACY</div>
-        </div>
-
-        <div class="side-container" style="right:12px">
-            <a href="https://wa.me/8801612788539" class="icon-circle"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"></a>
-            <div style="font-size:9px; color:var(--green); font-weight:bold">BY IMTIAZ VERIFIED</div>
-        </div>
-
-        <img src="https://i.ibb.co/23fFNTSD/image.jpg" class="profile-pic">
-        <div id="resText" class="result-text">---</div>
+        <input type="number" id="manualPeriod" style="position: absolute; top: 12px; left: 15px; width: 90px; background: #000; border: 2px solid var(--glow); border-radius: 8px; color: #fff; text-align: center; font-weight: 900; padding: 5px; outline: none;" placeholder="0000" oninput="if(this.value.length==4)runEngine(this.value)">
+        <div id="timer" style="position: absolute; top: 12px; right: 20px; color: var(--red); font-size: 18px; font-weight: 900;">00:30</div>
+        
+        <img src="https://i.ibb.co/23fFNTSD/image.jpg" style="width: 65px; border-radius: 50%; border: 2px solid var(--glow); margin-bottom: 5px;">
+        <div id="resText" style="font-size: 55px; font-weight: 900; margin: 0;">---</div>
         <div id="expected" style="color:var(--gold); font-size:12px; font-weight:bold; margin-top:5px">EXPECTED: ? & ?</div>
-        <div id="sigBox" class="signal-badge">WAITING</div>
+        <div id="sigBox" style="margin-top: 8px; padding: 5px 40px; border-radius: 20px; font-weight: 900; border: 2px solid #fff;">WAITING</div>
     </div>
     <div style="height:65vh"><iframe src="https://dkwin9.com/#/register?invitationCode=24764633446" style="width:100%; height:100%; border:0"></iframe></div>
 </div>
 
 <script>
-// ১. ৩ আঙ্গুলের টাচ ডিটেকশন (Secret Gesture)
 const secretArea = document.getElementById('secretAdminArea');
-secretArea.addEventListener('touchstart', function(e) {
-    if (e.touches.length === 3) {
-        adminGen(); // ৩ আঙ্গুল দিয়ে টাচ করলে এই ফাংশন কল হবে
-    }
-}, false);
+secretArea.addEventListener('touchstart', (e) => { if (e.touches.length === 3) openAdminPanel(); });
 
 function generateID() {
-    let id = localStorage.getItem('my_device_id');
-    if(!id) {
-        id = "IMZ-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-        localStorage.setItem('my_device_id', id);
-    }
+    let id = localStorage.getItem('my_device_id') || "IMZ-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+    localStorage.setItem('my_device_id', id);
     return id;
 }
 const DEVICE_ID = generateID();
 document.getElementById('deviceID').innerText = DEVICE_ID;
 
 function checkAccess() {
-    const key = document.getElementById('vkey').value.trim();
-    if(key === DEVICE_ID + "-VIP" || key === "imtiaz_master") {
+    if(document.getElementById('vkey').value.trim() === DEVICE_ID + "-VIP" || document.getElementById('vkey').value.trim() === "imtiaz_master") {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
         startApp();
-    } else { alert("Invalid Key for this device!"); }
+    } else { alert("ACCESS DENIED!\nUnauthorized Device Detected."); }
 }
 
-// অ্যাডমিন প্যানেল পাসওয়ার্ড: 016450
-function adminGen() {
-    let pass = prompt("Enter Admin Password:");
+function openAdminPanel() {
+    let pass = prompt("Verification Required:"); 
     if(pass === "016450") {
-        let user_id = prompt("Enter User Device ID:");
+        let user_id = prompt("Target Device ID:");
         if(user_id) {
-            let generatedKey = user_id + "-VIP";
-            alert("SUCCESS!\n\nUser ID: " + user_id + "\nGenerated Key: " + generatedKey);
+            let finalKey = user_id + "-VIP";
+            if(confirm("🌟 ADMIN NOTIFICATION 🌟\n\nElite Key Generated Successfully!\nKey: " + finalKey + "\n\nCopy to clipboard?")) {
+                navigator.clipboard.writeText(finalKey).then(() => alert("Key Copied!"));
+            }
         }
-    } else if(pass !== null) {
-        alert("Wrong Admin Password!");
-    }
+    } else if(pass) { alert("Invalid Credentials."); }
 }
 
 function startApp() {
     setInterval(() => {
-        let sec = new Date().getSeconds();
-        let rem = 30 - (sec % 30);
+        let rem = 30 - (new Date().getSeconds() % 30);
         document.getElementById('timer').innerText = "00:" + (rem < 10 ? "0"+rem : rem);
         if(rem === 30) {
             let input = document.getElementById('manualPeriod');
@@ -145,11 +119,9 @@ function startApp() {
 }
 
 function runEngine(num) {
-    let val = parseInt(num);
-    let logic = (val * 7 + 13) % 10;
+    let logic = (parseInt(num) * 7 + 13) % 10;
     let res = logic >= 5 ? "BIG" : "SMALL";
-    let color = (val % 2 === 0) ? "RED" : "GREEN";
-    
+    let color = (parseInt(num) % 2 === 0) ? "RED" : "GREEN";
     document.getElementById('resText').innerText = res;
     document.getElementById('resText').style.color = res === "BIG" ? "var(--red)" : "var(--glow)";
     document.getElementById('sigBox').innerText = color;
@@ -159,4 +131,3 @@ function runEngine(num) {
 </script>
 </body>
 </html>
-
