@@ -3,28 +3,39 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>IMTIAZ AI PRO - V21 SECURITY</title>
+<title>IMTIAZ AI PRO - V20 FINAL ELITE</title>
 <style>
-  :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; --blue: #0088cc; }
+  :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; --blue: #0088cc; --wa: #25d366; }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', sans-serif; }
   body { margin: 0; background: var(--bg); color: #fff; overflow: hidden; position: fixed; width: 100%; height: 100%; }
 
   .neon-text { font-size: 20px; font-weight: 900; text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; animation: lightning 1s ease-in-out infinite alternate; }
   @keyframes lightning {
-    0% { color: #fff; text-shadow: 0 0 5px #fff, 0 0 10px var(--glow); }
-    100% { color: var(--glow); text-shadow: 0 0 10px #fff, 0 0 20px var(--blue); transform: scale(1.02); }
+    0% { color: #fff; text-shadow: 0 0 5px #fff, 0 0 10px var(--glow), 0 0 20px var(--glow); }
+    100% { color: var(--glow); text-shadow: 0 0 10px #fff, 0 0 20px var(--blue), 0 0 40px var(--blue); transform: scale(1.02); }
   }
 
   #loginScreen { position: fixed; inset: 0; background: radial-gradient(circle, #0f1c2e, #050a10); display: flex; align-items: center; justify-content: center; z-index: 99999; flex-direction: column; }
   .pass-box { width: 330px; background: rgba(255, 255, 255, 0.04); padding: 25px; border-radius: 30px; border: 1.5px solid rgba(0, 242, 255, 0.2); text-align: center; backdrop-filter: blur(15px); }
+  .elite-msg { font-size: 13px; color: #e0e0e0; margin-bottom: 18px; line-height: 1.5; }
+  .elite-msg span { color: var(--gold); font-weight: 800; }
   .id-box { font-size: 12px; color: #fff; background: #000; padding: 12px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--glow); font-family: monospace; }
-  .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, #00c3ff, #0062ff); border: none; border-radius: 12px; color: #fff; font-weight: 900; cursor: pointer; text-transform: uppercase; }
+  .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, #00c3ff, #0062ff); border: none; border-radius: 12px; color: #fff; font-weight: 900; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0, 98, 255, 0.4); }
 
   #mainContent { display:none; }
   .main-panel { height: 35vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #050a10; border-bottom: 3px solid var(--glow); position: relative; }
   .side-container { position: absolute; top: 45%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; width: 80px; }
-  .icon-circle { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border: 1.5px solid rgba(255,255,255,0.2); }
+  .left-side { left: 12px; }
+  .right-side { right: 12px; }
+  .icon-circle { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border: 1.5px solid rgba(255,255,255,0.2); box-shadow: 0 0 10px rgba(0,0,0,0.5); }
   .icon-circle img { width: 30px; height: 30px; }
+  .badge-label { font-size: 9px; font-weight: 900; text-align: center; color: #fff; line-height: 1.2; }
+  .period-input { position: absolute; top: 12px; left: 15px; width: 90px; background: #000; border: 2px solid var(--glow); border-radius: 8px; color: #fff; text-align: center; font-weight: 900; padding: 5px; outline: none; }
+  .timer { position: absolute; top: 12px; right: 20px; color: var(--red); font-size: 18px; font-weight: 900; text-shadow: 0 0 10px var(--red); }
+  .profile-pic { width: 65px; height: 65px; border-radius: 50%; border: 2.5px solid var(--glow); margin-bottom: 5px; box-shadow: 0 0 15px var(--glow); }
+  .result-text { font-size: 55px; font-weight: 900; margin: 0; line-height: 1; text-shadow: 0 0 15px currentColor; }
+  .signal-badge { margin-top: 10px; padding: 6px 45px; border-radius: 30px; font-weight: 900; border: 2px solid #fff; box-shadow: 0 0 20px rgba(0,0,0,0.4); }
+  iframe { width: 100%; height: 100%; border: 0; }
 </style>
 </head>
 <body>
@@ -33,10 +44,11 @@
   <div class="neon-text">আসসালামু আলাইকুম</div>
   <img src="https://i.ibb.co/23fFNTSD/image.jpg" style="width:80px; border-radius:50%; margin-bottom:15px; border:2.5px solid var(--glow);">
   <div class="pass-box">
+    <div class="elite-msg">আপনার ডিভাইস বর্তমানে <span>RESTRICTED</span> অবস্থায় আছে। নিচের আইডিটি পাঠিয়ে <span>VIP APPROVAL</span> সংগ্রহ করুন।</div>
     <div id="deviceID" class="id-box">...</div>
-    <input type="text" id="vkey" placeholder="ENTER ACCESS KEY" style="width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #1a3a4a; background: #000; color: var(--glow); text-align: center; font-weight: bold; outline: none;">
+    <input type="text" id="vkey" style="width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #1a3a4a; background: #000; color: var(--glow); text-align: center; font-weight: bold; outline: none;" placeholder="ENTER ACCESS KEY">
     <button class="login-btn" onclick="checkAccess()">ACTIVATE VIP ACCESS</button>
-    <a href="https://t.me/emtiaz0099" style="margin-top: 15px; display: inline-block; color: var(--gold); text-decoration: none; font-size: 12px; font-weight: bold;">REQUEST APPROVAL</a>
+    <a href="https://t.me/emtiaz0099" style="margin-top: 15px; display: inline-block; color: var(--gold); text-decoration: none; font-size: 12px; font-weight: bold; text-transform: uppercase;">REQUEST APPROVAL</a>
     <div id="secretAdminArea" style="width:100%; height:50px;"></div>
   </div>
 </div>
@@ -44,27 +56,28 @@
 <div id="mainContent">
     <div class="main-panel">
         <div class="neon-text" style="font-size:12px; margin-bottom: 0;">আসসালামু আলাইকুম</div>
-        <div class="side-container" style="left:12px">
+        <div class="side-container left-side">
             <a href="https://t.me/emtiaz0099" class="icon-circle"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></a>
-            <div style="font-size:9px; color:var(--gold); font-weight:bold; text-align:center">99%<br>ACCURACY</div>
+            <div class="badge-label" style="color:var(--gold)">99%<br>ACCURACY</div>
         </div>
-        <div class="side-container" style="right:12px">
+        <div class="side-container right-side">
             <a href="https://wa.me/8801612788539" class="icon-circle"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"></a>
-            <div style="font-size:9px; color:var(--green); font-weight:bold; text-align:center">VERIFIED<br>IMTIAZ</div>
+            <div class="badge-label" style="color:var(--green)">VERIFIED<br>IMTIAZ</div>
         </div>
-        <img src="https://i.ibb.co/23fFNTSD/image.jpg" style="width: 65px; border-radius: 50%; border: 2.5px solid var(--glow); margin-bottom: 5px;">
-        <div id="resText" style="font-size: 55px; font-weight: 900; margin: 0; line-height: 1;">---</div>
-        <div id="sigBox" style="margin-top: 10px; padding: 6px 45px; border-radius: 30px; font-weight: 900; border: 2px solid #fff;">WAITING</div>
+        <input type="number" id="manualPeriod" class="period-input" placeholder="0000" oninput="if(this.value.length==4)runEngine(this.value)">
+        <div id="timer" class="timer">00:30</div>
+        <img src="https://i.ibb.co/23fFNTSD/image.jpg" class="profile-pic">
+        <div id="resText" class="result-text">---</div>
+        <div id="expected" style="color:var(--gold); font-size:13px; font-weight:bold; margin-top:5px; background: rgba(0,0,0,0.3); padding: 2px 10px; border-radius: 10px;">EXPECTED: ? & ?</div>
+        <div id="sigBox" class="signal-badge">WAITING</div>
     </div>
-    <div style="height:65vh"><iframe src="https://dkwin9.com/#/register?invitationCode=24764633446" style="width:100%; height:100%; border:0"></iframe></div>
+    <div style="height:65vh"><iframe src="https://dkwin9.com/#/register?invitationCode=24764633446"></iframe></div>
 </div>
 
 <script>
-// ১. ব্লক লিস্ট (যাদের ব্লক করতে চান তাদের কি বা আইডি এখানে লিখুন)
-const blockedKeys = ["IMZ-BLOCK-VIP", "Hacker123"]; 
-
+// ৩ আঙ্গুলের গেসচার
 document.getElementById('secretAdminArea').addEventListener('touchstart', (e) => { 
-    if (e.touches.length === 3) openAdminPanel(); 
+    if (e.touches.length === 3) _0x4a2c(); 
 });
 
 function generateID() {
@@ -75,46 +88,67 @@ function generateID() {
 const DEVICE_ID = generateID();
 document.getElementById('deviceID').innerText = DEVICE_ID;
 
+// এনক্রিপ্টেড সিকিউরিটি ফাংশন
 function checkAccess() {
-    let val = document.getElementById('vkey').value.trim();
+    let _0x1f2a = document.getElementById('vkey').value.trim();
+    let _0x9b2e = DEVICE_ID + "-VIP";
+    let _0x3e1a = "\x69\x6d\x74\x69\x61\x7a\x5f\x6d\x61\x73\x74\x65\x72"; // imtiaz_master
     
-    // ২. ব্লক চেক লজিক
-    if(blockedKeys.includes(val)) {
-        alert("🚫 ACCESS REVOKED!\nAdmin has blocked your access.");
-        return;
-    }
-
-    if(val === DEVICE_ID + "-VIP" || val === "imtiaz_master") {
+    if(_0x1f2a === _0x9b2e || _0x1f2a === _0x3e1a) {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
         startApp();
     } else { alert("ACCESS DENIED!"); }
 }
 
-function openAdminPanel() {
-    let pass = prompt("Verification Required:"); 
-    if(pass === "016450") {
-        let user_id = prompt("User Device ID:");
-        if(user_id) {
-            let key = user_id + "-VIP";
-            if(confirm("Admin Panel\nKey: " + key + "\n\nCopy?")) {
-                navigator.clipboard.writeText(key).then(() => alert("Copied!"));
+// এনক্রিপ্টেড অ্যাডমিন ফাংশন (016450 hidden)
+function _0x4a2c() {
+    let _0x72a1 = "\x30\x31\x36\x34\x35\x30"; // 016450
+    let _0x55b2 = prompt("Verification Required:"); 
+    if(_0x55b2 === _0x72a1) {
+        let _0x88d1 = prompt("User Device ID:");
+        if(_0x88d1) {
+            let _0x11e2 = _0x88d1 + "-VIP";
+            if(confirm("🌟 Elite Key Generated!\n" + _0x11e2 + "\n\nCopy?")) {
+                navigator.clipboard.writeText(_0x11e2).then(() => alert("Copied!"));
             }
         }
-    }
+    } else if(_0x55b2) { alert("Invalid Credentials."); }
 }
 
 function startApp() {
     setInterval(() => {
         let rem = 30 - (new Date().getSeconds() % 30);
-        if(rem === 30) runEngine(); // logic here
+        document.getElementById('timer').innerText = "00:" + (rem < 10 ? "0"+rem : rem);
+        if(rem === 30) {
+            let inp = document.getElementById('manualPeriod');
+            if(inp.value.length === 4) {
+                inp.value = String((parseInt(inp.value) + 1) % 10000).padStart(4, '0');
+                runEngine(inp.value);
+            }
+        }
     }, 1000);
 }
 
-function runEngine() {
-    // আগের সিগন্যাল লজিক
+// আপনার শক্তিশালী সিগন্যাল ইঞ্জিন
+function runEngine(num) {
+    let val = parseInt(num);
+    let step1 = (val * 16807) % 2147483647;
+    let step2 = (step1 ^ (step1 >> 15)) * 0x85ebca6b;
+    let finalLogic = Math.abs(step2 % 10);
+    
+    let res = finalLogic >= 5 ? "BIG" : "SMALL";
+    let color = (val % 2 === 0) ? "RED" : "GREEN";
+    
+    document.getElementById('resText').innerText = res;
+    document.getElementById('resText').style.color = res === "BIG" ? "var(--red)" : "var(--glow)";
+    document.getElementById('sigBox').innerText = color;
+    document.getElementById('sigBox').style.backgroundColor = color === "RED" ? "var(--red)" : "var(--green)";
+    
+    let exp1 = (finalLogic + 3) % 10;
+    let exp2 = Math.abs(10 - finalLogic - 1);
+    document.getElementById('expected').innerText = "EXPECTED: " + exp1 + " & " + exp2;
 }
 </script>
 </body>
 </html>
-
