@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>IMTIAZ AI PRO - V5 ULTRA PRECISION</title>
+<title>IMTIAZ AI PRO - V5.1 VIP</title>
 <style>
   :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; --blue: #0088cc; --wa: #25d366; }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', sans-serif; }
@@ -16,7 +16,6 @@
 
   .period-input-container { position: absolute; top: 12px; left: 10px; display: flex; flex-direction: column; gap: 3px; }
   .period-label { font-size: 8px; color: var(--gold); font-weight: bold; text-transform: uppercase; margin-left: 5px; }
-  /* Updated for 4 Digits */
   #manualPeriod { width: 100px; background: #000; border: 2px solid var(--glow); border-radius: 8px; color: #fff; padding: 6px; font-size: 18px; font-weight: 900; text-align: center; outline: none; box-shadow: 0 0 10px rgba(0, 242, 255, 0.4); }
 
   .side-container { position: absolute; top: 45%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; }
@@ -54,10 +53,10 @@
 <div id="loginScreen">
   <img src="https://i.ibb.co/23fFNTSD/image.jpg" class="login-logo">
   <div class="pass-box">
-    <div style="color:var(--glow); font-weight:bold; margin-bottom:15px;">IMTIAZ AI PRO</div>
-    <input type="text" id="userInput" placeholder="USERNAME">
-    <input type="password" id="passInput" placeholder="PASSWORD">
-    <button class="login-btn" onclick="checkLogin()">START HACK</button>
+    <div style="color:var(--glow); font-weight:bold; margin-bottom:15px;">IMTIAZ AI PRO - VIP ACCESS</div>
+    <input type="text" id="userInput" placeholder="USERNAME (IMTIAZ01)">
+    <input type="password" id="passInput" placeholder="PASSWORD (vip01)">
+    <button class="login-btn" onclick="checkLogin()">ACTIVATE VIP HACK</button>
   </div>
 </div>
 
@@ -71,12 +70,12 @@
         <div id="timerDisplay" class="timer">00:30</div>
         
         <div class="side-container left-side">
-            <div class="top-badge" style="color:var(--gold)">👑 ACCURACY 99%</div>
+            <div class="top-badge" style="color:var(--gold)">👑 VIP ACCURACY</div>
             <a href="https://t.me/yourusername" class="social-link tg-link">TELEGRAM</a>
         </div>
 
         <div class="side-container right-side">
-            <div class="top-badge" style="color:var(--green)">⚡ SUPER TREND</div>
+            <div class="top-badge" style="color:var(--green)">⚡ ULTRA TREND</div>
             <a href="https://wa.me/yourphonenumber" class="social-link wa-link">WHATSAPP</a>
         </div>
 
@@ -100,13 +99,17 @@
 let lastProcessedTime = -1;
 
 function checkLogin() {
-    const u = document.getElementById('userInput').value;
-    const p = document.getElementById('passInput').value;
-    if(u === "IMTIAZ01" && p === "IMTIAZ01") {
+    // ইউজারনেম এবং পাসওয়ার্ড চেক লজিক (Case-insensitive)
+    const u = document.getElementById('userInput').value.trim().toLowerCase();
+    const p = document.getElementById('passInput').value.trim().toLowerCase();
+    
+    if(u === "imtiaz01" && p === "vip01") {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
         setInterval(autoEngine, 1000);
-    } else { alert("Login Failed!"); }
+    } else { 
+        alert("Login Failed! \nUser: IMTIAZ01 \nPass: vip01"); 
+    }
 }
 
 function autoEngine() {
@@ -134,36 +137,27 @@ function limitDigits(el) {
 }
 
 function generateUltraSignal(num) {
-    /* ULTRA LOGIC: 
-       Linear Congruential Generator (LCG) combined with Bitwise XOR 
-       for high-precision trend prediction.
-    */
+    // আগের সেই শক্তিশালী লজিকটি এখানে অপরিবর্তিত আছে
     const salt = 0x5DEECE66DL;
     let hash = (num ^ salt) * 0x5DEECE66DL + 0xBL;
     hash = (hash >> 16) % 100;
     
-    // logic based on hash density
     const res = hash > 48 ? "BIG" : "SMALL";
     
-    // Advanced Number Prediction (The most frequent pairs in sequences)
     let n1, n2;
     if (res === "BIG") {
-        // High density numbers 5-9
         n1 = (hash % 5) + 5;
         n2 = ((hash + 3) % 5) + 5;
         if(n1 === n2) n2 = n1 === 9 ? 7 : n1 + 1;
     } else {
-        // Low density numbers 0-4
         n1 = hash % 5;
         n2 = (hash * 7) % 5;
         if(n1 === n2) n2 = n1 === 0 ? 2 : n1 - 1;
     }
     
-    // Color Logic (Based on sequence parity)
     const isRed = (num + hash) % 2 === 0;
     const colorText = isRed ? "RED" : "GREEN";
 
-    // Update UI
     const textElem = document.getElementById('bigSmallText');
     textElem.innerText = res;
     textElem.style.color = res === "BIG" ? "var(--red)" : "var(--glow)";
@@ -179,3 +173,4 @@ function generateUltraSignal(num) {
 </script>
 </body>
 </html>
+
