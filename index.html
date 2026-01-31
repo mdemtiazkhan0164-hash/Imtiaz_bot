@@ -5,63 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>IMTIAZ AI PRO - V20 FINAL ELITE</title>
 <style>
-  :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; --blue: #0088cc; --wa: #25d366; }
+  :root { --glow: #00f2ff; --bg: #050a10; --red: #ff4d4d; --green: #00ff88; --gold: #ffd700; --blue: #0088cc; }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', sans-serif; }
   body { margin: 0; background: var(--bg); color: #fff; overflow: hidden; position: fixed; width: 100%; height: 100%; }
 
-  .neon-text { font-size: 16px; font-weight: 900; text-align: center; margin-bottom: 5px; text-transform: uppercase; animation: lightning 1s ease-in-out infinite alternate; }
+  .neon-text { font-size: 14px; font-weight: 900; text-align: center; margin: 0; text-transform: uppercase; animation: lightning 1s ease-in-out infinite alternate; }
   @keyframes lightning {
-    0% { color: #fff; text-shadow: 0 0 5px #fff, 0 0 10px var(--glow); }
-    100% { color: var(--glow); text-shadow: 0 0 10px #fff, 0 0 20px var(--blue); }
+    0% { color: #fff; text-shadow: 0 0 5px var(--glow); }
+    100% { color: var(--glow); text-shadow: 0 0 10px var(--blue); }
   }
 
   #loginScreen { position: fixed; inset: 0; background: radial-gradient(circle, #0f1c2e, #050a10); display: flex; align-items: center; justify-content: center; z-index: 99999; flex-direction: column; }
-  .pass-box { width: 330px; background: rgba(255, 255, 255, 0.04); padding: 25px; border-radius: 30px; border: 1.5px solid rgba(0, 242, 255, 0.2); text-align: center; backdrop-filter: blur(15px); }
-  .id-box { font-size: 12px; color: #fff; background: #000; padding: 12px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--glow); font-family: monospace; }
-  .login-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, #00c3ff, #0062ff); border: none; border-radius: 12px; color: #fff; font-weight: 900; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0, 98, 255, 0.4); }
+  .pass-box { width: 320px; background: rgba(255, 255, 255, 0.04); padding: 20px; border-radius: 25px; border: 1.5px solid rgba(0, 242, 255, 0.2); text-align: center; backdrop-filter: blur(15px); }
+  .id-box { font-size: 11px; color: #fff; background: #000; padding: 10px; border-radius: 10px; margin-bottom: 12px; border: 1px solid var(--glow); }
+  .login-btn { width: 100%; padding: 12px; background: linear-gradient(90deg, #00c3ff, #0062ff); border: none; border-radius: 10px; color: #fff; font-weight: 900; text-transform: uppercase; }
 
-  /* 🎮 MAIN CONTENT LAYOUT ADJUSTED */
+  /* 🚀 ULTRA COMPACT LAYOUT FOR MAXIMUM GAME VIEW */
   #mainContent { display:none; height: 100vh; width: 100vw; display: flex; flex-direction: column; }
   
-  /* মেইন প্যানেলের হাইট কমিয়ে ২৭% করা হয়েছে যাতে গেম এরিয়া বড় হয় */
-  .main-panel { height: 27vh; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #050a10; border-bottom: 2px solid var(--glow); position: relative; padding: 5px 0; }
+  /* প্যানেল হাইট মাত্র ২০% করা হয়েছে যাতে গেমের বাটন দেখা যায় */
+  .main-panel { height: 20vh; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #050a10; border-bottom: 2px solid var(--glow); position: relative; padding: 2px 0; }
   
-  .side-container { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 5px; width: 70px; }
-  .left-side { left: 8px; }
-  .right-side { right: 8px; }
+  .side-container { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 3px; width: 60px; }
+  .left-side { left: 5px; }
+  .right-side { right: 5px; }
   
-  .icon-circle { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border: 1.2px solid rgba(255,255,255,0.2); }
-  .icon-circle img { width: 24px; height: 24px; }
-  .badge-label { font-size: 8px; font-weight: 900; text-align: center; color: #fff; line-height: 1.1; }
+  .icon-circle { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2); }
+  .icon-circle img { width: 18px; height: 18px; }
+  .badge-label { font-size: 7px; font-weight: 900; color: #fff; line-height: 1; text-align: center; }
 
-  .period-input { position: absolute; top: 8px; left: 10px; width: 75px; background: #000; border: 1.5px solid var(--glow); border-radius: 6px; color: #fff; text-align: center; font-weight: 900; padding: 3px; outline: none; font-size: 12px; }
-  .timer { position: absolute; top: 8px; right: 15px; color: var(--red); font-size: 16px; font-weight: 900; text-shadow: 0 0 10px var(--red); }
+  .period-input { position: absolute; top: 5px; left: 8px; width: 65px; background: #000; border: 1.2px solid var(--glow); border-radius: 5px; color: #fff; text-align: center; font-weight: 900; padding: 2px; font-size: 11px; outline: none; }
+  .timer { position: absolute; top: 5px; right: 10px; color: var(--red); font-size: 14px; font-weight: 900; }
   
-  .profile-pic { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--glow); margin-bottom: 3px; }
-  .result-text { font-size: 42px; font-weight: 900; margin: 0; line-height: 1; text-shadow: 0 0 15px currentColor; }
-  .signal-badge { margin-top: 5px; padding: 4px 35px; border-radius: 20px; font-weight: 900; border: 1.5px solid #fff; font-size: 12px; }
+  .profile-pic { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--glow); margin-bottom: 2px; }
+  .result-text { font-size: 32px; font-weight: 900; margin: 0; line-height: 1; }
+  .signal-badge { margin-top: 4px; padding: 3px 25px; border-radius: 15px; font-weight: 900; border: 1.2px solid #fff; font-size: 10px; }
   
-  /* 🎰 GAME AREA ENLARGED */
-  .game-container { flex-grow: 1; width: 100%; background: #000; position: relative; overflow: hidden; }
-  iframe { width: 100%; height: 100%; border: 0; position: absolute; top:0; left:0; }
+  /* 🎰 GAME AREA GETS 80% SCREEN */
+  .game-container { flex-grow: 1; width: 100%; background: #000; overflow: hidden; }
+  iframe { width: 100%; height: 100%; border: 0; }
 </style>
 </head>
 <body>
 
 <div id="loginScreen">
-  <div class="neon-text">আসসালামু আলাইকুম</div>
-  <img src="https://i.ibb.co/23fFNTSD/image.jpg" style="width:75px; border-radius:50%; margin-bottom:15px; border:2.5px solid var(--glow);">
+  <div class="neon-text" style="font-size: 18px; margin-bottom: 10px;">আসসালামু আলাইকুম</div>
+  <img src="https://i.ibb.co/23fFNTSD/image.jpg" style="width:70px; border-radius:50%; margin-bottom:15px; border:2.5px solid var(--glow);">
   <div class="pass-box">
     <div id="deviceID" class="id-box">...</div>
-    <input type="text" id="vkey" style="width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #1a3a4a; background: #000; color: var(--glow); text-align: center; font-weight: bold; outline: none;" placeholder="ENTER ACCESS KEY">
+    <input type="text" id="vkey" style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #1a3a4a; background: #000; color: var(--glow); text-align: center; font-weight: bold; outline: none;" placeholder="ENTER ACCESS KEY">
     <button class="login-btn" onclick="checkAccess()">ACTIVATE VIP ACCESS</button>
-    <div id="secretAdminArea" style="width:100%; height:50px; margin-top: 10px;"></div>
+    <div id="secretAdminArea" style="width:100%; height:40px; margin-top: 10px;"></div>
   </div>
 </div>
 
 <div id="mainContent">
     <div class="main-panel">
-        <div class="neon-text" style="font-size:10px; margin-bottom: 0;">আসসালামু আলাইকুম</div>
         <div class="side-container left-side">
             <a href="https://t.me/emtiaz0099" class="icon-circle"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"></a>
             <div class="badge-label" style="color:var(--gold)">99%<br>ACCURACY</div>
@@ -76,7 +75,7 @@
 
         <img src="https://i.ibb.co/23fFNTSD/image.jpg" class="profile-pic">
         <div id="resText" class="result-text">---</div>
-        <div id="expected" style="color:var(--gold); font-size:11px; font-weight:bold; margin-top:3px; background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 8px;">EXPECTED: ? & ?</div>
+        <div id="expected" style="color:var(--gold); font-size:10px; font-weight:bold; margin-top:2px;">EXPECTED: ? & ?</div>
         <div id="sigBox" class="signal-badge">WAITING</div>
     </div>
     
@@ -141,7 +140,6 @@ function runEngine(num) {
     let step2 = (step1 ^ (step1 >> 15)) * 0x85ebca6b;
     let finalLogic = Math.abs(step2 % 10);
     let res = finalLogic >= 5 ? "BIG" : "SMALL";
-    
     document.getElementById('resText').innerText = res;
     document.getElementById('resText').style.color = res === "BIG" ? "var(--red)" : "var(--glow)";
     let color = (val % 2 === 0) ? "RED" : "GREEN";
