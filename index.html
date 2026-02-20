@@ -39,7 +39,6 @@
         .header h1 { font-size: 26px; margin: 0; font-weight: 900; }
         .header h1 span { color: var(--primary); }
 
-        /* Menu Grid */
         .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .menu-item { 
             background: var(--card-bg); 
@@ -48,52 +47,31 @@
             text-align: center; border: 1px solid rgba(255,255,255,0.1); 
             cursor: pointer; transition: 0.2s;
         }
-        .menu-item:active { transform: scale(0.95); }
         .icon { font-size: 30px; margin-bottom: 8px; display: block; }
         .menu-item h3 { margin: 0; font-size: 11px; font-weight: bold; }
 
-        /* My Order Button */
-        .order-history-btn {
-            grid-column: span 2;
-            background: linear-gradient(to right, #111, #222);
-            border: 1px solid var(--gold) !important;
-            margin-top: 10px;
-        }
+        .order-history-btn { grid-column: span 2; background: linear-gradient(to right, #111, #222); border: 1px solid var(--gold) !important; margin-top: 10px; }
 
-        /* Views */
         .view { display: none; flex-direction: column; width: 100%; padding-bottom: 50px; }
         .back-container { width: 100%; display: flex; justify-content: flex-start; margin-bottom: 20px; }
-        .back-btn { 
-            background: rgba(255,255,255,0.1); color: #fff; padding: 8px 15px; 
-            border-radius: 50px; cursor: pointer; font-size: 13px; font-weight: bold; border: 1px solid rgba(255,255,255,0.2);
-        }
+        .back-btn { background: rgba(255,255,255,0.1); color: #fff; padding: 8px 15px; border-radius: 50px; cursor: pointer; font-size: 13px; font-weight: bold; border: 1px solid rgba(255,255,255,0.2); }
 
         .price-card { 
             background: rgba(0,0,0,0.3); margin-bottom: 10px; padding: 15px; 
             border-radius: 15px; display: flex; justify-content: space-between; align-items: center;
             border: 1px solid rgba(255,255,255,0.05);
         }
+        .price-card span { font-size: 14px; font-weight: 500; }
+        .price-card b { font-size: 16px; color: var(--success); }
         .buy-btn { background: var(--primary); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
-        /* Order List Style */
-        .order-item {
-            background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-bottom: 10px;
-            border-left: 4px solid var(--success);
-        }
-        .order-item p { margin: 5px 0; font-size: 13px; color: #ccc; }
-        .order-item b { color: var(--gold); }
+        .order-item { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-bottom: 10px; border-left: 4px solid var(--success); }
 
-        /* Modal */
-        .modal { 
-            display: none; position: fixed; top:0; left:0; width:100%; height:100%; 
-            background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center;
-            backdrop-filter: blur(8px);
-        }
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
         .modal-box { background: #1a1a2e; width: 85%; max-width: 340px; padding: 25px; border-radius: 25px; border: 1px solid var(--primary); text-align: center; }
         .payment-area { background: #0a0a1a; padding: 15px; border-radius: 12px; margin: 15px 0; border: 1px dashed var(--gold); }
         input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; background: #050510; border: 1px solid #333; color: #fff; text-align: center; }
         .verify-btn { background: var(--success); color: #000; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; }
-
         .footer { margin-top: 30px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.3); }
     </style>
 </head>
@@ -131,20 +109,48 @@
             <div class="back-container"><div class="back-btn" onclick="goBack()">❮ ফিরে যান</div></div>
             <div class="price-card"><span>২৫ ডাইমন্ড</span><b>২৫৳</b><button class="buy-btn" onclick="buy('25 DM', 25)">BUY</button></div>
             <div class="price-card"><span>৫০ ডাইমন্ড</span><b>৪০৳</b><button class="buy-btn" onclick="buy('50 DM', 40)">BUY</button></div>
-            <div class="price-card"><span>১০০ ডাইমন্ড</span><b>৮০৳</b><button class="buy-btn" onclick="buy('100 DM', 80)">BUY</button></div>
+            <div class="price-card"><span>৭০ ডাইমন্ড</span><b>৫৫৳</b><button class="buy-btn" onclick="buy('70 DM', 55)">BUY</button></div>
+            <div class="price-card"><span>১১৫ ডাইমন্ড</span><b>৮৫৳</b><button class="buy-btn" onclick="buy('115 DM', 85)">BUY</button></div>
+            <div class="price-card"><span>১৪০ ডাইমন্ড</span><b>১১০৳</b><button class="buy-btn" onclick="buy('140 DM', 110)">BUY</button></div>
+            <div class="price-card"><span>২১০ ডাইমন্ড</span><b>১৬০৳</b><button class="buy-btn" onclick="buy('210 DM', 160)">BUY</button></div>
+            <div class="price-card"><span>৩৫০ ডাইমন্ড</span><b>২২০৳</b><button class="buy-btn" onclick="buy('350 DM', 220)">BUY</button></div>
+            <div class="price-card"><span>৫১০ ডাইমন্ড</span><b>৩১০৳</b><button class="buy-btn" onclick="buy('510 DM', 310)">BUY</button></div>
+            <div class="price-card"><span>৬১০ ডাইমন্ড</span><b>৪৫০৳</b><button class="buy-btn" onclick="buy('610 DM', 450)">BUY</button></div>
+            <div class="price-card"><span>১০০০ ডাইমন্ড</span><b>৬০০৳</b><button class="buy-btn" onclick="buy('1000 DM', 600)">BUY</button></div>
         </div>
 
         <div id="star-view" class="view">
             <div class="back-container"><div class="back-btn" onclick="goBack()">❮ ফিরে যান</div></div>
-            <div class="price-card"><span>২০ CS স্টার</span><b>৫০৳</b><button class="buy-btn" onclick="buy('২০ স্টার', 50)">BUY</button></div>
-            <div class="price-card"><span>৫০ CS স্টার</span><b>১০০৳</b><button class="buy-btn" onclick="buy('৫০ স্টার', 100)">BUY</button></div>
+            <div class="price-card"><span>২০ CS স্টার</span><b>৫০৳</b><button class="buy-btn" onclick="buy('20 CS Star', 50)">BUY</button></div>
+            <div class="price-card"><span>২৫ CS স্টার</span><b>৫৫৳</b><button class="buy-btn" onclick="buy('25 CS Star', 55)">BUY</button></div>
+            <div class="price-card"><span>৫০ CS স্টার</span><b>১০০৳</b><button class="buy-btn" onclick="buy('50 CS Star', 100)">BUY</button></div>
+            <div class="price-card"><span>৮০ CS স্টার</span><b>১৫০৳</b><button class="buy-btn" onclick="buy('80 CS Star', 150)">BUY</button></div>
+            <div class="price-card"><span>১০০ CS স্টার</span><b>১৮০৳</b><button class="buy-btn" onclick="buy('100 CS Star', 180)">BUY</button></div>
+        </div>
+
+        <div id="panel-view" class="view">
+            <div class="back-container"><div class="back-btn" onclick="goBack()">❮ ফিরে যান</div></div>
+            <div class="price-card"><span>Drip Client (7D)</span><b>২৭০৳</b><button class="buy-btn" onclick="buy('Drip 7D', 270)">BUY</button></div>
+            <div class="price-card"><span>HG Charts (7D)</span><b>২৭০৳</b><button class="buy-btn" onclick="buy('HG 7D', 270)">BUY</button></div>
+            <div class="price-card"><span>Dolphin Pro (7D)</span><b>৩৯৯৳</b><button class="buy-btn" onclick="buy('Dolphin 7D', 399)">BUY</button></div>
+            <div class="price-card"><span>Drip Client (15D)</span><b>৩৫০৳</b><button class="buy-btn" onclick="buy('Drip 15D', 350)">BUY</button></div>
+            <div class="price-card"><span>HG Charts (15D)</span><b>৩৫০৳</b><button class="buy-btn" onclick="buy('HG 15D', 350)">BUY</button></div>
+            <div class="price-card"><span>Hack Ckerr (15D)</span><b>৫০০৳</b><button class="buy-btn" onclick="buy('Ckerr 15D', 500)">BUY</button></div>
+            <div class="price-card"><span>Dolphin Pro (15D)</span><b>৫০০৳</b><button class="buy-btn" onclick="buy('Dolphin 15D', 500)">BUY</button></div>
+        </div>
+
+        <div id="special-view" class="view">
+            <div class="back-container"><div class="back-btn" onclick="goBack()">❮ ফিরে যান</div></div>
+            <div class="price-card"><span>Weekly Member</span><b>১২৫৳</b><button class="buy-btn" onclick="buy('Weekly', 125)">BUY</button></div>
+            <div class="price-card"><span>Monthly Member</span><b>৫০০৳</b><button class="buy-btn" onclick="buy('Monthly', 500)">BUY</button></div>
+            <div class="price-card"><span>Level Up Pass</span><b>১৯০৳</b><button class="buy-btn" onclick="buy('LevelUp', 190)">BUY</button></div>
+            <div class="price-card"><span>Air Drop Special</span><b>৯৯৳</b><button class="buy-btn" onclick="buy('AirDrop', 99)">BUY</button></div>
         </div>
 
         <div id="order-view" class="view">
             <div class="back-container"><div class="back-btn" onclick="goBack()">❮ ফিরে যান</div></div>
-            <h2 style="color: var(--gold); font-size: 18px; margin-bottom: 15px;">Your Order History</h2>
-            <div id="order-list-container">
-                </div>
+            <h2 style="color: var(--gold); font-size: 18px; margin-bottom: 15px;">অর্ডার লিস্ট</h2>
+            <div id="order-list-container"></div>
         </div>
 
         <div class="footer">Admin: ইমতিয়াজ ভাই | 01612788539</div>
@@ -165,8 +171,7 @@
     </div>
 
     <script>
-        let currentItem = "";
-        let currentPrice = "";
+        let currentItem = ""; let currentPrice = "";
 
         setTimeout(() => {
             document.getElementById('loader').style.display = 'none';
@@ -184,8 +189,7 @@
         }
 
         function buy(name, price) {
-            currentItem = name;
-            currentPrice = price;
+            currentItem = name; currentPrice = price;
             document.getElementById('p-name').innerText = name;
             document.getElementById('p-price').innerText = price;
             document.getElementById('pay-modal').style.display = 'flex';
@@ -193,50 +197,35 @@
 
         function closeModal() { document.getElementById('pay-modal').style.display = 'none'; }
 
-        // অর্ডার সেভ করার ফাংশন
         function confirmOrder() {
             const trx = document.getElementById('trx').value;
             if(trx.length < 4) { alert("সঠিক Transaction ID দিন"); return; }
-
-            const order = {
-                name: currentItem,
-                price: currentPrice,
-                trxid: trx,
-                date: new Date().toLocaleString('bn-BD')
-            };
-
-            // লোকাল স্টোরেজে সেভ করা
+            const order = { name: currentItem, price: currentPrice, trxid: trx, date: new Date().toLocaleString('bn-BD') };
             let orders = JSON.parse(localStorage.getItem('myOrders')) || [];
             orders.unshift(order);
             localStorage.setItem('myOrders', JSON.stringify(orders));
-
-            alert("আপনার অর্ডারটি সফলভাবে সাবমিট হয়েছে!");
+            alert("অর্ডার সফল হয়েছে!");
             closeModal();
             showOrders();
         }
 
-        // অর্ডার দেখানোর ফাংশন
         function showOrders() {
             openView('order-view');
             const container = document.getElementById('order-list-container');
             const orders = JSON.parse(localStorage.getItem('myOrders')) || [];
-
             if(orders.length === 0) {
-                container.innerHTML = "<p style='text-align:center; color:#666;'>আপনি এখনো কোনো অর্ডার করেননি।</p>";
+                container.innerHTML = "<p style='text-align:center; color:#666;'>কোনো অর্ডার নেই।</p>";
                 return;
             }
-
             container.innerHTML = orders.map(o => `
                 <div class="order-item">
                     <p><b>আইটেম:</b> ${o.name}</p>
                     <p><b>মূল্য:</b> ${o.price}৳</p>
-                    <p><b>TrxID:</b> ${o.trxid}</p>
-                    <p><b>সময়:</b> ${o.date}</p>
-                    <p style="color:var(--gold); font-weight:bold; font-size:11px;">Status: 🟡 Pending (অপেক্ষা করুন)</p>
+                    <p><b>সময়:</b> ${o.date}</p>
+                    <p style="color:var(--gold); font-weight:bold; font-size:11px;">Status: 🟡 Pending</p>
                 </div>
             `).join('');
         }
     </script>
 </body>
 </html>
-
