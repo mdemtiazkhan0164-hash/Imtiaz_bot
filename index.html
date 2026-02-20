@@ -3,73 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EMTIAZ VAI STORE - OFFICIAL</title>
+    <title>EMTIAZ VAI STORE - PREMIUM</title>
     <style>
         :root { 
             --primary: #ff0055; 
             --gold: #ffcc00; 
             --cyan: #00d9ff;
             --purple: #7000ff;
-            --bg-color: radial-gradient(circle at top right, #1e1e4f, #08081a, #050505);
-            --card-bg: rgba(255, 255, 255, 0.06); 
             --success: #00ff88; 
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body { 
             font-family: 'Segoe UI', sans-serif; 
-            background: var(--bg-color);
-            background-attachment: fixed;
-            color: white; margin: 0; padding: 0;
+            margin: 0; padding: 0;
             display: flex; justify-content: center;
             min-height: 100vh;
+            background: linear-gradient(-45deg, #050510, #1a0a2e, #051a2e, #0a0a0a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
         }
 
-        #app { width: 100%; max-width: 450px; padding: 20px; animation: fadeIn 0.8s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-        .header { text-align: center; margin-bottom: 30px; }
-        .header h1 { font-size: 28px; margin: 0; font-weight: 900; }
-        .header h1 span { color: var(--primary); text-shadow: 0 0 15px rgba(255, 0, 85, 0.6); }
+        #app { width: 100%; max-width: 480px; padding: 20px; animation: fadeIn 0.8s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .header { text-align: center; margin-bottom: 30px; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .header h1 { font-size: 30px; margin: 0; font-weight: 900; letter-spacing: 2px; }
+        .header h1 span { color: var(--gold); }
+
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .menu-item { 
-            background: var(--card-bg); backdrop-filter: blur(10px);
-            padding: 25px 10px; border-radius: 22px;
+            background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(10px);
+            padding: 40px 15px; border-radius: 25px;
             text-align: center; border: 1px solid rgba(255,255,255,0.1); 
             cursor: pointer; transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
-        .menu-item:active { transform: scale(0.92); }
-        .icon { font-size: 35px; margin-bottom: 8px; display: block; }
+        .menu-item:active { transform: scale(0.92); background: rgba(255,255,255,0.15); }
+        .icon { font-size: 50px; margin-bottom: 15px; display: block; }
+        .menu-item h3 { margin: 0; font-size: 18px; font-weight: 900; }
 
-        .action-btn { 
-            grid-column: span 2; padding: 16px; border-radius: 18px; 
-            font-weight: 800; display: flex; align-items: center; justify-content: center; 
-            gap: 10px; cursor: pointer; margin-top: 5px; text-transform: uppercase;
-        }
-        .whatsapp-btn { background: #25d366; color: #fff; border: none; }
-        .order-history-btn { background: linear-gradient(90deg, #ffcc00, #ff8800); color: #000; border: none; }
+        .action-row { display: flex; gap: 12px; margin-top: 25px; }
+        .act-btn { flex: 1; padding: 20px; border-radius: 18px; font-weight: bold; text-align: center; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; border: none; }
+        .whatsapp { background: #25d366; color: white; }
+        .history { background: #222; color: white; border: 1px solid #444; }
 
         .view { display: none; flex-direction: column; width: 100%; }
-        .back-btn { background: rgba(255,255,255,0.1); color: #fff; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-size: 13px; font-weight: bold; width: fit-content; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.2); }
+        .back-btn { background: rgba(255,255,255,0.1); color: #fff; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-size: 14px; margin-bottom: 25px; width: fit-content; border: 1px solid rgba(255,255,255,0.2); font-weight: bold; }
 
         .price-card { 
-            background: rgba(255, 255, 255, 0.03); margin-bottom: 12px; padding: 18px; 
-            border-radius: 18px; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.04); margin-bottom: 12px; padding: 22px; 
+            border-radius: 20px; display: flex; justify-content: space-between; align-items: center;
             border: 1px solid rgba(255,255,255,0.05);
         }
-        .buy-btn { background: var(--primary); color: #fff; border: none; padding: 10px 22px; border-radius: 12px; font-weight: 900; cursor: pointer; }
+        .price-info span { font-size: 16px; display: block; font-weight: bold; }
+        .price-info b { color: var(--gold); font-size: 19px; }
+        .buy-btn { background: var(--primary); color: #fff; border: none; padding: 12px 28px; border-radius: 14px; font-weight: 900; cursor: pointer; }
 
-        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.92); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
-        .modal-box { background: #0c0c1f; width: 90%; max-width: 360px; padding: 25px; border-radius: 30px; border: 1px solid var(--primary); text-align: center; }
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.96); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(10px); }
+        .modal-box { background: #0a0a1a; width: 90%; max-width: 380px; padding: 25px; border-radius: 30px; border: 1px solid var(--primary); }
 
-        .payment-info { 
-            background: #050510; padding: 20px; border-radius: 20px; margin: 15px 0; 
-            border: 1px dashed var(--gold); text-align: left; line-height: 1.6;
-        }
-        
-        input { width: 100%; padding: 15px; margin: 15px 0; border-radius: 12px; background: #000; border: 1px solid #333; color: #fff; text-align: center; }
-        .footer { margin-top: 40px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.3); }
+        .pay-header { background: #000; padding: 20px; border-radius: 18px; border-left: 5px solid var(--gold); margin-bottom: 20px; font-size: 14px; line-height: 1.8; }
+        input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; background: #111; border: 1px solid #333; color: #fff; text-align: center; font-size: 16px; }
+        .confirm-btn { background: var(--success); color: #000; border: none; padding: 18px; border-radius: 16px; width: 100%; font-weight: 900; cursor: pointer; }
+
+        .footer { margin-top: 60px; text-align: center; font-size: 12px; color: #444; }
     </style>
 </head>
 <body>
@@ -77,69 +82,66 @@
     <div id="app">
         <div class="header">
             <h1>EMTIAZ VAI <span>STORE</span></h1>
-            <p style="font-size: 10px; color: var(--cyan); letter-spacing: 3px; margin-top: 5px;">PREMIUM GAMING SHOP</p>
         </div>
 
-        <div id="main-menu" class="menu-grid">
-            <div class="menu-item" onclick="openView('topup-view')">
-                <span class="icon">💎</span><h3 style="color: var(--cyan);">FF TOPUP</h3>
+        <div id="main-menu">
+            <div class="menu-grid">
+                <div class="menu-item" onclick="openView('topup-view')">
+                    <span class="icon">💎</span><h3 style="color: var(--cyan);">FF TOPUP</h3>
+                </div>
+                <div class="menu-item" onclick="openView('star-view')">
+                    <span class="icon">⭐</span><h3 style="color: var(--gold);">FF CS STAR</h3>
+                </div>
+                <div class="menu-item" onclick="openView('panel-view')">
+                    <span class="icon">🔥</span><h3 style="color: var(--primary);">FF PANEL</h3>
+                </div>
+                <div class="menu-item" onclick="openView('special-view')">
+                    <span class="icon">🎁</span><h3 style="color: var(--purple);">SPECIAL</h3>
+                </div>
             </div>
-            <div class="menu-item" onclick="openView('star-view')">
-                <span class="icon">⭐</span><h3 style="color: var(--gold);">FF CS STAR</h3>
+            
+            <div class="action-row">
+                <div class="act-btn history" onclick="showOrders()">📜 MY ORDERS</div>
+                <div class="act-btn whatsapp" onclick="window.location.href='https://wa.me/8801612788539'">💬 WHATSAPP</div>
             </div>
-            <div class="menu-item" onclick="openView('panel-view')">
-                <span class="icon">🔥</span><h3 style="color: var(--primary);">FF PANEL</h3>
-            </div>
-            <div class="menu-item" onclick="openView('special-view')">
-                <span class="icon">🎁</span><h3 style="color: var(--purple);">SPECIAL</h3>
-            </div>
-            <div class="action-btn order-history-btn" onclick="showOrders()">📜 MY ORDERS (অর্ডার লিস্ট)</div>
-            <div class="action-btn whatsapp-btn" onclick="window.location.href='https://wa.me/8801612788539'">💬 WHATSAPP SUPPORT</div>
         </div>
 
         <div id="topup-view" class="view">
-            <div class="back-btn" onclick="goBack()">❮ BACK HOME</div>
-            <div class="price-card"><span>২৫ ডাইমন্ড</span><b>২৫৳</b><button class="buy-btn" onclick="buy('25 DM', 25)">BUY</button></div>
-            <div class="price-card"><span>৫০ ডাইমন্ড</span><b>৪০৳</b><button class="buy-btn" onclick="buy('50 DM', 40)">BUY</button></div>
-            <div class="price-card"><span>৭০ ডাইমন্ড</span><b>৫৫৳</b><button class="buy-btn" onclick="buy('70 DM', 55)">BUY</button></div>
-            <div class="price-card"><span>১১৫ ডাইমন্ড</span><b>৮৫৳</b><button class="buy-btn" onclick="buy('115 DM', 85)">BUY</button></div>
-            <div class="price-card"><span>১৪০ ডাইমন্ড</span><b>১১০৳</b><button class="buy-btn" onclick="buy('140 DM', 110)">BUY</button></div>
-            <div class="price-card"><span>২১০ ডাইমন্ড</span><b>১৬০৳</b><button class="buy-btn" onclick="buy('210 DM', 160)">BUY</button></div>
-            <div class="price-card"><span>৩৫০ ডাইমন্ড</span><b>২২০৳</b><button class="buy-btn" onclick="buy('350 DM', 220)">BUY</button></div>
-            <div class="price-card"><span>৫১০ ডাইমন্ড</span><b>৩১০৳</b><button class="buy-btn" onclick="buy('510 DM', 310)">BUY</button></div>
-            <div class="price-card"><span>৬১০ ডাইমন্ড</span><b>৪৫০৳</b><button class="buy-btn" onclick="buy('610 DM', 450)">BUY</button></div>
-            <div class="price-card"><span>১০০০ ডাইমন্ড</span><b>৬০০৳</b><button class="buy-btn" onclick="buy('1000 DM', 600)">BUY</button></div>
+            <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
+            <div class="price-card"><div class="price-info"><span>২৫ ডাইমন্ড</span><b>২৫৳</b></div><button class="buy-btn" onclick="buy('25 DM', 25, true)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>৫০ ডাইমন্ড</span><b>৪০৳</b></div><button class="buy-btn" onclick="buy('50 DM', 40, true)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>১০০ ডাইমন্ড</span><b>৮০৳</b></div><button class="buy-btn" onclick="buy('100 DM', 80, true)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>৫১০ ডাইমন্ড</span><b>৩১০৳</b></div><button class="buy-btn" onclick="buy('510 DM', 310, true)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>১০০০ ডাইমন্ড</span><b>৬০০৳</b></div><button class="buy-btn" onclick="buy('1000 DM', 600, true)">BUY</button></div>
         </div>
 
         <div id="star-view" class="view">
-            <div class="back-btn" onclick="goBack()">❮ BACK HOME</div>
-            <div class="price-card"><span>২০ CS স্টার</span><b>৫০৳</b><button class="buy-btn" onclick="buy('20 Star', 50)">BUY</button></div>
-            <div class="price-card"><span>২৫ CS স্টার</span><b>৫৫৳</b><button class="buy-btn" onclick="buy('25 Star', 55)">BUY</button></div>
-            <div class="price-card"><span>৫০ CS স্টার</span><b>১০০৳</b><button class="buy-btn" onclick="buy('50 Star', 100)">BUY</button></div>
-            <div class="price-card"><span>৮০ CS স্টার</span><b>১৫০৳</b><button class="buy-btn" onclick="buy('80 Star', 150)">BUY</button></div>
-            <div class="price-card"><span>১০০ CS স্টার</span><b>১৮০৳</b><button class="buy-btn" onclick="buy('100 Star', 180)">BUY</button></div>
+            <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
+            <div class="price-card"><div class="price-info"><span>২০ CS স্টার</span><b>৫০৳</b></div><button class="buy-btn" onclick="buy('20 Star', 50, true)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>৫০ CS স্টার</span><b>১০০৳</b></div><button class="buy-btn" onclick="buy('50 Star', 100, true)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>১০০ CS স্টার</span><b>১৮০৳</b></div><button class="buy-btn" onclick="buy('100 Star', 180, true)">BUY</button></div>
         </div>
 
         <div id="panel-view" class="view">
-            <div class="back-btn" onclick="goBack()">❮ BACK HOME</div>
-            <div class="price-card"><span>Drip Client (7D)</span><b>২৭০৳</b><button class="buy-btn" onclick="buy('Drip 7D', 270)">BUY</button></div>
-            <div class="price-card"><span>HG Charts (7D)</span><b>২৭০৳</b><button class="buy-btn" onclick="buy('HG 7D', 270)">BUY</button></div>
-            <div class="price-card"><span>Dolphin Pro (7D)</span><b>৩৯৯৳</b><button class="buy-btn" onclick="buy('Dolphin 7D', 399)">BUY</button></div>
-            <div class="price-card"><span>Drip / HG (15D)</span><b>৩৫০৳</b><button class="buy-btn" onclick="buy('Panel 15D', 350)">BUY</button></div>
-            <div class="price-card"><span>Hack Ckerr (15D)</span><b>৫০০৳</b><button class="buy-btn" onclick="buy('Ckerr 15D', 500)">BUY</button></div>
-            <div class="price-card"><span>Dolphin Pro (15D)</span><b>৫০০৳</b><button class="buy-btn" onclick="buy('Dolphin 15D', 500)">BUY</button></div>
+            <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
+            <div class="price-card"><div class="price-info"><span>Drip Client (7D)</span><b>২৭০৳</b></div><button class="buy-btn" onclick="buy('Drip 7D', 270, false)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>HG Charts (7D)</span><b>২৭০৳</b></div><button class="buy-btn" onclick="buy('HG 7D', 270, false)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>Drip / HG (15D)</span><b>৩৫০৳</b></div><button class="buy-btn" onclick="buy('Drip/HG 15D', 350, false)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>Dolphin Pro (7D)</span><b>৩৯৯৳</b></div><button class="buy-btn" onclick="buy('Dolphin 7D', 399, false)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>Dolphin Pro (15D)</span><b>৫০০৳</b></div><button class="buy-btn" onclick="buy('Dolphin 15D', 500, false)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>Hack Ckerr (15D)</span><b>৫০০৳</b></div><button class="buy-btn" onclick="buy('Ckerr 15D', 500, false)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>Panel Premium (30D)</span><b>৯৫০৳</b></div><button class="buy-btn" onclick="buy('Premium 30D', 950, false)">BUY</button></div>
         </div>
 
         <div id="special-view" class="view">
-            <div class="back-btn" onclick="goBack()">❮ BACK HOME</div>
-            <div class="price-card"><span>Weekly Member</span><b>১২৫৳</b><button class="buy-btn" onclick="buy('Weekly', 125)">BUY</button></div>
-            <div class="price-card"><span>Monthly Member</span><b>৫০০৳</b><button class="buy-btn" onclick="buy('Monthly', 500)">BUY</button></div>
-            <div class="price-card"><span>Level Up Pass</span><b>১৯০৳</b><button class="buy-btn" onclick="buy('LevelUp', 190)">BUY</button></div>
-            <div class="price-card"><span>Air Drop Special</span><b>৯৯৳</b><button class="buy-btn" onclick="buy('AirDrop', 99)">BUY</button></div>
+            <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
+            <div class="price-card"><div class="price-info"><span>Weekly Member</span><b>১২৫৳</b></div><button class="buy-btn" onclick="buy('Weekly', 125, true)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>Monthly Member</span><b>৫০০৳</b></div><button class="buy-btn" onclick="buy('Monthly', 500, true)">BUY</button></div>
+            <div class="price-card"><div class="price-info"><span>Level Up Pass</span><b>১৯০৳</b></div><button class="buy-btn" onclick="buy('LevelUp', 190, true)">BUY</button></div>
         </div>
 
         <div id="order-view" class="view">
-            <div class="back-btn" onclick="goBack()">❮ BACK HOME</div>
+            <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
             <div id="order-list-container"></div>
         </div>
 
@@ -148,58 +150,71 @@
 
     <div id="pay-modal" class="modal">
         <div class="modal-box">
-            <h3 id="p-name" style="color: var(--gold); margin:0; font-size: 20px;"></h3>
+            <h3 id="p-name" style="margin:0 0 15px; color: var(--gold); text-align:center;"></h3>
             
-            <div class="payment-info">
-                <div style="font-weight: bold; color: var(--cyan); margin-bottom: 8px;">🇧🇩 𝗕𝗗 𝗣𝗔𝗬𝗠𝗘𝗡𝗧 𝗠𝗘𝗧𝗛𝗢𝗗 💰</div>
-                <div style="font-size: 15px;">💘 𝗕𝗞𝗮𝘀𝗵 : <b>01612788539</b> 👈</div>
-                <div style="font-size: 15px;">💘 𝗡𝗮𝗴𝗮𝗱 : <b>01612788539</b> 👈</div>
-                <div style="margin-top: 10px; color: var(--success); font-weight: bold; border-top: 1px solid #333; padding-top: 5px;">
-                    এমাউন্ট: <span id="p-price"></span>৳ (সেন্ড মানি করুন)
-                </div>
+            <div class="pay-header">
+                <b>🇧🇩 𝗕𝗗 𝗣𝗔𝗬𝗠𝗘𝗡𝗧 𝗠𝗘𝗧𝗛𝗢𝗗 💰</b><br>
+                💘 𝗕𝗞𝗮𝘀𝗵 : 01612788539 👈<br>
+                💘 𝗡𝗮𝗴𝗮𝗱 : 01612788539 👈<br>
+                এমাউন্ট: <span id="p-price" style="color:var(--success); font-weight:bold;"></span>৳
             </div>
 
-            <input type="text" id="trx" placeholder="Transaction ID দিন">
-            <button onclick="confirmOrder()" style="background: var(--success); color: #000; border: none; padding: 16px; border-radius: 14px; width: 100%; font-weight: 900; cursor: pointer;">CONFIRM ORDER</button>
-            <p onclick="closeModal()" style="color: #666; margin-top: 15px; cursor: pointer; font-size: 12px;">বাতিল করুন</p>
+            <div id="id-inputs" style="display: none;">
+                <input type="text" id="p_id" placeholder="Player UID / ID দিন">
+                <input type="text" id="p_nick" placeholder="Ingame Name দিন">
+            </div>
+
+            <input type="text" id="trx" placeholder="Transaction ID (TrxID) দিন">
+            <button class="confirm-btn" onclick="confirmOrder()">CONFIRM ORDER</button>
+            <p onclick="closeModal()" style="text-align:center; color:#666; font-size:14px; margin-top:20px; cursor:pointer;">বাতিল করুন</p>
         </div>
     </div>
 
     <script>
-        let currentItem = ""; let currentPrice = "";
+        let currentItem = ""; let currentPrice = ""; let needID = false;
+
         function openView(id) { document.getElementById('main-menu').style.display = 'none'; document.getElementById(id).style.display = 'flex'; }
-        function goBack() { document.querySelectorAll('.view').forEach(v => v.style.display = 'none'); document.getElementById('main-menu').style.display = 'grid'; }
-        
-        function buy(name, price) { 
-            currentItem = name; currentPrice = price; 
-            document.getElementById('p-name').innerText = name; 
-            document.getElementById('p-price').innerText = price; 
-            document.getElementById('pay-modal').style.display = 'flex'; 
+        function goBack() { document.querySelectorAll('.view').forEach(v => v.style.display = 'none'); document.getElementById('main-menu').style.display = 'block'; }
+
+        function buy(name, price, modeID) {
+            currentItem = name; currentPrice = price; needID = modeID;
+            document.getElementById('p-name').innerText = name;
+            document.getElementById('p-price').innerText = price;
+            document.getElementById('id-inputs').style.display = modeID ? 'block' : 'none';
+            document.getElementById('pay-modal').style.display = 'flex';
         }
-        
+
         function closeModal() { document.getElementById('pay-modal').style.display = 'none'; }
-        
+
         function confirmOrder() {
             const trx = document.getElementById('trx').value;
             if(trx.length < 4) { alert("সঠিক TrxID দিন"); return; }
-            const order = { name: currentItem, price: currentPrice, trxid: trx, date: new Date().toLocaleString('bn-BD') };
+            let idInfo = "";
+            if(needID) {
+                const uid = document.getElementById('p_id').value;
+                const name = document.getElementById('p_nick').value;
+                if(!uid || !name) { alert("UID এবং ইনগেম নাম দিন"); return; }
+                idInfo = ` (ID: ${uid}, Name: ${name})`;
+            }
+            const order = { name: currentItem + idInfo, price: currentPrice, trx: trx, date: new Date().toLocaleString('bn-BD') };
             let orders = JSON.parse(localStorage.getItem('myOrders')) || [];
             orders.unshift(order);
             localStorage.setItem('myOrders', JSON.stringify(orders));
-            alert("অর্ডার সফল! এডমিন চেক করে ডেলিভারি দিবে।");
-            closeModal(); showOrders();
+            alert("অর্ডার সফল!");
+            closeModal();
+            showOrders();
         }
 
         function showOrders() {
             openView('order-view');
             const container = document.getElementById('order-list-container');
             const orders = JSON.parse(localStorage.getItem('myOrders')) || [];
-            if(orders.length === 0) { container.innerHTML = "<p style='text-align:center;'>কোনো অর্ডার পাওয়া যায়নি।</p>"; return; }
+            if(orders.length === 0) { container.innerHTML = "<p style='text-align:center;'>কোনো অর্ডার নেই</p>"; return; }
             container.innerHTML = orders.map(o => `
-                <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:18px; margin-bottom:12px; border-left:5px solid var(--gold);">
-                    <p style="margin:0; font-weight:bold;">${o.name} - ${o.price}৳</p>
-                    <p style="margin:5px 0 0; font-size:11px; color:#aaa;">ID: ${o.trxid} | ${o.date}</p>
-                    <p style="margin:5px 0 0; color:var(--gold); font-weight:bold;">Status: 🟡 Pending</p>
+                <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:18px; margin-bottom:12px; border-left:4px solid var(--gold);">
+                    <p style="margin:0; font-size:15px;"><b>${o.name}</b></p>
+                    <p style="margin:5px 0 0; font-size:12px; color:#aaa;">Trx: ${o.trx} | ${o.date}</p>
+                    <p style="margin:5px 0 0; color:var(--gold); font-size:13px; font-weight:bold;">Status: 🟡 Pending</p>
                 </div>
             `).join('');
         }
