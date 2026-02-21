@@ -46,35 +46,45 @@
             cursor: pointer; transition: 0.3s;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
-        .menu-item:active { transform: scale(0.92); background: rgba(255,255,255,0.15); }
         .icon { font-size: 50px; margin-bottom: 15px; display: block; }
         .menu-item h3 { margin: 0; font-size: 18px; font-weight: 900; }
 
+        /* Grid System for All Charts */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .grid-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .grid-item:active { transform: scale(0.95); background: rgba(255,255,255,0.15); }
+        .grid-item span { display: block; font-size: 13px; font-weight: 900; margin-bottom: 5px; color: #fff; }
+        .grid-item b { display: block; font-size: 12px; color: var(--cyan); }
+
         .action-row { display: flex; gap: 12px; margin-top: 25px; }
-        .act-btn { flex: 1; padding: 20px; border-radius: 18px; font-weight: bold; text-align: center; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; border: none; }
+        .act-btn { flex: 1; padding: 18px; border-radius: 18px; font-weight: bold; text-align: center; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 10px; border: none; }
         .whatsapp { background: #25d366; color: white; }
         .history { background: #222; color: white; border: 1px solid #444; }
 
         .view { display: none; flex-direction: column; width: 100%; }
-        .back-btn { background: rgba(255,255,255,0.1); color: #fff; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-size: 14px; margin-bottom: 25px; width: fit-content; border: 1px solid rgba(255,255,255,0.2); font-weight: bold; }
-
-        .price-card { 
-            background: rgba(255, 255, 255, 0.04); margin-bottom: 12px; padding: 22px; 
-            border-radius: 20px; display: flex; justify-content: space-between; align-items: center;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .price-info span { font-size: 16px; display: block; font-weight: bold; }
-        .price-info b { color: var(--gold); font-size: 19px; }
-        .buy-btn { background: var(--primary); color: #fff; border: none; padding: 12px 28px; border-radius: 14px; font-weight: 900; cursor: pointer; }
+        .back-btn { background: rgba(255,255,255,0.1); color: #fff; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-size: 13px; margin-bottom: 20px; width: fit-content; border: 1px solid rgba(255,255,255,0.2); }
 
         .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.96); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(10px); }
         .modal-box { background: #0a0a1a; width: 90%; max-width: 380px; padding: 25px; border-radius: 30px; border: 1px solid var(--primary); }
+        .pay-header { background: #000; padding: 15px; border-radius: 15px; border-left: 5px solid var(--gold); margin-bottom: 20px; font-size: 13px; line-height: 1.6; }
+        input { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 12px; background: #111; border: 1px solid #333; color: #fff; text-align: center; font-size: 15px; }
+        .confirm-btn { background: var(--success); color: #000; border: none; padding: 16px; border-radius: 14px; width: 100%; font-weight: 900; cursor: pointer; margin-top: 10px;}
 
-        .pay-header { background: #000; padding: 20px; border-radius: 18px; border-left: 5px solid var(--gold); margin-bottom: 20px; font-size: 14px; line-height: 1.8; }
-        input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; background: #111; border: 1px solid #333; color: #fff; text-align: center; font-size: 16px; }
-        .confirm-btn { background: var(--success); color: #000; border: none; padding: 18px; border-radius: 16px; width: 100%; font-weight: 900; cursor: pointer; }
-
-        .footer { margin-top: 60px; text-align: center; font-size: 12px; color: #444; }
+        .footer { margin-top: 50px; text-align: center; font-size: 12px; color: #555; }
     </style>
 </head>
 <body>
@@ -99,7 +109,6 @@
                     <span class="icon">🎁</span><h3 style="color: var(--purple);">SPECIAL</h3>
                 </div>
             </div>
-            
             <div class="action-row">
                 <div class="act-btn history" onclick="showOrders()">📜 MY ORDERS</div>
                 <div class="act-btn whatsapp" onclick="window.location.href='https://wa.me/8801612788539'">💬 WHATSAPP</div>
@@ -108,74 +117,80 @@
 
         <div id="topup-view" class="view">
             <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
-            <div class="price-card"><div class="price-info"><span>২৫ ডাইমন্ড</span><b>২৫৳</b></div><button class="buy-btn" onclick="buy('25 DM', 25, true)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>৫০ ডাইমন্ড</span><b>৪০৳</b></div><button class="buy-btn" onclick="buy('50 DM', 40, true)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>১০০ ডাইমন্ড</span><b>৮০৳</b></div><button class="buy-btn" onclick="buy('100 DM', 80, true)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>৫১০ ডাইমন্ড</span><b>৩১০৳</b></div><button class="buy-btn" onclick="buy('510 DM', 310, true)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>১০০০ ডাইমন্ড</span><b>৬০০৳</b></div><button class="buy-btn" onclick="buy('1000 DM', 600, true)">BUY</button></div>
-        </div>
-
-        <div id="star-view" class="view">
-            <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
-            <div class="price-card"><div class="price-info"><span>২০ CS স্টার</span><b>৫০৳</b></div><button class="buy-btn" onclick="buy('20 Star', 50, true)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>৫০ CS স্টার</span><b>১০০৳</b></div><button class="buy-btn" onclick="buy('50 Star', 100, true)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>১০০ CS স্টার</span><b>১৮০৳</b></div><button class="buy-btn" onclick="buy('100 Star', 180, true)">BUY</button></div>
-        </div>
-
-        <div id="panel-view" class="view">
-            <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
-            <div class="price-card"><div class="price-info"><span>Drip Client (7D)</span><b>২৭০৳</b></div><button class="buy-btn" onclick="buy('Drip 7D', 270, false)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>HG Charts (7D)</span><b>২৭০৳</b></div><button class="buy-btn" onclick="buy('HG 7D', 270, false)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>Drip / HG (15D)</span><b>৩৫০৳</b></div><button class="buy-btn" onclick="buy('Drip/HG 15D', 350, false)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>Dolphin Pro (7D)</span><b>৩৯৯৳</b></div><button class="buy-btn" onclick="buy('Dolphin 7D', 399, false)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>Dolphin Pro (15D)</span><b>৫০০৳</b></div><button class="buy-btn" onclick="buy('Dolphin 15D', 500, false)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>Hack Ckerr (15D)</span><b>৫০০৳</b></div><button class="buy-btn" onclick="buy('Ckerr 15D', 500, false)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>Panel Premium (30D)</span><b>৯৫০৳</b></div><button class="buy-btn" onclick="buy('Premium 30D', 950, false)">BUY</button></div>
+            <div class="grid-container">
+                <div class="grid-item" onclick="buy('25 Diamond', 24, true)"><span>25 Diamond</span><b>BDT 24</b></div>
+                <div class="grid-item" onclick="buy('50 Diamond', 38, true)"><span>50 Diamond</span><b>BDT 38</b></div>
+                <div class="grid-item" onclick="buy('115 Diamond', 79, true)"><span>115 Diamond</span><b>BDT 79</b></div>
+                <div class="grid-item" onclick="buy('240 Diamond', 158, true)"><span>240 Diamond</span><b>BDT 158</b></div>
+                <div class="grid-item" onclick="buy('355 Diamond', 238, true)"><span>355 Diamond</span><b>BDT 238</b></div>
+                <div class="grid-item" onclick="buy('480 Diamond', 316, true)"><span>480 Diamond</span><b>BDT 316</b></div>
+                <div class="grid-item" onclick="buy('610 Diamond', 405, true)"><span>610 Diamond</span><b>BDT 405</b></div>
+                <div class="grid-item" onclick="buy('1240 Diamond', 799, true)"><span>1240 Diamond</span><b>BDT 799</b></div>
+            </div>
         </div>
 
         <div id="special-view" class="view">
             <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
-            <div class="price-card"><div class="price-info"><span>Weekly Member</span><b>১২৫৳</b></div><button class="buy-btn" onclick="buy('Weekly', 125, true)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>Monthly Member</span><b>৫০০৳</b></div><button class="buy-btn" onclick="buy('Monthly', 500, true)">BUY</button></div>
-            <div class="price-card"><div class="price-info"><span>Level Up Pass</span><b>১৯০৳</b></div><button class="buy-btn" onclick="buy('LevelUp', 190, true)">BUY</button></div>
+            <div class="grid-container">
+                <div class="grid-item" onclick="buy('Weekly', 154, true)"><span>Weekly</span><b>BDT 154</b></div>
+                <div class="grid-item" onclick="buy('Monthly', 765, true)"><span>Monthly</span><b>BDT 765</b></div>
+                <div class="grid-item" onclick="buy('2X Weekly', 308, true)"><span>2X Weekly</span><b>BDT 308</b></div>
+                <div class="grid-item" onclick="buy('3X Weekly', 460, true)"><span>3X Weekly</span><b>BDT 460</b></div>
+                <div class="grid-item" onclick="buy('Level Up Pass', 190, true)"><span>Level Up Pass</span><b>BDT 190</b></div>
+                <div class="grid-item" onclick="buy('1W + 1M', 915, true)"><span>1W + 1M</span><b>BDT 915</b></div>
+            </div>
+        </div>
+
+        <div id="panel-view" class="view">
+            <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
+            <div class="grid-container">
+                <div class="grid-item" onclick="buy('Drip 7D', 270, false)"><span>Drip (7D)</span><b>BDT 270</b></div>
+                <div class="grid-item" onclick="buy('HG 7D', 270, false)"><span>HG (7D)</span><b>BDT 270</b></div>
+                <div class="grid-item" onclick="buy('Drip/HG 15D', 350, false)"><span>Drip/HG (15D)</span><b>BDT 350</b></div>
+                <div class="grid-item" onclick="buy('Dolphin 7D', 399, false)"><span>Dolphin (7D)</span><b>BDT 399</b></div>
+                <div class="grid-item" onclick="buy('Dolphin 15D', 500, false)"><span>Dolphin (15D)</span><b>BDT 500</b></div>
+                <div class="grid-item" onclick="buy('Ckerr 15D', 500, false)"><span>Ckerr (15D)</span><b>BDT 500</b></div>
+                <div class="grid-item" onclick="buy('Premium 30D', 950, false)"><span>Premium (30D)</span><b>BDT 950</b></div>
+            </div>
+        </div>
+
+        <div id="star-view" class="view">
+            <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
+            <div class="grid-container">
+                <div class="grid-item" onclick="buy('20 Star', 50, true)"><span>20 Star</span><b>BDT 50</b></div>
+                <div class="grid-item" onclick="buy('50 Star', 100, true)"><span>50 Star</span><b>BDT 100</b></div>
+                <div class="grid-item" onclick="buy('100 Star', 180, true)"><span>100 Star</span><b>BDT 180</b></div>
+            </div>
         </div>
 
         <div id="order-view" class="view">
             <div class="back-btn" onclick="goBack()">❮ ফিরে যান</div>
             <div id="order-list-container"></div>
         </div>
-
-        <div class="footer">ADMIN: ইমতিয়াজ ভাই | 01612788539</div>
     </div>
 
     <div id="pay-modal" class="modal">
         <div class="modal-box">
             <h3 id="p-name" style="margin:0 0 15px; color: var(--gold); text-align:center;"></h3>
-            
             <div class="pay-header">
-                <b>🇧🇩 𝗕𝗗 𝗣𝗔𝗬𝗠𝗘𝗡𝗧 𝗠𝗘𝗧𝗛𝗢𝗗 💰</b><br>
-                💘 𝗕𝗞𝗮𝘀𝗵 : 01612788539 👈<br>
-                💘 𝗡𝗮𝗴𝗮𝗱 : 01612788539 👈<br>
+                <b>🇧🇩 PAYMENT METHOD</b><br>
+                💘 BKash/Nagad: 01612788539<br>
                 এমাউন্ট: <span id="p-price" style="color:var(--success); font-weight:bold;"></span>৳
             </div>
-
             <div id="id-inputs" style="display: none;">
-                <input type="text" id="p_id" placeholder="Player UID / ID দিন">
+                <input type="text" id="p_id" placeholder="Player UID দিন">
                 <input type="text" id="p_nick" placeholder="Ingame Name দিন">
             </div>
-
-            <input type="text" id="trx" placeholder="Transaction ID (TrxID) দিন">
+            <input type="text" id="trx" placeholder="Transaction ID দিন">
             <button class="confirm-btn" onclick="confirmOrder()">CONFIRM ORDER</button>
-            <p onclick="closeModal()" style="text-align:center; color:#666; font-size:14px; margin-top:20px; cursor:pointer;">বাতিল করুন</p>
+            <p onclick="closeModal()" style="text-align:center; color:#666; font-size:12px; margin-top:15px; cursor:pointer;">বাতিল করুন</p>
         </div>
     </div>
 
     <script>
         let currentItem = ""; let currentPrice = ""; let needID = false;
-
-        function openView(id) { document.getElementById('main-menu').style.display = 'none'; document.getElementById(id).style.display = 'flex'; }
+        function openView(id) { document.getElementById('main-menu').style.display = 'none'; document.getElementById(id).style.display = 'block'; }
         function goBack() { document.querySelectorAll('.view').forEach(v => v.style.display = 'none'); document.getElementById('main-menu').style.display = 'block'; }
-
         function buy(name, price, modeID) {
             currentItem = name; currentPrice = price; needID = modeID;
             document.getElementById('p-name').innerText = name;
@@ -183,9 +198,7 @@
             document.getElementById('id-inputs').style.display = modeID ? 'block' : 'none';
             document.getElementById('pay-modal').style.display = 'flex';
         }
-
         function closeModal() { document.getElementById('pay-modal').style.display = 'none'; }
-
         function confirmOrder() {
             const trx = document.getElementById('trx').value;
             if(trx.length < 4) { alert("সঠিক TrxID দিন"); return; }
@@ -193,7 +206,7 @@
             if(needID) {
                 const uid = document.getElementById('p_id').value;
                 const name = document.getElementById('p_nick').value;
-                if(!uid || !name) { alert("UID এবং ইনগেম নাম দিন"); return; }
+                if(!uid || !name) { alert("UID এবং নাম দিন"); return; }
                 idInfo = ` (ID: ${uid}, Name: ${name})`;
             }
             const order = { name: currentItem + idInfo, price: currentPrice, trx: trx, date: new Date().toLocaleString('bn-BD') };
@@ -204,17 +217,16 @@
             closeModal();
             showOrders();
         }
-
         function showOrders() {
             openView('order-view');
             const container = document.getElementById('order-list-container');
             const orders = JSON.parse(localStorage.getItem('myOrders')) || [];
-            if(orders.length === 0) { container.innerHTML = "<p style='text-align:center;'>কোনো অর্ডার নেই</p>"; return; }
+            if(orders.length === 0) { container.innerHTML = "<p style='text-align:center;'>অর্ডার নেই</p>"; return; }
             container.innerHTML = orders.map(o => `
-                <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:18px; margin-bottom:12px; border-left:4px solid var(--gold);">
-                    <p style="margin:0; font-size:15px;"><b>${o.name}</b></p>
-                    <p style="margin:5px 0 0; font-size:12px; color:#aaa;">Trx: ${o.trx} | ${o.date}</p>
-                    <p style="margin:5px 0 0; color:var(--gold); font-size:13px; font-weight:bold;">Status: 🟡 Pending</p>
+                <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:15px; margin-bottom:10px; border-left:4px solid var(--gold);">
+                    <p style="margin:0; font-size:14px;"><b>${o.name}</b></p>
+                    <p style="margin:5px 0 0; font-size:11px; color:#aaa;">Trx: ${o.trx} | ${o.date}</p>
+                    <p style="margin:5px 0 0; color:var(--gold); font-size:12px; font-weight:bold;">Status: Pending</p>
                 </div>
             `).join('');
         }
