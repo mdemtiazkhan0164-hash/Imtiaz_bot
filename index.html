@@ -2,118 +2,1580 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Imtiaz TopUp - Premium Panel</title>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;900&family=Hind+Siliguri:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Imtiaz TopUp</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-    :root {
-        --p: #1a56db; --bg: #f0f4fd; --text: #0f172a;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: var(--text); }
+:root{
+  --p:#2563eb;--pd:#1d4ed8;--pl:#60a5fa;--p2:#0ea5e9;
+  --g1:linear-gradient(135deg,#1e3a8a,#2563eb,#0ea5e9);
+  --acc:#f97316;--acc2:#fbbf24;
+  --ok:#22c55e;--warn:#f59e0b;--err:#ef4444;
+  --bg:#f1f5f9;--card:#fff;--text:#0f172a;--t2:#64748b;--brd:#e2e8f0;
+  --nav:64px;--bot:66px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Hind Siliguri',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+img{max-width:100%}
+.sc{display:none;min-height:100vh}
+.sc.on{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sc.on{animation:fi .25s ease}
 
-    /* আপনার দেওয়া লোগো এবং হিডেন এডমিন ট্রিগার */
-    .admin-secret-trigger {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        width: 50px;
-        height: 50px;
-        z-index: 9999;
-        background-image: url('https://ibb.co.com/Jj9WjtZT'); /* আপনার দেওয়া লোগো লিঙ্ক */
-        background-size: cover;
-        background-position: center;
-        border-radius: 50%;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        cursor: pointer;
-    }
+/* AUTH */
+.auth-bg{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0f172a;padding:24px 18px;position:relative;overflow:hidden}
+.auth-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(37,99,235,.25) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(14,165,233,.2) 0%,transparent 50%)}
+.auth-logo{text-align:center;margin-bottom:28px;position:relative;z-index:1}
+.auth-logo-img{width:80px;height:80px;border-radius:50%;margin:0 auto 10px;background:linear-gradient(135deg,#1e40af,#3b82f6);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:900;font-size:20px;color:#fff;box-shadow:0 8px 32px rgba(37,99,235,.5);overflow:hidden;border:3px solid rgba(255,255,255,.2)}
+.auth-logo-img img{width:80px;height:80px;object-fit:cover;border-radius:50%}
+.auth-logo h1{font-family:'Sora',sans-serif;font-weight:900;font-size:26px;color:#fff;letter-spacing:-.5px}
+.auth-logo p{color:rgba(255,255,255,.45);font-size:12px;letter-spacing:3px;margin-top:3px;text-transform:uppercase}
+.auth-card{background:rgba(255,255,255,.04);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:26px 20px;width:100%;max-width:400px;position:relative;z-index:1;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.auth-card h2{font-family:'Sora',sans-serif;font-weight:800;font-size:20px;color:#f8fafc;text-align:center;margin-bottom:22px}
+.fg{margin-bottom:14px}
+.fg label{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.6px}
+.fg input{width:100%;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 15px;font-size:14px;color:#f1f5f9;font-family:'Hind Siliguri',sans-serif;outline:none;transition:.2s}
+.fg input:focus{border-color:rgba(96,165,250,.6);background:rgba(255,255,255,.1)}
+.fg input::placeholder{color:rgba(255,255,255,.3)}
+.auth-btn{width:100%;background:linear-gradient(90deg,#1d4ed8,#3b82f6,#0ea5e9);color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:800;cursor:pointer;margin-top:6px;font-family:'Sora',sans-serif;box-shadow:0 4px 20px rgba(37,99,235,.4);transition:.2s}
+.auth-btn:active{opacity:.9;transform:scale(.99)}
+.auth-sw{text-align:center;margin-top:16px;font-size:13px;color:rgba(255,255,255,.45)}
+.auth-sw a{color:#60a5fa;font-weight:700;cursor:pointer}
+.auth-err{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:9px 13px;font-size:13px;color:#fca5a5;margin-bottom:12px;display:none}
+.captcha-row{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border-radius:10px;padding:10px 13px;margin-bottom:12px}
+.captcha-q{font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:#e2e8f0;flex:1}
+.captcha-inp{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:8px;padding:7px 11px;width:70px;font-size:15px;font-weight:700;color:#fff;font-family:'Sora',sans-serif;outline:none;text-align:center}
+.lock-msg{text-align:center;color:#fca5a5;font-size:13px;font-family:'Sora',sans-serif;padding:10px 0;display:none}
+/* hidden admin tap zone */
+.hidden-tap{position:absolute;top:0;left:0;width:60px;height:60px;z-index:99;cursor:default}
 
-    .auth-wrap {
-        min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
-        background: linear-gradient(160deg, #0a0e27 0%, #1e3a8a 100%);
-        padding: 20px;
-    }
+/* OTP */
+.otp-row{display:flex;gap:10px;justify-content:center;margin:12px 0}
+.otp-box{width:46px;height:52px;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:12px;font-size:22px;font-weight:900;color:#fff;text-align:center;font-family:'Sora',sans-serif;outline:none;transition:.2s}
+.otp-box:focus{border-color:rgba(96,165,250,.7);background:rgba(255,255,255,.12)}
 
-    .auth-card {
-        background: rgba(255, 255, 255, 0.98);
-        border-radius: 24px; padding: 28px; width: 100%; max-width: 400px;
-        box-shadow: 0 25px 70px rgba(0,0,0,0.4);
-    }
+/* APP */
+#app-sc{padding-top:var(--nav);padding-bottom:var(--bot)}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);background:linear-gradient(90deg,#0f172a 0%,#1e3a8a 50%,#1d4ed8 100%);display:flex;align-items:center;justify-content:space-between;padding:0 16px;box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.tlogo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.tlogo-img{width:38px;height:38px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.3);flex-shrink:0;background:linear-gradient(135deg,#1e40af,#3b82f6);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:900;font-size:13px;color:#fff}
+.tlogo-img img{width:38px;height:38px;object-fit:cover;border-radius:50%}
+.tlogo-t{color:#fff;line-height:1}
+.tlogo-t .n1{font-family:'Sora',sans-serif;font-weight:900;font-size:17px;letter-spacing:-.3px}
+.tlogo-t .n2{font-size:9px;font-weight:600;color:var(--acc2);letter-spacing:2.5px;opacity:.9}
+.tright{display:flex;align-items:center;gap:8px}
+.bal-chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:6px 13px;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px;cursor:pointer;font-family:'Sora',sans-serif}
+.tav{width:36px;height:36px;background:var(--acc);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;cursor:pointer;font-family:'Sora',sans-serif;box-shadow:0 2px 10px rgba(249,115,22,.5);overflow:hidden}
+.tav img{width:36px;height:36px;object-fit:cover;border-radius:50%}
 
-    .f-group { margin-bottom: 16px; }
-    .f-group label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 5px; color: #64748b; }
-    .f-group input {
-        width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; outline: none;
-    }
+.pg{display:none;animation:fi .2s ease}
+.pg.on{display:block}
 
-    .auth-btn {
-        width: 100%; padding: 15px; background: var(--p); color: white; border: none;
-        border-radius: 12px; font-weight: 800; cursor: pointer;
-    }
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:200;height:var(--bot);background:rgba(255,255,255,.97);backdrop-filter:blur(20px);display:flex;border-top:1px solid rgba(0,0,0,.06);box-shadow:0 -4px 20px rgba(0,0,0,.08)}
+.bi{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;position:relative;transition:.15s}
+.bi svg{width:21px;height:21px;fill:var(--t2);transition:.2s}
+.bi span{font-size:9.5px;color:var(--t2);font-weight:600;transition:.2s;font-family:'Sora',sans-serif}
+.bi.on svg{fill:var(--p)}
+.bi.on span{color:var(--p);font-weight:800}
+.bi.on::after{content:'';position:absolute;top:0;left:22%;right:22%;height:3px;background:var(--p);border-radius:0 0 6px 6px}
 
-    /* ক্যালেন্ডার স্টাইল */
-    .calendar-container { margin-top: 20px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
-    .day { padding: 8px; background: #e2e8f0; text-align: center; border-radius: 5px; font-size: 12px; }
-    .hidden { display: none !important; }
+/* NOTICE */
+.notice-bar{margin:12px 12px 0;background:linear-gradient(90deg,rgba(37,99,235,.08),rgba(14,165,233,.08));border-radius:14px;padding:11px 38px 11px 14px;border-left:4px solid var(--p);font-size:13px;color:var(--t2);position:relative;box-shadow:0 2px 10px rgba(37,99,235,.08)}
+.nc{position:absolute;top:8px;right:10px;background:none;border:none;font-size:17px;cursor:pointer;color:var(--t2)}
 
-    .unipin-box {
-        margin-top: 15px; padding: 10px; border-radius: 10px; text-align: center;
-        background: #fee2e2; color: #dc2626; font-weight: bold;
-        display: none; /* এডমিন প্যানেল থেকে কন্ট্রোল হবে */
-    }
+/* SLIDER */
+.slwrap{margin:12px 12px 0;border-radius:22px;overflow:hidden;position:relative;height:165px;box-shadow:0 8px 32px rgba(0,0,0,.15)}
+.sltrack{display:flex;height:100%;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:relative;overflow:hidden}
+.s1{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 50%,#1d4ed8 100%)}
+.s2{background:linear-gradient(135deg,#312e81,#4338ca 50%,#6366f1)}
+.s3{background:linear-gradient(135deg,#7c2d12,#b45309 50%,#f59e0b)}
+.stxt{color:#fff;z-index:1}
+.stxt h2{font-family:'Sora',sans-serif;font-weight:900;font-size:22px;line-height:1.2;letter-spacing:-.3px}
+.stxt h2 em{color:var(--acc2);font-style:normal}
+.stxt p{font-size:12px;margin-top:5px;opacity:.75}
+.simg{font-size:65px;z-index:1;filter:drop-shadow(0 6px 16px rgba(0,0,0,.35))}
+.sbg1{position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);right:-60px;top:-50px}
+.sbg2{position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04);right:40px;bottom:-40px}
+.sdots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:2}
+.sdot{width:5px;height:5px;background:rgba(255,255,255,.4);border-radius:3px;transition:.3s;cursor:pointer}
+.sdot.on{width:20px;background:#fff}
+
+/* QUICK LINKS */
+.qls{display:flex;gap:10px;margin:12px 12px 0}
+.ql{flex:1;background:#fff;border-radius:16px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:.18s;border:1px solid var(--brd)}
+.ql:active{transform:scale(.93)}
+.ql-i{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.ql span{font-size:10.5px;font-weight:700;color:var(--text);font-family:'Sora',sans-serif}
+
+/* HELPLINE POPUP */
+.helpline-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:600;display:none;align-items:flex-end;backdrop-filter:blur(4px)}
+.helpline-overlay.on{display:flex}
+.helpline-modal{background:#fff;border-radius:26px 26px 0 0;padding:24px 18px 32px;width:100%;animation:slideUp .3s cubic-bezier(.4,0,.2,1)}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.hlm-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.hlm-h h3{font-family:'Sora',sans-serif;font-weight:900;font-size:18px}
+.hlm-close{background:var(--bg);border:none;border-radius:50%;width:33px;height:33px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.hl-btn{display:flex;align-items:center;gap:14px;padding:15px 16px;border-radius:16px;margin-bottom:10px;cursor:pointer;border:none;width:100%;text-align:left;transition:.15s;font-family:'Sora',sans-serif}
+.hl-btn:active{transform:scale(.97)}
+.hl-btn.wa{background:linear-gradient(135deg,#dcfce7,#bbf7d0);border:1.5px solid #86efac}
+.hl-btn.tg{background:linear-gradient(135deg,#dbeafe,#bfdbfe);border:1.5px solid #93c5fd}
+.hl-ico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.hl-ico.wa-i{background:#16a34a}
+.hl-ico.tg-i{background:#0284c7}
+.hl-txt h4{font-size:14px;font-weight:800;color:var(--text)}
+.hl-txt p{font-size:12px;color:var(--t2);margin-top:2px}
+
+/* SECTION HEADER */
+.sec-h{display:flex;align-items:center;justify-content:space-between;margin:18px 12px 10px}
+.sec-h h3{font-family:'Sora',sans-serif;font-weight:800;font-size:16px;color:var(--text)}
+.sec-h span{font-size:11px;color:var(--p);font-weight:700;cursor:pointer}
+
+/* CATEGORY */
+.cats{display:flex;gap:8px;margin:0 12px 12px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.cats::-webkit-scrollbar{display:none}
+.cat-chip{background:#fff;border:1.5px solid var(--brd);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;color:var(--t2);cursor:pointer;white-space:nowrap;transition:.2s;flex-shrink:0;font-family:'Sora',sans-serif}
+.cat-chip.on{background:var(--p);border-color:var(--p);color:#fff}
+
+/* PRODUCT GRID - like panelsell style */
+.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:0 12px 16px}
+.pcard{background:#fff;border-radius:18px;overflow:hidden;cursor:pointer;box-shadow:0 3px 14px rgba(0,0,0,.09);transition:.18s;border:1px solid rgba(0,0,0,.04)}
+.pcard:active{transform:scale(.95)}
+.pthumb{height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.pthumb img{width:100%;height:100%;object-fit:cover}
+.pthumb-emoji{font-size:52px;z-index:1;position:relative}
+.abadge{position:absolute;top:8px;left:8px;background:#22c55e;color:#fff;font-size:8px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.4px;font-family:'Sora',sans-serif;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.pname{padding:9px 10px 3px;font-size:12px;font-weight:800;color:var(--text);text-align:center;line-height:1.3;font-family:'Sora',sans-serif}
+.pprice{padding:2px 10px 10px;text-align:center;font-size:12px;font-weight:800;background:linear-gradient(90deg,var(--p),var(--p2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-family:'Sora',sans-serif}
+
+/* ORDERS FEED */
+.lbox{margin:0 12px 14px;background:#fff;border-radius:18px;padding:15px;box-shadow:0 3px 14px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.04)}
+.lbox-h{font-family:'Sora',sans-serif;font-weight:800;font-size:14px;margin-bottom:13px}
+.orow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--brd)}
+.orow:last-child{border-bottom:none}
+.oav-g{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;flex-shrink:0;font-family:'Sora',sans-serif;background:linear-gradient(135deg,var(--p),var(--p2))}
+.oi{flex:1}
+.oi strong{font-size:12.5px;display:block;font-family:'Sora',sans-serif;font-weight:700}
+.oi span{font-size:11px;color:var(--t2)}
+.badge{padding:3px 10px;border-radius:20px;font-size:9.5px;font-weight:800;white-space:nowrap;font-family:'Sora',sans-serif;text-transform:uppercase}
+.badge.completed{background:#dcfce7;color:#16a34a}
+.badge.processing,.badge.pending{background:#fef9c3;color:#d97706}
+.badge.cancelled{background:#fee2e2;color:#dc2626}
+
+/* PRODUCT DETAIL */
+.pd-hero{background:linear-gradient(160deg,#0f172a,#1e3a8a,#1d4ed8);padding:16px 14px;position:relative;overflow:hidden}
+.pd-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.05)}
+.backbtn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:10px;padding:7px 13px;font-size:12px;cursor:pointer;margin-bottom:10px;font-family:'Sora',sans-serif;font-weight:600;display:inline-flex;align-items:center;gap:5px}
+.pd-meta{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.pd-img-w{width:80px;height:80px;border-radius:18px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:42px;border:1px solid rgba(255,255,255,.2);flex-shrink:0;overflow:hidden}
+.pd-img-w img{width:80px;height:80px;object-fit:cover;border-radius:18px}
+.pd-inf h2{color:#fff;font-family:'Sora',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.3px}
+.pd-inf p{color:rgba(255,255,255,.6);font-size:12px;margin-top:3px}
+.pd-stat{margin-top:8px;display:flex;gap:8px}
+.pd-stat span{background:rgba(255,255,255,.12);border-radius:8px;padding:3px 10px;color:rgba(255,255,255,.8);font-size:11px;font-weight:600;font-family:'Sora',sans-serif}
+
+.stepsec{margin:12px}
+.step-lbl{display:flex;align-items:center;gap:9px;margin-bottom:11px}
+.snum{width:28px;height:28px;background:linear-gradient(135deg,var(--pd),var(--p2));border-radius:50%;color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Sora',sans-serif}
+.step-lbl span{font-weight:800;font-size:14px;font-family:'Sora',sans-serif}
+
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ri{background:#fff;border:2px solid var(--brd);border-radius:12px;padding:11px 13px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:.18s;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.ri:active,.ri.sel{border-color:var(--p);background:linear-gradient(135deg,#eff6ff,#e0f2fe)}
+.ri .rn{font-size:12.5px;font-weight:600;font-family:'Sora',sans-serif}
+.ri .rp{font-size:13px;font-weight:800;color:var(--p);font-family:'Sora',sans-serif}
+
+.inpg{background:#fff;border-radius:15px;padding:14px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.05);border:1px solid var(--brd)}
+.inpg label{font-size:11px;color:var(--t2);font-weight:700;margin-bottom:7px;display:block;text-transform:uppercase;letter-spacing:.5px;font-family:'Sora',sans-serif}
+.inpg input{width:100%;border:2px solid var(--brd);border-radius:10px;padding:11px 14px;font-size:14px;font-family:'Hind Siliguri',sans-serif;outline:none;transition:.2s;background:#fafbff}
+.inpg input:focus{border-color:var(--p);background:#fff}
+.vbtn{width:100%;background:linear-gradient(90deg,var(--pd),var(--p2));color:#fff;border:none;border-radius:10px;padding:11px;font-size:14px;font-weight:800;cursor:pointer;margin-top:8px;font-family:'Sora',sans-serif}
+.uid-ok{margin-top:8px;border-radius:10px;padding:10px 14px;font-size:14px;font-weight:700;display:none;font-family:'Sora',sans-serif}
+
+.pmgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pm{background:#fff;border:2px solid var(--brd);border-radius:14px;padding:13px;cursor:pointer;transition:.18s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.pm.sel{border-color:var(--p);background:linear-gradient(135deg,#eff6ff,#e0f2fe)}
+.pm-ico{font-size:26px;margin-bottom:6px}
+.pm-n{font-size:12px;font-weight:800;font-family:'Sora',sans-serif}
+.pm-s{font-size:10px;color:var(--t2);margin-top:2px}
+
+.buybtn{width:100%;background:linear-gradient(90deg,#1d4ed8,#3b82f6,#0ea5e9);color:#fff;border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:900;cursor:pointer;margin:12px 0;font-family:'Sora',sans-serif;box-shadow:0 6px 24px rgba(37,99,235,.4);transition:.18s}
+.buybtn:active{transform:scale(.98);opacity:.92}
+
+.rules-box{background:#fff;border-radius:15px;padding:14px;margin:0 12px 12px;box-shadow:0 2px 10px rgba(0,0,0,.05);border:1px solid var(--brd)}
+.rules-box h4{font-size:13px;font-weight:800;margin-bottom:10px;font-family:'Sora',sans-serif}
+.rules-box li{font-size:12px;color:var(--t2);line-height:2.1;list-style:none}
+.rules-box li::before{content:'◉ ';color:var(--p)}
+
+/* ORDER MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;display:none;align-items:flex-end;backdrop-filter:blur(4px)}
+.overlay.on{display:flex}
+.modal{background:#fff;border-radius:26px 26px 0 0;padding:24px 18px;width:100%;max-height:92vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.4,0,.2,1)}
+.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.mh h3{font-family:'Sora',sans-serif;font-weight:900;font-size:18px}
+.mcl{background:var(--bg);border:none;border-radius:50%;width:33px;height:33px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.csummary{background:var(--bg);border-radius:14px;padding:14px;margin-bottom:14px}
+.cs-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--brd);font-size:13px}
+.cs-row:last-child{border-bottom:none;padding-top:11px}
+.cs-row .ck{color:var(--t2);font-weight:600;font-family:'Sora',sans-serif}
+.cs-row .cv{font-weight:700;font-family:'Sora',sans-serif}
+.cs-row .cv.big{color:var(--p);font-size:16px;font-weight:900}
+.pay-card{border-radius:16px;padding:16px;margin-bottom:12px;border:2px solid var(--brd)}
+.pay-card.bkash-c{background:linear-gradient(135deg,#fff0f6,#fce7f3);border-color:#f9a8d4}
+.pay-card.nagad-c{background:linear-gradient(135deg,#fff7ed,#ffedd5);border-color:#fdba74}
+.pay-card.rocket-c{background:linear-gradient(135deg,#faf5ff,#ede9fe);border-color:#c4b5fd}
+.pay-card h4{font-family:'Sora',sans-serif;font-weight:800;font-size:14px;margin-bottom:10px}
+.num-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.7);border-radius:10px;padding:10px 13px;margin-bottom:8px}
+.num-big{font-family:'Sora',sans-serif;font-weight:900;font-size:18px;letter-spacing:1px}
+.copy-btn{background:var(--p);color:#fff;border:none;border-radius:8px;padding:6px 13px;font-size:12px;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif;flex-shrink:0}
+.wa-btn{width:100%;background:linear-gradient(90deg,#16a34a,#22c55e);color:#fff;border:none;border-radius:10px;padding:10px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:6px}
+.tg-btn2{width:100%;background:linear-gradient(90deg,#0284c7,#38bdf8);color:#fff;border:none;border-radius:10px;padding:10px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif;display:flex;align-items:center;justify-content:center;gap:6px}
+.trx-inp{width:100%;background:#fff;border:2px solid var(--brd);border-radius:10px;padding:11px 14px;font-size:14px;font-family:'Hind Siliguri',sans-serif;outline:none;margin:10px 0 8px;transition:.2s}
+.trx-inp:focus{border-color:var(--p)}
+.cfm-btn{width:100%;background:linear-gradient(90deg,#1d4ed8,#0ea5e9);color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:900;cursor:pointer;font-family:'Sora',sans-serif}
+
+/* MY ORDERS */
+.olist{margin:12px;display:flex;flex-direction:column;gap:10px}
+.ocard{background:#fff;border-radius:16px;padding:15px;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.04)}
+.ocard-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.ocard-id{font-family:'Sora',sans-serif;font-weight:900;font-size:13px;color:var(--p)}
+.ocard-rows{display:flex;flex-direction:column;gap:5px}
+.or{display:flex;justify-content:space-between;font-size:12.5px}
+.or .ok{color:var(--t2);font-weight:600}
+.or .ov{font-weight:600;font-family:'Sora',sans-serif}
+
+/* ACCOUNT */
+.acc-hero{background:linear-gradient(160deg,#0f172a,#1e3a8a 50%,#1d4ed8);padding:30px 16px 24px;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;overflow:hidden}
+.acc-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.05)}
+.acc-av{width:80px;height:80px;border-radius:50%;background:var(--acc);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:32px;font-family:'Sora',sans-serif;box-shadow:0 6px 24px rgba(249,115,22,.5);border:3px solid rgba(255,255,255,.3);position:relative;z-index:1}
+.acc-name{color:#fff;font-family:'Sora',sans-serif;font-weight:900;font-size:19px;position:relative;z-index:1}
+.acc-bal{color:rgba(255,255,255,.65);font-size:13px;position:relative;z-index:1}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px}
+.sc2{background:#fff;border-radius:16px;padding:16px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.04)}
+.sv2{font-family:'Sora',sans-serif;font-weight:900;font-size:22px;color:var(--p)}
+.sl2{font-size:11px;color:var(--t2);margin-top:3px;font-family:'Sora',sans-serif;font-weight:600}
+.pibox{margin:0 12px 12px;background:#fff;border-radius:16px;padding:17px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.pibox h3{font-family:'Sora',sans-serif;font-weight:800;font-size:15px;margin-bottom:14px}
+.pif{margin-bottom:12px}
+.pif label{font-size:11px;color:var(--t2);margin-bottom:5px;display:block;font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-family:'Sora',sans-serif}
+.pif input{width:100%;border:1.5px solid var(--brd);border-radius:10px;padding:10px 14px;font-size:13px;font-family:'Hind Siliguri',sans-serif;background:#fafbff;outline:none;transition:.2s}
+.pif input:focus{border-color:var(--p)}
+.ubtn{width:100%;background:linear-gradient(90deg,var(--pd),var(--p2));color:#fff;border:none;border-radius:11px;padding:13px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif}
+.mlist{margin:0 12px 12px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.mi{display:flex;align-items:center;gap:13px;padding:15px 16px;border-bottom:1px solid var(--brd);cursor:pointer;transition:.15s}
+.mi:last-child{border-bottom:none}
+.mi:active{background:var(--bg)}
+.mi-ico{width:36px;height:36px;border-radius:10px;background:rgba(37,99,235,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mi-ico svg{width:18px;height:18px;fill:var(--p)}
+.mi .mt{flex:1;font-size:13.5px;font-weight:600;font-family:'Sora',sans-serif}
+.mi .ch{fill:var(--t2) !important;width:15px;height:15px}
+.accbtns{margin:0 12px 12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.abtn-acc{border:none;border-radius:12px;padding:14px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif}
+.abtn-acc.supp{background:rgba(37,99,235,.1);color:var(--p)}
+.abtn-acc.lo{background:rgba(239,68,68,.1);color:var(--err)}
+
+/* ADD FUND */
+.afbox{margin:12px;background:#fff;border-radius:18px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.afbox h3{font-family:'Sora',sans-serif;font-weight:900;font-size:17px;margin-bottom:16px}
+.amount-inp{width:100%;border:2px solid var(--brd);border-radius:12px;padding:14px 16px;font-size:18px;font-family:'Sora',sans-serif;outline:none;transition:.2s;font-weight:700;background:#fafbff}
+.amount-inp:focus{border-color:var(--p)}
+.qa-row{display:flex;gap:7px;margin:11px 0;flex-wrap:wrap}
+.qa{background:rgba(37,99,235,.08);border:1.5px solid rgba(37,99,235,.2);border-radius:9px;padding:7px 14px;font-size:13px;font-weight:800;color:var(--p);cursor:pointer;font-family:'Sora',sans-serif}
+.fbtn{width:100%;background:linear-gradient(90deg,var(--pd),var(--p2));color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:800;cursor:pointer;margin-top:10px;font-family:'Sora',sans-serif}
+.dep-sec{margin:0 12px}
+.dep-sec h3{font-family:'Sora',sans-serif;font-weight:800;font-size:16px;margin-bottom:10px}
+.no-data{text-align:center;padding:30px 0;color:var(--t2);font-size:13px;font-family:'Sora',sans-serif}
+
+/* ══════ ADMIN ══════ */
+.adm{background:#080e1f;min-height:100vh;color:#e2e8f0;font-family:'Sora',sans-serif}
+.adm-nav{background:linear-gradient(90deg,#080e1f,#0f1f3d);padding:0 16px;height:60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;z-index:50;box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.adm-nav h1{font-family:'Sora',sans-serif;font-weight:900;font-size:16px;color:#f8fafc;display:flex;align-items:center;gap:8px}
+.adm-badge{background:linear-gradient(90deg,#1d4ed8,#0ea5e9);color:#fff;padding:3px 11px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:.5px}
+.adm-tabs{display:flex;background:#0a1628;border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto;scrollbar-width:none;padding:0 4px}
+.adm-tabs::-webkit-scrollbar{display:none}
+.atab{padding:13px 15px;font-size:12px;font-weight:700;color:rgba(255,255,255,.4);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:.2s;flex-shrink:0;display:flex;align-items:center;gap:5px}
+.atab.on{color:#60a5fa;border-bottom-color:#3b82f6}
+.adm-pg{display:none;padding:14px}
+.adm-pg.on{display:block}
+.astat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.astat{background:linear-gradient(135deg,#0d1b33,#132040);border-radius:16px;padding:16px;border:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden}
+.astat::after{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;opacity:.15}
+.astat.blue::after{background:#3b82f6}
+.astat.teal::after{background:#06b6d4}
+.astat.green::after{background:#22c55e}
+.astat.orange::after{background:#f97316}
+.astat-val{font-family:'Sora',sans-serif;font-weight:900;font-size:24px;margin-bottom:4px}
+.astat.blue .astat-val{color:#60a5fa}
+.astat.teal .astat-val{color:#22d3ee}
+.astat.green .astat-val{color:#4ade80}
+.astat.orange .astat-val{color:#fb923c}
+.astat-lbl{font-size:11px;color:rgba(255,255,255,.4);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.astat-ico{font-size:22px;margin-bottom:8px}
+.acard{background:linear-gradient(135deg,#0d1b33,#0f2040);border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid rgba(255,255,255,.07)}
+.acard h3{font-size:14px;font-weight:800;color:#f1f5f9;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.acard h3 .ah3-ico{width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;font-size:14px}
+.af2{margin-bottom:12px}
+.af2 label{font-size:10px;color:rgba(255,255,255,.4);font-weight:700;display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px}
+.af2 input,.af2 select,.af2 textarea{width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 13px;font-size:13px;color:#e2e8f0;font-family:'Sora',sans-serif;outline:none;transition:.2s}
+.af2 input:focus,.af2 select:focus,.af2 textarea:focus{border-color:rgba(96,165,250,.5);background:rgba(255,255,255,.08)}
+.af2 input::placeholder{color:rgba(255,255,255,.25)}
+.af2 select option{background:#0d1b33}
+.af2 textarea{resize:vertical;min-height:70px}
+.a2-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.abtn-save{background:linear-gradient(90deg,#1d4ed8,#0ea5e9);color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif;transition:.2s;box-shadow:0 3px 12px rgba(37,99,235,.3)}
+.abtn-del{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:7px 13px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif}
+.abtn-edit{background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.2);border-radius:8px;padding:7px 13px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif}
+.abtn-back{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;margin-bottom:12px;display:inline-flex;align-items:center;gap:5px}
+
+/* IMAGE UPLOAD */
+.img-type-tabs{display:flex;gap:6px;margin-bottom:8px}
+.img-tab{flex:1;padding:7px;text-align:center;font-size:11px;font-weight:700;border-radius:8px;cursor:pointer;transition:.2s;font-family:'Sora',sans-serif;border:1.5px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);background:rgba(255,255,255,.04)}
+.img-tab.on{background:rgba(37,99,235,.25);border-color:rgba(96,165,250,.5);color:#93c5fd}
+.img-upload-area{border:2px dashed rgba(255,255,255,.2);border-radius:12px;padding:16px;text-align:center;cursor:pointer;transition:.2s;background:rgba(255,255,255,.03);margin-bottom:8px}
+.img-upload-area:hover{border-color:rgba(96,165,250,.5);background:rgba(255,255,255,.06)}
+
+/* PRODUCT ITEMS */
+.prod-item{background:rgba(255,255,255,.04);border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px}
+.pi-ico-w{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;overflow:hidden}
+.pi-ico-w img{width:56px;height:56px;object-fit:cover;border-radius:12px}
+.pi-inf{flex:1}
+.pi-inf h4{font-size:13px;font-weight:700;color:#f1f5f9}
+.pi-inf p{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px}
+.pi-tag{background:rgba(59,130,246,.2);color:#93c5fd;padding:2px 8px;border-radius:5px;font-size:9px;font-weight:700;margin-top:4px;display:inline-block}
+.pi-acts{display:flex;gap:5px}
+
+/* PKG */
+.pkg-item{background:rgba(255,255,255,.04);border-radius:10px;padding:10px 12px;margin-bottom:6px;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between}
+.pkg-n{font-size:13px;font-weight:600;color:#e2e8f0}
+.pkg-p{font-size:14px;font-weight:900;color:#60a5fa}
+.pkg-acts{display:flex;gap:5px}
+
+/* USER */
+.user-item{background:rgba(255,255,255,.04);border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px}
+.uav{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#0ea5e9);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;flex-shrink:0}
+.uinf{flex:1}
+.uinf h4{font-size:13px;font-weight:700;color:#f1f5f9}
+.uinf p{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px}
+.ubal{font-size:14px;font-weight:900;color:#4ade80}
+
+/* ORDER ADMIN */
+.oa-item{background:rgba(255,255,255,.04);border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.07)}
+.oa-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.oa-id{font-size:12px;font-weight:900;color:#60a5fa}
+.oa-rows{font-size:11.5px;color:rgba(255,255,255,.45);line-height:2}
+.oa-rows span{color:#cbd5e1;font-weight:600}
+.status-sel{background:rgba(255,255,255,.06);color:#e2e8f0;border:1px solid rgba(255,255,255,.15);border-radius:7px;padding:3px 8px;font-size:11px;cursor:pointer;font-family:'Sora',sans-serif;font-weight:700}
+
+/* ADMIN LOGIN */
+.adm-login{min-height:100vh;background:linear-gradient(160deg,#040912,#0a1628,#0f2040);display:flex;align-items:center;justify-content:center;padding:24px 18px;position:relative;overflow:hidden}
+.adm-login::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(37,99,235,.15),transparent 60%),radial-gradient(ellipse at 70% 20%,rgba(14,165,233,.1),transparent 50%)}
+.al-card{background:rgba(255,255,255,.04);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:30px 22px;width:100%;max-width:380px;position:relative;z-index:1;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.al-card h2{font-family:'Sora',sans-serif;font-weight:900;font-size:22px;color:#f8fafc;text-align:center;margin-bottom:6px}
+.al-card p{font-size:13px;color:rgba(255,255,255,.4);text-align:center;margin-bottom:24px}
+.al-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:9px 13px;font-size:13px;color:#fca5a5;margin-bottom:12px;display:none}
+.al-btn{width:100%;background:linear-gradient(90deg,#1d4ed8,#3b82f6,#0ea5e9);color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:900;cursor:pointer;font-family:'Sora',sans-serif}
+.al-back{text-align:center;margin-top:14px;color:rgba(255,255,255,.35);font-size:13px;cursor:pointer}
+.adm-no-data{text-align:center;padding:28px 0;color:rgba(255,255,255,.3);font-size:13px}
+
+/* DANGER BTN */
+.abtn-danger{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif;width:100%;margin-top:8px}
+
+/* TOAST */
+.toast-box{position:fixed;bottom:78px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:11px 22px;border-radius:22px;font-size:13px;z-index:9999;display:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.1);font-family:'Sora',sans-serif;font-weight:600}
+.toast-box.on{display:block;animation:ta 3s forwards}
+@keyframes ta{0%{opacity:0;transform:translateX(-50%) translateY(10px)}12%{opacity:1;transform:translateX(-50%) translateY(0)}75%{opacity:1}100%{opacity:0}}
+.color-row{display:flex;align-items:center;gap:8px}
+.color-row input[type=color]{width:40px;height:36px;border:none;border-radius:8px;cursor:pointer;padding:2px}
 </style>
 </head>
 <body>
 
-<div id="admin-trigger" class="admin-secret-trigger"></div>
-
-<div class="auth-wrap">
-    <div class="auth-card">
-        <h2 style="text-align:center; color: var(--p); margin-bottom: 20px;">JHX TOP UP LOGIN</h2>
-        
-        <div id="unipin-notice" class="unipin-box">Uni Pin Service is Closed</div>
-
-        <form id="loginForm">
-            <div class="f-group">
-                <label>PLAYER UID (VERIFIED)</label>
-                <input type="text" placeholder="Enter Player UID" required>
-            </div>
-            <button type="submit" class="auth-btn">LOGIN & BUY PANEL</button>
-        </form>
-
-        <h4 style="margin-top:20px; font-size: 14px; color: #64748b;">Select Date (17th Hidden):</h4>
-        <div class="calendar-container" id="calendar">
-            </div>
+<!-- LOGIN -->
+<div class="sc on" id="s-login">
+  <div class="auth-bg">
+    <div class="hidden-tap" id="hidden-tap" onclick="hiddenTap()"></div>
+    <div class="auth-logo">
+      <div class="auth-logo-img">
+        <img src="https://i.ibb.co/Jj9WjtZ/logo.jpg" onerror="this.style.display='none'" alt="logo">
+      </div>
+      <h1>IMTIAZ TOPUP</h1>
+      <p>Game Topup BD</p>
     </div>
+    <div class="auth-card">
+      <h2>স্বাগতম 👋</h2>
+      <div class="auth-err" id="l-err"></div>
+      <div class="lock-msg" id="lock-msg"></div>
+      <div id="login-form">
+        <div class="fg"><label>ফোন নম্বর বা ইমেইল</label><input id="l-u" placeholder="01XXXXXXXXX" type="text" maxlength="60"></div>
+        <div class="fg"><label>পাসওয়ার্ড</label><input id="l-p" placeholder="••••••••" type="password" maxlength="50"></div>
+        <div class="captcha-row">
+          <span class="captcha-q" id="cap-q">3 + 4 = ?</span>
+          <input class="captcha-inp" id="cap-a" placeholder="?" type="number" maxlength="3">
+        </div>
+        <button class="auth-btn" onclick="doLogin()">লগইন →</button>
+      </div>
+      <div class="auth-sw" style="margin-top:14px">অ্যাকাউন্ট নেই? <a onclick="show('s-reg')">রেজিস্টার করুন</a></div>
+    </div>
+  </div>
 </div>
 
+<!-- OTP -->
+<div class="sc" id="s-otp">
+  <div class="auth-bg">
+    <div class="auth-logo">
+      <div class="auth-logo-img"><img src="https://i.ibb.co/Jj9WjtZ/logo.jpg" onerror="this.style.display='none'" alt="logo"></div>
+      <h1>IMTIAZ TOPUP</h1><p>Game Topup BD</p>
+    </div>
+    <div class="auth-card">
+      <h2>🔐 OTP ভেরিফিকেশন</h2>
+      <div style="text-align:center;font-size:13px;color:rgba(255,255,255,.5);margin-bottom:18px">আপনার ফোনে পাঠানো ৪-সংখ্যার কোড লিখুন<br><span id="otp-sent-to" style="color:#60a5fa;font-weight:700"></span></div>
+      <div class="auth-err" id="otp-err"></div>
+      <div style="background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:9px 13px;font-size:13px;color:#86efac;margin-bottom:12px;display:none" id="otp-ok"></div>
+      <div class="otp-row">
+        <input class="otp-box" id="o1" maxlength="1" type="tel" oninput="otpMove(this,'o2')" onkeydown="otpBack(event,this,'')">
+        <input class="otp-box" id="o2" maxlength="1" type="tel" oninput="otpMove(this,'o3')" onkeydown="otpBack(event,this,'o1')">
+        <input class="otp-box" id="o3" maxlength="1" type="tel" oninput="otpMove(this,'o4')" onkeydown="otpBack(event,this,'o2')">
+        <input class="otp-box" id="o4" maxlength="1" type="tel" oninput="otpMove(this,'')" onkeydown="otpBack(event,this,'o3')">
+      </div>
+      <button class="auth-btn" onclick="verifyOTP()">✅ ভেরিফাই করুন</button>
+      <div style="text-align:center;margin-top:14px;font-size:13px;color:rgba(255,255,255,.4)">
+        কোড পাননি? <a onclick="resendOTP()" style="color:#60a5fa;cursor:pointer;font-weight:700">পুনরায় পাঠান</a>
+        <span id="resend-timer" style="color:rgba(255,255,255,.3)"></span>
+      </div>
+      <div style="text-align:center;margin-top:10px"><a onclick="show('s-login')" style="color:rgba(255,255,255,.4);font-size:12px;cursor:pointer">← ফিরে যান</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div class="sc" id="s-reg">
+  <div class="auth-bg">
+    <div class="hidden-tap" onclick="hiddenTap()"></div>
+    <div class="auth-logo">
+      <div class="auth-logo-img"><img src="https://i.ibb.co/Jj9WjtZ/logo.jpg" onerror="this.style.display='none'" alt="logo"></div>
+      <h1>IMTIAZ TOPUP</h1><p>Game Topup BD</p>
+    </div>
+    <div class="auth-card">
+      <h2>নতুন অ্যাকাউন্ট ✨</h2>
+      <div class="auth-err" id="r-err"></div>
+      <div class="fg"><label>পুরো নাম</label><input id="r-n" placeholder="আপনার নাম" type="text" maxlength="50"></div>
+      <div class="fg"><label>ফোন নম্বর</label><input id="r-ph" placeholder="01XXXXXXXXX" type="tel" maxlength="15"></div>
+      <div class="fg"><label>ইমেইল (ঐচ্ছিক)</label><input id="r-em" placeholder="email@gmail.com" type="email" maxlength="80"></div>
+      <div class="fg"><label>পাসওয়ার্ড</label><input id="r-pw" placeholder="কমপক্ষে ৬ অক্ষর" type="password" maxlength="50"></div>
+      <div class="fg"><label>পাসওয়ার্ড নিশ্চিত করুন</label><input id="r-pw2" placeholder="পাসওয়ার্ড আবার লিখুন" type="password" maxlength="50"></div>
+      <div class="captcha-row">
+        <span class="captcha-q" id="cap-q2">5 + 3 = ?</span>
+        <input class="captcha-inp" id="cap-a2" placeholder="?" type="number" maxlength="3">
+      </div>
+      <button class="auth-btn" onclick="doReg()">অ্যাকাউন্ট তৈরি করুন →</button>
+      <div class="auth-sw" style="margin-top:14px">আগেই আছে? <a onclick="show('s-login')">লগইন করুন</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="sc" id="s-app">
+  <div id="app-sc">
+    <nav class="topbar">
+      <div class="tlogo" onclick="goP('home')">
+        <div class="tlogo-img"><img src="https://i.ibb.co/Jj9WjtZ/logo.jpg" onerror="this.style.display='none'" alt="logo"></div>
+        <div class="tlogo-t"><div class="n1">IMTIAZ TOPUP</div><div class="n2">GAME TOPUP BD</div></div>
+      </div>
+      <div class="tright">
+        <div class="bal-chip" onclick="goP('addfund')">💳 <span id="nav-bal">৳0</span></div>
+        <div class="tav" id="tav">I</div>
+      </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div class="pg on" id="pg-home">
+      <div class="notice-bar" id="nb"><strong>📢</strong> <span id="nb-txt">২৪ ঘন্টা সার্ভিস।</span><button class="nc" onclick="this.parentElement.style.display='none'">✕</button></div>
+      <div class="slwrap">
+        <div class="sltrack" id="slt">
+          <div class="slide s1"><div class="sbg1"></div><div class="sbg2"></div><div class="stxt"><h2>টপআপ করুন<br><em>২৪ ঘন্টায়</em></h2><p>⚡ মাত্র ৩ সেকেন্ডে</p></div><div class="simg">💎</div></div>
+          <div class="slide s2"><div class="sbg1"></div><div class="sbg2"></div><div class="stxt"><h2>সেরা দামে<br><em>Diamond কিনুন</em></h2><p>🚀 Auto Delivery</p></div><div class="simg">🔷</div></div>
+          <div class="slide s3"><div class="sbg1"></div><div class="sbg2"></div><div class="stxt"><h2>Fast &amp;<br><em>Secure</em></h2><p>🔒 ১০০% নিরাপদ</p></div><div class="simg">💫</div></div>
+        </div>
+        <div class="sdots" id="sdots"><div class="sdot on" onclick="goSl(0)"></div><div class="sdot" onclick="goSl(1)"></div><div class="sdot" onclick="goSl(2)"></div></div>
+    </div>
+    <!-- Quick links with Helpline button -->
+      <div class="qls">
+        <div class="ql" onclick="showHelpline()"><div class="ql-i" style="background:#dcfce7">📞</div><span>Helpline</span></div>
+        <div class="ql" onclick="window.open('https://wa.me/8801612788539','_blank')"><div class="ql-i" style="background:#dcfce7">💬</div><span>WhatsApp</span></div>
+        <div class="ql" onclick="window.open('https://t.me/emtiaz0099','_blank')"><div class="ql-i" style="background:#dbeafe">✈️</div><span>Telegram</span></div>
+        <div class="ql" onclick="toast('App coming soon!')"><div class="ql-i" style="background:#f3e8ff">📱</div><span>App</span></div>
+      </div>
+      <div class="sec-h"><h3 id="home-cat">🔥 সব পণ্য</h3></div>
+      <div class="cats" id="cats-row"></div>
+      <div class="pgrid" id="home-prods"></div>
+      <div class="lbox"><div class="lbox-h">📦 সর্বশেষ অর্ডার</div><div id="order-feed"><div class="no-data">কোনো অর্ডার নেই</div></div></div>
+    </div>
+
+    <!-- PRODUCT DETAIL -->
+    <div class="pg" id="pg-product">
+      <div class="pd-hero">
+        <button class="backbtn" onclick="goP('home')">← ফিরে যান</button>
+        <div class="pd-meta">
+          <div class="pd-img-w" id="pd-ico"></div>
+          <div class="pd-inf">
+            <h2 id="pd-title">-</h2>
+            <p>Game / Topup</p>
+            <div class="pd-stat"><span id="pd-min-price">-</span><span>AUTO</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stepsec">
+        <div class="step-lbl"><div class="snum">1</div><span>প্যাকেজ সিলেক্ট করুন</span></div>
+        <div class="rgrid" id="rg"></div>
+      </div>
+      <div class="stepsec">
+        <div class="step-lbl"><div class="snum">2</div><span>Account Info</span></div>
+        <div class="inpg">
+          <label>Player ID</label>
+          <input type="number" id="pid" placeholder="Player ID লিখুন" maxlength="20">
+          <button class="vbtn" onclick="verUID()">🔍 Player ID ভেরিফাই</button>
+          <div class="uid-ok" id="uid-ok"></div>
+        </div>
+      </div>
+      <div class="stepsec">
+        <div class="step-lbl"><div class="snum">3</div><span>Payment Method</span></div>
+        <div class="pmgrid">
+          <div class="pm" onclick="selPM(this,'wallet')"><div class="pm-ico">👛</div><div class="pm-n">Wallet</div><div class="pm-s" id="w-b">৳0</div></div>
+          <div class="pm sel" onclick="selPM(this,'bkash')"><div class="pm-ico">📱</div><div class="pm-n">bKash/Nagad</div><div class="pm-s">Send Money</div></div>
+        </div>
+        <div style="margin-top:9px;padding:0 2px;font-size:12px;color:var(--t2)">
+          <div style="margin-bottom:3px">ℹ️ ওয়ালেট: <strong id="bal-s">৳0</strong></div>
+          <div>ℹ️ মূল্য: <strong id="sel-pr">৳0</strong></div>
+        </div>
+      </div>
+      <div style="margin:0 12px"><button class="buybtn" onclick="doBuy()">🛒 অর্ডার করুন</button></div>
+      <div class="rules-box"><h4>📋 নিয়ম ও শর্ত</h4><ul id="rules-list">
+        <li>শুধুমাত্র Bangladesh সার্ভারের ID দিয়ে টপ আপ হবে।</li>
+        <li>ভুল Player ID দিলে Diamond ফেরত দেওয়া হবে না।</li>
+        <li>অর্ডার দেওয়ার পর ক্যান্সেল করা যাবে না।</li>
+        <li>সমস্যায় WhatsApp: 01612788539</li>
+      </ul></div>
+    </div>
+
+    <!-- ORDERS -->
+    <div class="pg" id="pg-orders">
+      <div style="padding:14px 12px 6px;font-family:'Sora',sans-serif;font-weight:900;font-size:18px">📋 My Orders</div>
+      <div class="olist" id="olist"><div class="no-data">কোনো অর্ডার নেই</div></div>
+    </div>
+
+    <!-- ADD FUND -->
+    <div class="pg" id="pg-addfund">
+      <div class="afbox">
+        <h3>💰 Add Money</h3>
+        <label style="font-size:11px;color:var(--t2);margin-bottom:6px;display:block;font-weight:700;text-transform:uppercase;letter-spacing:.5px">পরিমাণ লিখুন</label>
+        <input class="amount-inp" type="number" id="fa" placeholder="৳ Amount" max="100000">
+        <div class="qa-row">
+          <div class="qa" onclick="setA(50)">৳50</div><div class="qa" onclick="setA(100)">৳100</div>
+          <div class="qa" onclick="setA(200)">৳200</div><div class="qa" onclick="setA(500)">৳500</div>
+          <div class="qa" onclick="setA(1000)">৳1000</div>
+        </div>
+        <button class="fbtn" onclick="reqFund()">💳 Add Fund করুন</button>
+      </div>
+      <div class="dep-sec"><h3 style="margin-bottom:10px">My Deposits</h3><div id="deps"><div class="no-data">No deposit found</div></div></div>
+    </div>
+
+    <!-- ACCOUNT -->
+    <div class="pg" id="pg-account">
+      <div class="acc-hero">
+        <div class="acc-av" id="a-av">I</div>
+        <div class="acc-name" id="a-nm">-</div>
+        <div class="acc-bal">Balance: <strong id="a-bl">৳0</strong></div>
+      </div>
+      <div class="sgrid">
+        <div class="sc2"><div class="sv2" id="s-b">৳0</div><div class="sl2">Balance</div></div>
+        <div class="sc2"><div class="sv2" id="s-o">0</div><div class="sl2">Orders</div></div>
+        <div class="sc2"><div class="sv2" id="s-sp">৳0</div><div class="sl2">Total Spent</div></div>
+        <div class="sc2"><div class="sv2" id="s-pin">0000</div><div class="sl2">Support PIN</div></div>
+      </div>
+      <div class="pibox">
+        <h3>👤 Personal Information</h3>
+        <div class="pif"><label>নাম</label><input id="pn" type="text" maxlength="50"></div>
+        <div class="pif"><label>ফোন</label><input id="pp" type="tel" maxlength="15" readonly style="background:#f8fafc;color:#94a3b8"></div>
+        <div class="pif"><label>ইমেইল</label><input id="pe" type="email" maxlength="80"></div>
+        <button class="ubtn" onclick="updProf()">আপডেট করুন</button>
+      </div>
+      <div class="mlist">
+        <div class="mi" onclick="goP('orders')"><div class="mi-ico"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div><span class="mt">My Orders</span><svg class="ch" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></div>
+        <div class="mi" onclick="goP('addfund')"><div class="mi-ico"><svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.1 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></div><span class="mt">Add Fund</span><svg class="ch" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></div>
+        <div class="mi" onclick="showHelpline()"><div class="mi-ico"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div><span class="mt">Support / Helpline</span><svg class="ch" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></div>
+      </div>
+      <div class="accbtns">
+        <button class="abtn-acc supp" onclick="showHelpline()">📞 Helpline</button>
+        <button class="abtn-acc lo" onclick="doLogout()">🚪 Logout</button>
+      </div>
+    </div>
+
+    <nav class="bnav">
+      <div class="bi on" id="bi-home" onclick="goP('home')"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>Home</span></div>
+      <div class="bi" id="bi-addfund" onclick="goP('addfund')"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg><span>Add Fund</span></div>
+      <div class="bi" id="bi-orders" onclick="goP('orders')"><svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg><span>Orders</span></div>
+      <div class="bi" id="bi-account" onclick="goP('account')"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span>Account</span></div>
+    </nav>
+  </div>
+
+  <!-- ORDER MODAL -->
+  <div class="overlay" id="ov">
+    <div class="modal">
+      <div class="mh"><h3 id="m-title">অর্ডার কনফার্ম</h3><button class="mcl" onclick="closeOv()">✕</button></div>
+      <div class="csummary" id="csum"></div>
+      <div id="m-pay"></div>
+    </div>
+  </div>
+
+  <!-- HELPLINE POPUP -->
+  <div class="helpline-overlay" id="hl-overlay" onclick="closeHL(event)">
+    <div class="helpline-modal">
+      <div class="hlm-h">
+        <h3>📞 Helpline</h3>
+        <button class="hlm-close" onclick="closeHelpline()">✕</button>
+      </div>
+      <p style="font-size:12px;color:var(--t2);margin-bottom:16px">যেকোনো সমস্যায় আমাদের সাথে যোগাযোগ করুন</p>
+      <button class="hl-btn wa" id="hl-wa-btn" onclick="openWA()">
+        <div class="hl-ico wa-i">💬</div>
+        <div class="hl-txt">
+          <h4>WhatsApp</h4>
+          <p id="hl-wa-num">01612788539 · এখনই চ্যাট করুন</p>
+        </div>
+      </button>
+      <button class="hl-btn tg" id="hl-tg-btn" onclick="openTG()">
+        <div class="hl-ico tg-i">✈️</div>
+        <div class="hl-txt">
+          <h4>Telegram</h4>
+          <p id="hl-tg-un">@emtiaz0099 · Message করুন</p>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="sc" id="s-admin">
+  <div id="adm-login">
+    <div class="adm-login">
+      <div class="al-card">
+        <h2>⚡ Admin Panel</h2>
+        <p>Authorized Access Only</p>
+        <div class="al-err" id="al-err"></div>
+        <div class="fg" style="margin-bottom:13px"><label style="color:rgba(255,255,255,.4)">Username</label><input id="al-u" placeholder="username" type="text" autocomplete="off" maxlength="30" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);color:#f1f5f9"></div>
+        <div class="fg" style="margin-bottom:13px"><label style="color:rgba(255,255,255,.4)">Password</label><input id="al-p" placeholder="••••••••" type="password" autocomplete="off" maxlength="50" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);color:#f1f5f9"></div>
+        <div class="captcha-row" style="margin-bottom:14px">
+          <span class="captcha-q" id="adm-cap-q">7 + 2 = ?</span>
+          <input class="captcha-inp" id="adm-cap-a" placeholder="?" type="number" maxlength="3">
+        </div>
+        <button class="al-btn" onclick="admLogin()">Access Panel →</button>
+        <div class="al-back" onclick="show('s-login')">← Back to App</div>
+      </div>
+    </div>
+  </div>
+  <div id="adm-panel" style="display:none">
+    <div class="adm">
+      <nav class="adm-nav">
+        <h1>⚡ IMTIAZ <span class="adm-badge">ADMIN</span></h1>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:11px;color:rgba(255,255,255,.4)">Users: <span id="a-online" style="color:#4ade80;font-weight:700">0</span></span>
+          <span style="cursor:pointer;background:rgba(239,68,68,.15);color:#fca5a5;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:700" onclick="admLogout()">Logout</span>
+        </div>
+      </nav>
+      <div class="adm-tabs">
+        <div class="atab on" onclick="aTab(this,'at-dash')">📊 Dashboard</div>
+        <div class="atab" onclick="aTab(this,'at-prods')">📦 Products</div>
+        <div class="atab" onclick="aTab(this,'at-orders')">📋 Orders</div>
+        <div class="atab" onclick="aTab(this,'at-users')">👥 Users</div>
+        <div class="atab" onclick="aTab(this,'at-set')">⚙️ Settings</div>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div class="adm-pg on" id="at-dash">
+        <div class="astat-grid">
+          <div class="astat blue"><div class="astat-ico">📦</div><div class="astat-val" id="as-ord">0</div><div class="astat-lbl">Total Orders</div></div>
+          <div class="astat teal"><div class="astat-ico">👥</div><div class="astat-val" id="as-usr">0</div><div class="astat-lbl">Total Users</div></div>
+          <div class="astat green"><div class="astat-ico">💰</div><div class="astat-val" id="as-rev">৳0</div><div class="astat-lbl">Revenue</div></div>
+          <div class="astat orange"><div class="astat-ico">⚡</div><div class="astat-val" id="as-prod">0</div><div class="astat-lbl">Products</div></div>
+        </div>
+        <div class="acard"><h3><span class="ah3-ico">📋</span>Recent Orders</h3><div id="a-rec-ord"><div class="adm-no-data">No orders yet</div></div></div>
+        <div class="acard"><h3><span class="ah3-ico">👤</span>Recent Users</h3><div id="a-rec-usr"><div class="adm-no-data">No users yet</div></div></div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="adm-pg" id="at-prods">
+        <div class="acard">
+          <h3><span class="ah3-ico">➕</span>নতুন Product যোগ করুন</h3>
+          <div class="af2"><label>Product Name</label><input id="np-nm" placeholder="FF UID TOPUP (BD)" maxlength="60"></div>
+          <div class="a2-row">
+            <div class="af2"><label>Category</label><input id="np-ct" placeholder="FREE FIRE" maxlength="30"></div>
+            <div class="af2"><label>BG Color</label>
+              <div class="color-row">
+                <input id="np-c1" type="color" value="#0D47A1">
+                <input id="np-c2" type="color" value="#42A5F5">
+              </div>
+            </div>
+          </div>
+          <!-- IMAGE INPUT -->
+          <div class="af2">
+            <label>Product Image / Icon</label>
+            <div class="img-type-tabs">
+              <div class="img-tab on" id="itype-emoji" onclick="setImgType('emoji')">😀 Emoji</div>
+              <div class="img-tab" id="itype-url" onclick="setImgType('url')">🔗 Image URL</div>
+              <div class="img-tab" id="itype-upload" onclick="setImgType('upload')">📁 Upload</div>
+            </div>
+            <div id="img-emoji-sec">
+              <input id="np-ic" placeholder="💎 Emoji" maxlength="4" style="background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 13px;font-size:24px;color:#e2e8f0;width:100%;outline:none;">
+            </div>
+            <div id="img-url-sec" style="display:none">
+              <input id="np-img-url" placeholder="https://i.ibb.co/xxx/image.png" maxlength="500" style="background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 13px;font-size:13px;color:#e2e8f0;width:100%;outline:none;" oninput="prevUrlImg(this)">
+              <div id="url-prev" style="margin-top:8px;display:none">
+                <img id="url-prev-img" src="" style="width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.15)">
+              </div>
+            </div>
+            <div id="img-upload-sec" style="display:none">
+              <div class="img-upload-area" onclick="document.getElementById('np-file').click()">
+                <div id="upload-prev-wrap">
+                  <div style="font-size:32px;margin-bottom:6px">📁</div>
+                  <p style="font-size:12px;color:rgba(255,255,255,.4);font-family:'Sora',sans-serif">ক্লিক করে ছবি আপলোড করুন<br><span style="font-size:10px">JPG, PNG — max 2MB</span></p>
+                </div>
+              </div>
+              <input type="file" id="np-file" accept="image/*" style="display:none" onchange="handleImgUpload(this)">
+            </div>
+          </div>
+          <button class="abtn-save" onclick="addProd()">✅ Product যোগ করুন</button>
+        </div>
+        <div class="acard">
+          <h3><span class="ah3-ico">📦</span>All Products (<span id="pc">0</span>)
+            <button class="abtn-danger" onclick="deleteAllProds()" style="margin-left:auto;width:auto;margin-top:0;padding:5px 12px;font-size:11px">🗑️ সব মুছুন</button>
+          </h3>
+          <div id="a-prod-list"><div class="adm-no-data">No products</div></div>
+        </div>
+      </div>
+
+      <!-- PKG MANAGER -->
+      <div class="adm-pg" id="at-pkg" style="display:none">
+        <button class="abtn-back" onclick="aTab(null,'at-prods')">← Products</button>
+        <div class="acard">
+          <h3><span class="ah3-ico">📦</span><span id="pkg-pn">-</span> Packages</h3>
+          <div class="af2"><label>Package Name</label><input id="npk-n" placeholder="50 Diamond" maxlength="50"></div>
+          <div class="af2"><label>মূল্য (৳)</label><input id="npk-p" type="number" placeholder="38" max="999999"></div>
+          <button class="abtn-save" onclick="addPkg()">➕ Package যোগ</button>
+        </div>
+        <div class="acard"><h3><span class="ah3-ico">📋</span>Package List</h3><div id="pkg-list"><div class="adm-no-data">No packages</div></div></div>
+      </div>
+
+      <!-- ORDERS -->
+      <div class="adm-pg" id="at-orders">
+        <div class="acard">
+          <h3><span class="ah3-ico">📋</span>All Orders (<span id="oc">0</span>)</h3>
+          <select id="ord-filter" onchange="renderAOrders()" style="background:rgba(255,255,255,.06);color:#e2e8f0;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:6px 12px;font-size:12px;font-family:'Sora',sans-serif;margin-bottom:12px">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <div id="a-ord-list"><div class="adm-no-data">No orders</div></div>
+        </div>
+      </div>
+
+      <!-- USERS -->
+      <div class="adm-pg" id="at-users">
+        <div class="acard">
+          <h3><span class="ah3-ico">👥</span>All Users (<span id="uc">0</span>)</h3>
+          <div id="a-usr-list"><div class="adm-no-data">No users</div></div>
+        </div>
+        <div class="acard">
+          <h3><span class="ah3-ico">💰</span>Balance দিন</h3>
+          <div class="af2"><label>User Phone / Email</label><input id="b-uid" placeholder="01XXXXXXXXX" maxlength="80"></div>
+          <div class="af2"><label>Amount (৳)</label><input id="b-amt" type="number" placeholder="100" max="999999"></div>
+          <button class="abtn-save" onclick="givebal()">✅ Balance দিন</button>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="adm-pg" id="at-set">
+        <div class="acard">
+          <h3><span class="ah3-ico">⚙️</span>Site Settings</h3>
+          <div class="af2"><label>Site Name</label><input id="ss-nm" value="Imtiaz TopUp" maxlength="50"></div>
+          <div class="af2"><label>Logo URL</label><input id="ss-logo" value="https://i.ibb.co/Jj9WjtZ/logo.jpg" maxlength="300"></div>
+          <div class="af2"><label>Notice Message</label><textarea id="ss-nc" maxlength="200">২৪ ঘন্টা সার্ভিস চালু।</textarea></div>
+          <div class="af2"><label>Rules (এক লাইন = এক নিয়ম)</label><textarea id="ss-rules" maxlength="1000">শুধুমাত্র Bangladesh সার্ভারের ID দিয়ে টপ আপ হবে।&#10;ভুল Player ID দিলে Diamond ফেরত দেওয়া হবে না।&#10;অর্ডার দেওয়ার পর ক্যান্সেল করা যাবে না।</textarea></div>
+          <button class="abtn-save" onclick="saveSet()" style="margin-bottom:8px">✅ সেভ করুন</button>
+        </div>
+        <div class="acard">
+          <h3><span class="ah3-ico">💳</span>Payment & Contact Settings</h3>
+          <div class="af2"><label>bKash Number</label><input id="ss-bk" value="01612788539" maxlength="15"></div>
+          <div class="af2"><label>Nagad Number</label><input id="ss-ng" value="01612788539" maxlength="15"></div>
+          <div class="af2"><label>Rocket Number</label><input id="ss-rk" value="01612788539" maxlength="15"></div>
+          <div class="af2"><label>WhatsApp Number</label><input id="ss-wa" value="01612788539" maxlength="15"></div>
+          <div class="af2"><label>Telegram Username</label><input id="ss-tg" value="emtiaz0099" maxlength="50"></div>
+          <button class="abtn-save" onclick="savePaySet()">✅ সেভ করুন</button>
+        </div>
+        <div class="acard">
+          <h3><span class="ah3-ico">🔐</span>Admin Credentials</h3>
+          <div class="af2"><label>নতুন Username</label><input id="ss-au" placeholder="admin" maxlength="30"></div>
+          <div class="af2"><label>বর্তমান Password</label><input id="ss-op" type="password" placeholder="বর্তমান পাসওয়ার্ড" maxlength="50"></div>
+          <div class="af2"><label>নতুন Password</label><input id="ss-np" type="password" placeholder="নতুন পাসওয়ার্ড" maxlength="50"></div>
+          <button class="abtn-save" onclick="changeAdmCreds()">🔑 পরিবর্তন করুন</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-box" id="toast"></div>
+
 <script>
-    // ১. ক্যালেন্ডার লজিক (১৭ তারিখ বাদ দিয়ে)
-    const calendar = document.getElementById('calendar');
-    for (let i = 1; i <= 30; i++) {
-        if (i === 17) continue; // ১৭ তারিখ শো করবে না
-        let dayBox = document.createElement('div');
-        dayBox.className = 'day';
-        dayBox.innerText = i;
-        calendar.appendChild(dayBox);
-    }
+'use strict';
+const sanitize=s=>String(s||'').replace(/[<>"'`\\]/g,'').trim().slice(0,500);
+const sv=(k,v)=>{try{localStorage.setItem('it_'+k,JSON.stringify(v))}catch(e){}};
+const ld=(k,d)=>{try{const v=localStorage.getItem('it_'+k);return v!=null?JSON.parse(v):d}catch(e){return d}};
 
-    // ২. ৩ আঙুলের সিক্রেট ক্লিক লজিক
-    const trigger = document.getElementById('admin-trigger');
-    trigger.addEventListener('touchstart', function(e) {
-        // যদি ৩টি আঙুল দিয়ে ক্লিক করা হয়
-        if (e.touches.length === 3) {
-            // এডমিন প্যানেল ওপেন হবে
-            window.location.href = 'admin_panel.php'; 
-        }
-    }, {passive: true});
+// RATE LIMIT
+let loginAttempts=0,lockUntil=0,admAttempts=0,admLockUntil=0;
+function chkLock(isAdm){
+  const now=Date.now();
+  if(isAdm){if(now<admLockUntil){toast('🔒 '+Math.ceil((admLockUntil-now)/1000)+'s অপেক্ষা');return false;}return true;}
+  if(now<lockUntil){
+    const s=Math.ceil((lockUntil-now)/1000);
+    const lm=document.getElementById('lock-msg');
+    if(lm){lm.textContent='🔒 '+s+' সেকেন্ড অপেক্ষা করুন।';lm.style.display='block';}
+    return false;
+  }
+  const lm=document.getElementById('lock-msg');if(lm)lm.style.display='none';
+  return true;
+}
+function regFail(isAdm){
+  if(isAdm){admAttempts++;if(admAttempts>=3){admLockUntil=Date.now()+180000;admAttempts=0;}}
+  else{loginAttempts++;if(loginAttempts>=5){lockUntil=Date.now()+60000;loginAttempts=0;chkLock(false);}}
+}
 
-    // ৩. ইউনিপিন কন্ট্রোল (উদাহরণ হিসেবে বন্ধ রাখা হয়েছে)
-    let isUnipinOff = true; // এডমিন প্যানেল থেকে এই ভ্যালু পরিবর্তন করবেন
-    if (isUnipinOff) {
-        document.getElementById('unipin-notice').style.display = 'block';
-    }
+// CAPTCHA
+let capAnswer=0,capAnswer2=0,admCapAnswer=0;
+function genCap(qId){
+  const a=Math.floor(Math.random()*9)+1,b=Math.floor(Math.random()*9)+1;
+  const op=Math.random()>.5?'+':'-';
+  const ans=op==='+'?a+b:a-b;
+  document.getElementById(qId).textContent=a+' '+op+' '+b+' = ?';
+  return ans;
+}
+function initCaps(){capAnswer=genCap('cap-q');capAnswer2=genCap('cap-q2');admCapAnswer=genCap('adm-cap-q');}
+initCaps();
+
+// DEFAULT PRODUCTS
+const DEF_PRODS=[
+  {id:'p1',name:'FF UID TOPUP (BD)',icon:'💎',imgUrl:'',imgType:'emoji',cat:'FREE FIRE',c1:'#0D47A1',c2:'#42A5F5',pkgs:[
+    {id:'k1',n:'25 Diamond',p:25},{id:'k2',n:'50 Diamond',p:38},{id:'k3',n:'240 Diamond',p:155},
+    {id:'k4',n:'355 Diamond',p:230},{id:'k5',n:'480 Diamond',p:302},{id:'k6',n:'610 Diamond',p:385},
+    {id:'k7',n:'850 Diamond',p:535},{id:'k8',n:'1090 Diamond',p:692},{id:'k9',n:'1240 Diamond',p:762},
+    {id:'k10',n:'1850 Diamond',p:1140},{id:'k11',n:'2530 Diamond',p:1525},{id:'k12',n:'5060 Diamond',p:3040},
+    {id:'k13',n:'Weekly',p:155},{id:'k14',n:'Monthly',p:750}
+  ]},
+  {id:'p2',name:'UNIPIN VOUCHER',icon:'🎫',imgUrl:'',imgType:'emoji',cat:'FREE FIRE',c1:'#4A148C',c2:'#AB47BC',pkgs:[
+    {id:'u1',n:'50 Unipin',p:55},{id:'u2',n:'100 Unipin',p:110},{id:'u3',n:'200 Unipin',p:220},{id:'u4',n:'500 Unipin',p:550}
+  ]},
+  {id:'p3',name:'WEEKLY MONTHLY',icon:'🌟',imgUrl:'',imgType:'emoji',cat:'FREE FIRE',c1:'#E65100',c2:'#FF7043',pkgs:[
+    {id:'w1',n:'Weekly Pass',p:155},{id:'w2',n:'1X Monthly',p:750},{id:'w3',n:'2X Monthly',p:1500}
+  ]},
+  {id:'p4',name:'EVO ACCESS',icon:'🎮',imgUrl:'',imgType:'emoji',cat:'FREE FIRE',c1:'#B71C1C',c2:'#EF5350',pkgs:[
+    {id:'e1',n:'Evo 1 Week',p:200},{id:'e2',n:'Evo 1 Month',p:700}
+  ]},
+  {id:'p5',name:'WEEKLY LITE BD',icon:'⚡',imgUrl:'',imgType:'emoji',cat:'FREE FIRE',c1:'#1B5E20',c2:'#66BB6A',pkgs:[
+    {id:'l1',n:'Weekly Lite',p:20},{id:'l2',n:'Monthly Lite',p:450}
+  ]},
+  {id:'p6',name:'INDONESIA TOPUP',icon:'🌏',imgUrl:'',imgType:'emoji',cat:'FREE FIRE',c1:'#BF360C',c2:'#FF7043',pkgs:[
+    {id:'i1',n:'50 Diamond',p:45},{id:'i2',n:'100 Diamond',p:90},{id:'i3',n:'310 Diamond',p:255},{id:'i4',n:'520 Diamond',p:420}
+  ]}
+];
+
+let D={
+  prods:ld('p',DEF_PRODS),
+  users:ld('u',[]),
+  orders:ld('o',[]),
+  set:ld('s',{nm:'Imtiaz TopUp',logo:'https://i.ibb.co/Jj9WjtZ/logo.jpg',notice:'২৪ ঘন্টা সার্ভিস চালু।',rules:'শুধুমাত্র Bangladesh সার্ভারের ID দিয়ে টপ আপ হবে।\nভুল Player ID দিলে Diamond ফেরত দেওয়া হবে না।\nঅর্ডার দেওয়ার পর ক্যান্সেল করা যাবে না।',bk:'01612788539',ng:'01612788539',rk:'01612788539',wa:'01612788539',tg:'emtiaz0099'}),
+  admU:ld('au','admin'),
+  admP:ld('ap','imtiaz2024'),
+  cur:null,selProd:null,selPkg:null,pm:'bkash',curPkgProd:null,
+  pendingLogin:null,otpCode:null,otpExpiry:0
+};
+const sDB=()=>{sv('p',D.prods);sv('u',D.users);sv('o',D.orders);sv('s',D.set);sv('au',D.admU);sv('ap',D.admP)};
+
+// SCREENS
+function show(id){
+  document.querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  if(id==='s-login'){capAnswer=genCap('cap-q');document.getElementById('cap-a').value='';}
+  if(id==='s-reg'){capAnswer2=genCap('cap-q2');document.getElementById('cap-a2').value='';}
+}
+
+// HIDDEN ADMIN TAP
+let tapCount=0,tapTimer=null;
+function hiddenTap(){
+  tapCount++;clearTimeout(tapTimer);
+  tapTimer=setTimeout(()=>tapCount=0,2000);
+  if(tapCount>=3){
+    tapCount=0;
+    document.getElementById('adm-login').style.display='block';
+    document.getElementById('adm-panel').style.display='none';
+    show('s-admin');
+    admCapAnswer=genCap('adm-cap-q');
+    document.getElementById('adm-cap-a').value='';
+  }
+}
+
+// OTP
+let otpResendTimer=null;
+function genOTP(){return String(Math.floor(1000+Math.random()*9000));}
+function sendOTP(phone){
+  D.otpCode=genOTP();D.otpExpiry=Date.now()+5*60*1000;
+  setTimeout(()=>toast('📱 OTP (Demo): '+D.otpCode),500);
+}
+function otpMove(el,nextId){
+  el.value=el.value.replace(/\D/g,'');
+  if(el.value&&nextId)document.getElementById(nextId).focus();
+  if(!nextId){const allFilled=['o1','o2','o3','o4'].every(id=>document.getElementById(id).value);if(allFilled)verifyOTP();}
+}
+function otpBack(e,el,prevId){if(e.key==='Backspace'&&!el.value&&prevId)document.getElementById(prevId).focus();}
+function startResendTimer(){
+  let t=60;clearInterval(otpResendTimer);
+  const el=document.getElementById('resend-timer');
+  if(el)el.textContent=' ('+t+'s)';
+  otpResendTimer=setInterval(()=>{t--;if(el)el.textContent=t>0?' ('+t+'s)':'';if(t<=0)clearInterval(otpResendTimer);},1000);
+}
+function resendOTP(){
+  if(!D.pendingLogin)return;
+  sendOTP(D.pendingLogin.phone);
+  ['o1','o2','o3','o4'].forEach(id=>document.getElementById(id).value='');
+  startResendTimer();toast('📱 নতুন OTP পাঠানো হয়েছে');
+}
+function verifyOTP(){
+  const code=['o1','o2','o3','o4'].map(id=>document.getElementById(id).value).join('');
+  const err=document.getElementById('otp-err'),ok=document.getElementById('otp-ok');
+  if(code.length<4){err.textContent='OTP লিখুন';err.style.display='block';return;}
+  if(Date.now()>D.otpExpiry){err.textContent='OTP মেয়াদ শেষ। আবার পাঠান।';err.style.display='block';return;}
+  if(code!==D.otpCode){err.textContent='ভুল OTP!';err.style.display='block';return;}
+  err.style.display='none';ok.textContent='✅ ভেরিফাই সফল!';ok.style.display='block';
+  const usr=D.pendingLogin;
+  usr.lastLogin=new Date().toLocaleString('en-GB').replace(',',' ');
+  usr.loginCount=(usr.loginCount||0)+1;
+  const idx=D.users.findIndex(x=>x.id===usr.id);
+  if(idx>-1)D.users[idx]=usr;
+  D.cur=D.users[idx]||usr;
+  sDB();D.pendingLogin=null;D.otpCode=null;
+  setTimeout(()=>{loadApp();show('s-app');},700);
+}
+
+// AUTH
+function doLogin(){
+  if(!chkLock(false))return;
+  const u=sanitize(document.getElementById('l-u').value);
+  const p=sanitize(document.getElementById('l-p').value);
+  const ca=parseInt(document.getElementById('cap-a').value);
+  const err=document.getElementById('l-err');
+  if(isNaN(ca)||ca!==capAnswer){
+    capAnswer=genCap('cap-q');document.getElementById('cap-a').value='';
+    err.textContent='❌ ক্যাপচা ভুল';err.style.display='block';return;
+  }
+  if(!u||!p){err.textContent='সব ফিল্ড পূরণ করুন';err.style.display='block';return;}
+  const usr=D.users.find(x=>(x.phone===u||x.email===u)&&x.pass===p);
+  if(!usr){
+    regFail(false);
+    capAnswer=genCap('cap-q');document.getElementById('cap-a').value='';
+    err.textContent='ফোন/পাসওয়ার্ড ভুল';err.style.display='block';return;
+  }
+  loginAttempts=0;err.style.display='none';
+  D.pendingLogin=usr;sendOTP(usr.phone);
+  document.getElementById('otp-sent-to').textContent=usr.phone.replace(/(\d{3})(\d{4})(\d{4})/,'$1****$3');
+  ['o1','o2','o3','o4'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('otp-err').style.display='none';
+  document.getElementById('otp-ok').style.display='none';
+  startResendTimer();show('s-otp');
+  setTimeout(()=>document.getElementById('o1').focus(),300);
+}
+
+function doReg(){
+  const n=sanitize(document.getElementById('r-n').value);
+  const ph=sanitize(document.getElementById('r-ph').value);
+  const em=sanitize(document.getElementById('r-em').value);
+  const pw=document.getElementById('r-pw').value; 
+    const pw2=document.getElementById('r-pw2').value;
+  const ca=parseInt(document.getElementById('cap-a2').value);
+  const err=document.getElementById('r-err');
+  if(isNaN(ca)||ca!==capAnswer2){
+    capAnswer2=genCap('cap-q2');document.getElementById('cap-a2').value='';
+    err.textContent='❌ ক্যাপচা ভুল';err.style.display='block';return;
+  }
+  if(!n||!ph||!pw){err.textContent='নাম, ফোন ও পাসওয়ার্ড দিতে হবে';err.style.display='block';return;}
+  if(pw.length<6){err.textContent='পাসওয়ার্ড কমপক্ষে ৬ অক্ষর';err.style.display='block';return;}
+  if(pw!==pw2){err.textContent='পাসওয়ার্ড মিলছে না';err.style.display='block';return;}
+  if(ph.length<10||!/^\d+$/.test(ph)){err.textContent='সঠিক ফোন নম্বর দিন';err.style.display='block';return;}
+  if(D.users.find(x=>x.phone===ph)){err.textContent='এই নম্বরে আগেই অ্যাকাউন্ট আছে';err.style.display='block';return;}
+  if(em&&D.users.find(x=>x.email===em)){err.textContent='এই ইমেইলে আগেই অ্যাকাউন্ট আছে';err.style.display='block';return;}
+  err.style.display='none';
+  const usr={id:'u'+Date.now(),name:n,phone:ph,email:em,pass:pw,bal:0,spent:0,orders:[],pin:Math.floor(1000+Math.random()*9000),loginCount:0,lastLogin:'-'};
+  D.users.push(usr);D.pendingLogin=usr;sendOTP(ph);
+  document.getElementById('otp-sent-to').textContent=ph.replace(/(\d{3})(\d{4})(\d{4})/,'$1****$3');
+  ['o1','o2','o3','o4'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('otp-err').style.display='none';
+  document.getElementById('otp-ok').style.display='none';
+  startResendTimer();sDB();show('s-otp');
+  setTimeout(()=>document.getElementById('o1').focus(),300);
+}
+
+function doLogout(){
+  D.cur=null;D.pendingLogin=null;
+  document.getElementById('l-u').value='';document.getElementById('l-p').value='';
+  capAnswer=genCap('cap-q');document.getElementById('cap-a').value='';
+  show('s-login');
+}
+
+function loadApp(){
+  const u=D.cur;if(!u)return;
+  document.getElementById('tav').textContent=u.name[0].toUpperCase();
+  document.getElementById('a-av').textContent=u.name[0].toUpperCase();
+  document.getElementById('a-nm').textContent=sanitize(u.name);
+  document.getElementById('pn').value=u.name;
+  document.getElementById('pp').value=u.phone;
+  document.getElementById('pe').value=u.email||'';
+  document.getElementById('s-pin').textContent=u.pin;
+  document.getElementById('nb-txt').textContent=D.set.notice;
+  // Helpline update
+  document.getElementById('hl-wa-num').textContent=D.set.wa+' · এখনই চ্যাট করুন';
+  document.getElementById('hl-tg-un').textContent='@'+D.set.tg+' · Message করুন';
+  updUI();renderHomeProds();renderFeed();goP('home');
+  const rl=document.getElementById('rules-list');
+  if(rl)rl.innerHTML=D.set.rules.split('\n').filter(r=>r.trim()).map(r=>`<li>${sanitize(r)}</li>`).join('');
+}
+
+function updUI(){
+  const u=D.users.find(x=>x.id===D.cur.id)||D.cur;
+  D.cur=u;
+  ['nav-bal','a-bl','s-b'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='৳'+u.bal;});
+  ['w-b','bal-s'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='৳'+u.bal;});
+  document.getElementById('s-o').textContent=u.orders.length;
+  document.getElementById('s-sp').textContent='৳'+(u.spent||0);
+}
+
+// NAVIGATION
+function goP(p){
+  document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
+  document.getElementById('pg-'+p).classList.add('on');
+  const b=document.getElementById('bi-'+p);if(b)b.classList.add('on');
+  if(p==='orders')renderOrders();
+  if(p==='addfund')renderDeps();
+  if(p==='account')updUI();
+  window.scrollTo(0,0);
+}
+
+// SLIDER
+let csl=0;
+function goSl(i){csl=i;document.getElementById('slt').style.transform=`translateX(-${i*100}%)`;document.querySelectorAll('.sdot').forEach((d,j)=>d.classList.toggle('on',j===i));}
+setInterval(()=>goSl((csl+1)%3),3600);
+
+// HELPLINE
+function showHelpline(){document.getElementById('hl-overlay').classList.add('on');}
+function closeHelpline(){document.getElementById('hl-overlay').classList.remove('on');}
+function closeHL(e){if(e.target===document.getElementById('hl-overlay'))closeHelpline();}
+function openWA(){window.open('https://wa.me/88'+D.set.wa,'_blank');closeHelpline();}
+function openTG(){window.open('https://t.me/'+D.set.tg,'_blank');closeHelpline();}
+
+// PRODUCT ICON HTML
+function prodIconHtml(p,size,radius){
+  size=size||'42px';radius=radius||'0';
+  if((p.imgType==='upload'||p.imgType==='url')&&p.imgUrl){
+    return `<img src="${p.imgUrl}" style="width:${size};height:${size};object-fit:cover;border-radius:${radius}" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:30px>${p.icon||'📦'}</span>'">`;
+  }
+  return `<span style="font-size:calc(${size} * 0.7)">${p.icon||'📦'}</span>`;
+}
+
+// HOME PRODUCTS - 2 column like panelsell
+function renderHomeProds(){
+  const cats=[...new Set(D.prods.map(p=>p.cat))];
+  const cr=document.getElementById('cats-row');
+  if(cr)cr.innerHTML=['সব',...cats].map((c,i)=>`<div class="cat-chip${i===0?' on':''}" onclick="filterCat(this,'${c}')">${c}</div>`).join('');
+  renderProdGrid(D.prods);
+}
+
+function renderProdGrid(prods){
+  const g=document.getElementById('home-prods');
+  if(!prods.length){g.innerHTML='<div class="no-data" style="grid-column:span 2">কোনো পণ্য নেই</div>';return;}
+  g.innerHTML=prods.map(p=>{
+    const hasImg=(p.imgType==='upload'||p.imgType==='url')&&p.imgUrl;
+    const thumbContent=hasImg
+      ?`<img src="${p.imgUrl}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextSibling.style.display='flex'">`+`<div class="pthumb-emoji" style="display:none">${p.icon||'📦'}</div>`
+      :`<div class="pthumb-emoji">${p.icon||'📦'}</div>`;
+    return `<div class="pcard" onclick="openProd('${p.id}')">
+      <div class="pthumb" style="background:linear-gradient(135deg,${p.c1},${p.c2})">
+        <div class="abadge">AUTO</div>
+        ${thumbContent}
+      </div>
+      <div class="pname">${sanitize(p.name)}</div>
+      <div class="pprice">${p.pkgs.length?'৳'+Math.min(...p.pkgs.map(k=>k.p))+' থেকে':'-'}</div>
+    </div>`;
+  }).join('');
+}
+
+function filterCat(el,cat){
+  document.querySelectorAll('.cat-chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  renderProdGrid(cat==='সব'?D.prods:D.prods.filter(p=>p.cat===cat));
+}
+
+// PRODUCT DETAIL
+function openProd(id){
+  const p=D.prods.find(x=>x.id===id);if(!p)return;
+  D.selProd=id;D.selPkg=null;
+  const iw=document.getElementById('pd-ico');
+  if((p.imgType==='upload'||p.imgType==='url')&&p.imgUrl){
+    iw.innerHTML=`<img src="${p.imgUrl}" style="width:80px;height:80px;object-fit:cover;border-radius:18px">`;
+  } else {
+    iw.innerHTML=`<span style="font-size:42px">${p.icon||'📦'}</span>`;
+  }
+  document.getElementById('pd-title').textContent=sanitize(p.name);
+  document.getElementById('pd-min-price').textContent=p.pkgs.length?'৳'+Math.min(...p.pkgs.map(k=>k.p))+' থেকে':'-';
+  document.getElementById('pid').value='';
+  document.getElementById('uid-ok').style.display='none';
+  document.getElementById('sel-pr').textContent='৳0';
+  document.getElementById('rg').innerHTML=p.pkgs.map(pk=>`
+    <div class="ri" onclick="sPkg(this,'${pk.id}')">
+      <span class="rn">${sanitize(pk.n)}</span><span class="rp">৳${pk.p}</span>
+    </div>`).join('')||'<p style="color:var(--t2);font-size:13px;padding:8px;grid-column:span 2">Package নেই</p>';
+  goP('product');
+}
+
+function sPkg(el,id){
+  document.querySelectorAll('.ri').forEach(r=>r.classList.remove('sel'));
+  el.classList.add('sel');D.selPkg=id;
+  const p=D.prods.find(x=>x.id===D.selProd);
+  const pk=p&&p.pkgs.find(k=>k.id===id);
+  if(pk)document.getElementById('sel-pr').textContent='৳'+pk.p;
+}
+
+function selPM(el,m){document.querySelectorAll('.pm').forEach(p=>p.classList.remove('sel'));el.classList.add('sel');D.pm=m;}
+
+const GN=['RAHAT FF 71','SAKIB GAMING','RAFI PRO','ARIF BD','FAHIM 99','NABIL FF'];
+function verUID(){
+  const uid=document.getElementById('pid').value;
+  if(!uid||uid.length<5){toast('সঠিক Player ID লিখুন');return;}
+  const ok=document.getElementById('uid-ok');
+  ok.style.display='block';ok.textContent='⏳ Verifying...';ok.style.background='#fef9c3';ok.style.color='#d97706';
+  setTimeout(()=>{ok.textContent='✅ '+GN[Math.floor(Math.random()*GN.length)];ok.style.background='#dcfce7';ok.style.color='#16a34a';},1300);
+}
+
+function doBuy(){
+  if(!D.selPkg){toast('একটি প্যাকেজ সিলেক্ট করুন');return;}
+  const uid=sanitize(document.getElementById('pid').value);
+  if(!uid||uid.length<5){toast('Player ID দিন');return;}
+  const prod=D.prods.find(x=>x.id===D.selProd);
+  const pkg=prod&&prod.pkgs.find(k=>k.id===D.selPkg);
+  if(!pkg)return;
+  if(D.pm==='wallet'&&D.cur.bal<pkg.p){toast('ওয়ালেট ব্যালেন্স কম!');return;}
+  document.getElementById('csum').innerHTML=`
+    <div class="cs-row"><span class="ck">পণ্য</span><span class="cv">${sanitize(prod.name)}</span></div>
+    <div class="cs-row"><span class="ck">প্যাকেজ</span><span class="cv">${sanitize(pkg.n)}</span></div>
+    <div class="cs-row"><span class="ck">Player ID</span><span class="cv">${sanitize(uid)}</span></div>
+    <div class="cs-row"><span class="ck">মূল্য</span><span class="cv big">৳${pkg.p}</span></div>`;
+  const bk=D.set.bk,ng=D.set.ng,rk=D.set.rk,tg=D.set.tg,wa=D.set.wa;
+  if(D.pm==='wallet'){
+    document.getElementById('m-title').textContent='Wallet Payment ✅';
+    document.getElementById('m-pay').innerHTML=`
+      <div style="text-align:center;padding:10px 0 4px">
+        <div style="font-size:14px;color:var(--t2);margin-bottom:14px">Wallet থেকে ৳${pkg.p} কাটা হবে।<br>ব্যালেন্স: <strong>৳${D.cur.bal}</strong></div>
+        <button class="cfm-btn" onclick="confWallet('${sanitize(uid)}')">✅ Confirm করুন</button>
+      </div>`;
+  } else {
+    document.getElementById('m-title').textContent='Payment করুন 💳';
+    document.getElementById('m-pay').innerHTML=`
+      <div class="pay-card bkash-c">
+        <h4>📱 bKash</h4>
+        <div class="num-row"><div><div style="font-size:10px;color:#9d174d;margin-bottom:3px">Personal Number</div><div class="num-big" style="color:#9d174d">${bk}</div></div>
+        <button class="copy-btn" style="background:#e879a0" onclick="copyNum('${bk}')">Copy</button></div>
+        <button class="wa-btn" onclick="window.open('https://wa.me/88${wa}?text=bKash+Payment+৳${pkg.p}+for+${encodeURIComponent(pkg.n)}','_blank')">💬 WhatsApp</button>
+        <button class="tg-btn2" onclick="window.open('https://t.me/${tg}','_blank')">✈️ Telegram</button>
+      </div>
+      <div class="pay-card nagad-c">
+        <h4>🟠 Nagad</h4>
+        <div class="num-row"><div><div style="font-size:10px;color:#b45309;margin-bottom:3px">Personal Number</div><div class="num-big" style="color:#b45309">${ng}</div></div>
+        <button class="copy-btn" style="background:#f97316" onclick="copyNum('${ng}')">Copy</button></div>
+      </div>
+      <div class="pay-card rocket-c">
+        <h4>🚀 Rocket</h4>
+        <div class="num-row"><div><div style="font-size:10px;color:#6d28d9;margin-bottom:3px">Personal Number</div><div class="num-big" style="color:#7c3aed">${rk}</div></div>
+        <button class="copy-btn" style="background:#8b5cf6" onclick="copyNum('${rk}')">Copy</button></div>
+      </div>
+      <input class="trx-inp" id="trx-i" placeholder="TrxID / Transaction ID লিখুন" maxlength="30">
+      <button class="cfm-btn" onclick="confPay('${sanitize(uid)}')">✅ Payment Confirm করুন</button>`;
+  }
+  document.getElementById('ov').classList.add('on');
+}
+
+function copyNum(n){try{navigator.clipboard.writeText(n).then(()=>toast('✅ কপি: '+n)).catch(()=>toast('নম্বর: '+n));}catch(e){toast('নম্বর: '+n);}}
+function confWallet(uid){closeOv();placeOrder(uid,'wallet','WALLET');}
+function confPay(uid){
+  const trx=sanitize(document.getElementById('trx-i')?.value||'');
+  if(!trx||trx.length<4){toast('TrxID লিখুন');return;}
+  closeOv();placeOrder(uid,'bkash',trx);
+}
+function closeOv(){document.getElementById('ov').classList.remove('on');}
+
+function placeOrder(uid,method,trx){
+  const prod=D.prods.find(x=>x.id===D.selProd);
+  const pkg=prod&&prod.pkgs.find(k=>k.id===D.selPkg);
+  if(!pkg)return;
+  const u=D.users.find(x=>x.id===D.cur.id);
+  if(method==='wallet')u.bal-=pkg.p;
+  u.spent=(u.spent||0)+pkg.p;
+  const ord={id:'ORD'+Date.now(),uid:sanitize(uid),prodName:sanitize(prod.name),pkgName:sanitize(pkg.n),price:pkg.p,method,trx:sanitize(trx),status:'pending',date:new Date().toLocaleString('en-GB').replace(',',' '),userName:sanitize(u.name),userPhone:u.phone,userId:u.id,cancelAt:Date.now()+5*60*1000};
+  D.orders.unshift(ord);u.orders.unshift(ord.id);
+  sDB();updUI();renderFeed();
+  toast('📦 অর্ডার হয়েছে! ID: '+ord.id);
+  setTimeout(()=>{const o=D.orders.find(x=>x.id===ord.id);if(o&&o.status==='pending'){o.status='cancelled';sDB();}},5*60*1000);
+  setTimeout(()=>goP('orders'),1500);
+}
+
+// ORDERS
+function renderOrders(){
+  const my=D.orders.filter(o=>o.userId===D.cur.id);
+  const c=document.getElementById('olist');
+  if(!my.length){c.innerHTML='<div class="no-data">কোনো অর্ডার নেই</div>';return;}
+  c.innerHTML=my.map(o=>`<div class="ocard">
+    <div class="ocard-h"><span class="ocard-id">${o.id}</span><span class="badge ${o.status}">${o.status}</span></div>
+    <div class="ocard-rows">
+      <div class="or"><span class="ok">পণ্য</span><span class="ov">${o.pkgName}</span></div>
+      <div class="or"><span class="ok">Player ID</span><span class="ov">${o.uid}</span></div>
+      <div class="or"><span class="ok">মূল্য</span><span class="ov">৳${o.price}</span></div>
+      <div class="or"><span class="ok">পদ্ধতি</span><span class="ov">${o.method}</span></div>
+      ${o.trx&&o.trx!=='WALLET'?`<div class="or"><span class="ok">TrxID</span><span class="ov">${o.trx}</span></div>`:''}
+      <div class="or"><span class="ok">তারিখ</span><span class="ov">${o.date}</span></div>
+    </div></div>`).join('');
+}
+
+function renderFeed(){
+  const my=D.orders.filter(o=>o.userId===D.cur.id).slice(0,5);
+  const f=document.getElementById('order-feed');
+  if(!my.length){f.innerHTML='<div class="no-data">কোনো অর্ডার নেই</div>';return;}
+  f.innerHTML=my.map(o=>`<div class="orow">
+    <div class="oav-g">${D.cur.name[0].toUpperCase()}</div>
+    <div class="oi"><strong>${sanitize(D.cur.name)}</strong><span>${sanitize(o.pkgName)} · ৳${o.price}</span></div>
+    <span class="badge ${o.status}">${o.status}</span>
+  </div>`).join('');
+}
+
+// ADD FUND
+function setA(a){document.getElementById('fa').value=a;}
+function reqFund(){
+  const a=parseInt(document.getElementById('fa').value);
+  if(!a||a<10||a>100000){toast('সর্বনিম্ন ৳10, সর্বোচ্চ ৳1,00,000');return;}
+  const u=D.users.find(x=>x.id===D.cur.id);
+  u.bal+=a;if(!u.deps)u.deps=[];
+  u.deps.unshift({amount:a,date:new Date().toLocaleString('en-GB').replace(',',' '),status:'completed'});
+  sDB();document.getElementById('fa').value='';updUI();renderDeps();
+  toast('✅ ৳'+a+' যোগ হয়েছে!');
+}
+function renderDeps(){
+  const u=D.users.find(x=>x.id===D.cur.id);
+  const deps=u&&u.deps||[];
+  const c=document.getElementById('deps');
+  if(!deps.length){c.innerHTML='<div class="no-data">No deposit found</div>';return;}
+  c.innerHTML=deps.map(d=>`<div class="ocard" style="margin-bottom:8px">
+    <div class="or"><span class="ok">Amount</span><span class="ov">৳${d.amount}</span></div>
+    <div class="or"><span class="ok">Date</span><span class="ov">${d.date}</span></div>
+    <div class="or"><span class="ok">Status</span><span class="badge completed">${d.status}</span></div>
+  </div>`).join('');
+}
+
+// ACCOUNT
+function updProf(){
+  const u=D.users.find(x=>x.id===D.cur.id);
+  const newName=sanitize(document.getElementById('pn').value)||u.name;
+  const newEm=sanitize(document.getElementById('pe').value);
+  u.name=newName;u.email=newEm;sDB();
+  document.getElementById('a-nm').textContent=newName;
+  document.getElementById('tav').textContent=newName[0].toUpperCase();
+  document.getElementById('a-av').textContent=newName[0].toUpperCase();
+  toast('✅ প্রোফাইল আপডেট হয়েছে!');
+}
+
+// IMAGE UPLOAD
+let currentImgType='emoji',uploadedImgData='';
+function setImgType(t){
+  currentImgType=t;
+  ['emoji','url','upload'].forEach(tp=>{
+    document.getElementById('itype-'+tp).classList.toggle('on',tp===t);
+    document.getElementById('img-'+tp+'-sec').style.display=tp===t?'block':'none';
+  });
+}
+function prevUrlImg(inp){
+  const url=inp.value.trim();
+  const prev=document.getElementById('url-prev');
+  const img=document.getElementById('url-prev-img');
+  if(url){prev.style.display='block';img.src=url;img.onerror=()=>{prev.style.display='none'};}
+  else prev.style.display='none';
+}
+function handleImgUpload(inp){
+  const file=inp.files[0];
+  if(!file)return;
+  if(file.size>2*1024*1024){toast('ছবি ২MB এর বেশি হবে না');return;}
+  if(!file.type.startsWith('image/')){toast('শুধু ছবি আপলোড করুন');return;}
+  const reader=new FileReader();
+  reader.onload=e=>{
+    uploadedImgData=e.target.result;
+    document.getElementById('upload-prev-wrap').innerHTML=`<img src="${uploadedImgData}" style="width:80px;height:80px;object-fit:cover;border-radius:10px;margin:0 auto 6px;display:block"><p style="font-size:11px;color:rgba(255,255,255,.5);font-family:'Sora',sans-serif">✅ ছবি লোড হয়েছে</p>`;
+    toast('✅ ছবি লোড হয়েছে!');
+  };
+  reader.readAsDataURL(file);
+}
+
+// ADMIN
+function admLogin(){
+  if(!chkLock(true))return;
+  const u=sanitize(document.getElementById('al-u').value);
+  const p=document.getElementById('al-p').value;
+  const ca=parseInt(document.getElementById('adm-cap-a').value);
+  const err=document.getElementById('al-err');
+  if(isNaN(ca)||ca!==admCapAnswer){
+    admCapAnswer=genCap('adm-cap-q');document.getElementById('adm-cap-a').value='';
+    err.textContent='❌ ক্যাপচা ভুল';err.style.display='block';return;
+  }
+  if(u!==D.admU||p!==D.admP){
+    regFail(true);admCapAnswer=genCap('adm-cap-q');document.getElementById('adm-cap-a').value='';
+    err.textContent='Incorrect credentials';err.style.display='block';return;
+  }
+  admAttempts=0;err.style.display='none';
+  document.getElementById('adm-login').style.display='none';
+  document.getElementById('adm-panel').style.display='block';
+  renderAdmAll();
+}
+function admLogout(){
+  document.getElementById('adm-login').style.display='block';
+  document.getElementById('adm-panel').style.display='none';
+  document.getElementById('al-p').value='';
+  admCapAnswer=genCap('adm-cap-q');
+  document.getElementById('adm-cap-a').value='';
+  show('s-login');
+}
+function aTab(el,id){
+  document.querySelectorAll('.atab').forEach(t=>t.classList.remove('on'));
+  if(el)el.classList.add('on');
+  else document.querySelectorAll('.atab').forEach(t=>{if(t.getAttribute('onclick')&&t.getAttribute('onclick').includes(id))t.classList.add('on');});
+  document.querySelectorAll('.adm-pg').forEach(p=>{p.classList.remove('on');if(p.id!=='at-pkg')p.style.display='';});
+  document.getElementById('at-pkg').style.display='none';
+  const pg=document.getElementById(id);
+  if(pg){if(id==='at-pkg')pg.style.display='block';pg.classList.add('on');}
+  if(id==='at-dash')renderAdmDash();
+  if(id==='at-prods'){renderAdmProds();setImgType('emoji');}
+  if(id==='at-orders')renderAOrders();
+  if(id==='at-users')renderAdmUsers();
+  if(id==='at-set')loadSetForm();
+}
+function renderAdmAll(){renderAdmDash();renderAdmProds();renderAOrders();renderAdmUsers();}
+
+function renderAdmDash(){
+  const rev=D.orders.reduce((s,o)=>s+o.price,0);
+  document.getElementById('as-ord').textContent=D.orders.length;
+  document.getElementById('as-usr').textContent=D.users.length;
+  document.getElementById('as-rev').textContent='৳'+rev;
+  document.getElementById('as-prod').textContent=D.prods.length;
+  document.getElementById('a-online').textContent=D.users.length;
+  document.getElementById('a-rec-ord').innerHTML=D.orders.slice(0,6).map(o=>`<div class="oa-item"><div class="oa-top"><span class="oa-id">${o.id}</span><span class="badge ${o.status}">${o.status}</span></div><div class="oa-rows">👤 <span>${sanitize(o.userName)}</span> | 📦 <span>${sanitize(o.pkgName)}</span> | <span>৳${o.price}</span></div></div>`).join('')||'<div class="adm-no-data">No orders</div>';
+  document.getElementById('a-rec-usr').innerHTML=D.users.slice(-5).reverse().map(u=>`<div class="user-item"><div class="uav">${u.name[0].toUpperCase()}</div><div class="uinf"><h4>${sanitize(u.name)}</h4><p>${u.phone}</p></div><span class="ubal">৳${u.bal}</span></div>`).join('')||'<div class="adm-no-data">No users</div>';
+}
+
+function admProdThumb(p){
+  if((p.imgType==='upload'||p.imgType==='url')&&p.imgUrl){
+    return `<img src="${p.imgUrl}" style="width:56px;height:56px;object-fit:cover;border-radius:12px" onerror="this.parentElement.innerHTML='<span style=font-size:28px>${p.icon||'📦'}</span>'">`;
+  }
+  return `<span style="font-size:28px">${p.icon||'📦'}</span>`;
+}
+
+function renderAdmProds(){
+  document.getElementById('pc').textContent=D.prods.length;
+  document.getElementById('a-prod-list').innerHTML=D.prods.map(p=>`
+    <div class="prod-item">
+      <div class="pi-ico-w" style="background:linear-gradient(135deg,${p.c1},${p.c2})">${admProdThumb(p)}</div>
+      <div class="pi-inf"><h4>${sanitize(p.name)}</h4><p>${sanitize(p.cat)} · ${p.pkgs.length} pkg</p><div class="pi-tag">Min ৳${p.pkgs.length?Math.min(...p.pkgs.map(k=>k.p)):'-'}</div></div>
+      <div class="pi-acts">
+        <button class="abtn-edit" onclick="openPkgMgr('${p.id}')">📦</button>
+        <button class="abtn-del" onclick="delProd('${p.id}')">🗑️</button>
+      </div>
+    </div>`).join('')||'<div class="adm-no-data">No products</div>';
+}
+
+function addProd(){
+  const nm=sanitize(document.getElementById('np-nm').value);
+  const ct=sanitize(document.getElementById('np-ct').value)||'OTHER';
+  const c1=document.getElementById('np-c1').value;
+  const c2=document.getElementById('np-c2').value;
+  if(!nm){toast('Product নাম দিন');return;}
+  let icon='📦',imgUrl='',imgType=currentImgType;
+  if(currentImgType==='emoji'){icon=sanitize(document.getElementById('np-ic').value)||'📦';}
+  else if(currentImgType==='url'){imgUrl=sanitize(document.getElementById('np-img-url').value);icon='📦';if(!imgUrl){toast('Image URL দিন');return;}}
+  else if(currentImgType==='upload'){imgUrl=uploadedImgData;icon='📦';if(!imgUrl){toast('ছবি আপলোড করুন');return;}}
+  D.prods.push({id:'p'+Date.now(),name:nm,icon,imgUrl,imgType,cat:ct,c1,c2,pkgs:[]});
+  sDB();
+  document.getElementById('np-nm').value='';document.getElementById('np-ic').value='';document.getElementById('np-ct').value='';
+  document.getElementById('np-img-url').value='';document.getElementById('url-prev').style.display='none';
+  document.getElementById('upload-prev-wrap').innerHTML='<div style="font-size:32px;margin-bottom:6px">📁</div><p style="font-size:12px;color:rgba(255,255,255,.4);font-family:Sora,sans-serif">ক্লিক করে ছবি আপলোড করুন</p>';
+  uploadedImgData='';setImgType('emoji');
+  renderAdmProds();if(D.cur)renderHomeProds();toast('✅ Product যোগ হয়েছে!');
+}
+
+function delProd(id){
+  if(!confirm('এই product মুছবেন?'))return;
+  D.prods=D.prods.filter(p=>p.id!==id);sDB();renderAdmProds();if(D.cur)renderHomeProds();toast('🗑️ মুছা হয়েছে');
+}
+
+// DELETE ALL PRODUCTS
+function deleteAllProds(){
+  if(!confirm('সব product মুছবেন? এটা undo করা যাবে না!'))return;
+  if(!confirm('নিশ্চিত? সব '+D.prods.length+' টি product মুছে যাবে।'))return;
+  D.prods=[];sDB();renderAdmProds();if(D.cur)renderHomeProds();toast('🗑️ সব Product মুছা হয়েছে');
+}
+
+function openPkgMgr(pid){
+  D.curPkgProd=pid;
+  const p=D.prods.find(x=>x.id===pid);
+  document.getElementById('pkg-pn').textContent=sanitize(p.name);
+  document.getElementById('at-pkg').style.display='block';
+  document.querySelectorAll('.adm-pg').forEach(x=>x.classList.remove('on'));
+  document.getElementById('at-pkg').classList.add('on');
+  renderPkgList();
+}
+function renderPkgList(){
+  const p=D.prods.find(x=>x.id===D.curPkgProd);
+  const c=document.getElementById('pkg-list');
+  if(!p||!p.pkgs.length){c.innerHTML='<div class="adm-no-data">No packages</div>';return;}
+  c.innerHTML=p.pkgs.map(pk=>`<div class="pkg-item">
+    <span class="pkg-n">${sanitize(pk.n)}</span><span class="pkg-p">৳${pk.p}</span>
+    <div class="pkg-acts">
+      <button class="abtn-edit" onclick="editPkg('${pk.id}')">✏️</button>
+      <button class="abtn-del" onclick="delPkg('${pk.id}')">🗑️</button>
+    </div>
+  </div>`).join('');
+}
+function addPkg(){
+  const n=sanitize(document.getElementById('npk-n').value);
+  const p=parseInt(document.getElementById('npk-p').value);
+  if(!n||!p||p<1){toast('নাম ও সঠিক মূল্য দিন');return;}
+  const prod=D.prods.find(x=>x.id===D.curPkgProd);
+  prod.pkgs.push({id:'k'+Date.now(),n,p});
+  sDB();document.getElementById('npk-n').value='';document.getElementById('npk-p').value='';
+  renderPkgList();renderAdmProds();if(D.cur)renderHomeProds();toast('✅ Package যোগ!');
+}
+function delPkg(id){
+  const prod=D.prods.find(x=>x.id===D.curPkgProd);
+  prod.pkgs=prod.pkgs.filter(k=>k.id!==id);sDB();renderPkgList();renderAdmProds();if(D.cur)renderHomeProds();
+}
+function editPkg(id){
+  const prod=D.prods.find(x=>x.id===D.curPkgProd);
+  const pk=prod&&prod.pkgs.find(k=>k.id===id);if(!pk)return;
+  const np=prompt('"'+pk.n+'" — নতুন মূল্য (৳):',pk.p);
+  if(np!==null&&!isNaN(np)&&parseInt(np)>0){pk.p=parseInt(np);sDB();renderPkgList();renderAdmProds();if(D.cur)renderHomeProds();}
+}
+
+function renderAOrders(){
+  const f=document.getElementById('ord-filter')?.value||'all';
+  const ords=f==='all'?D.orders:D.orders.filter(o=>o.status===f);
+  document.getElementById('oc').textContent=D.orders.length;
+  const c=document.getElementById('a-ord-list');
+  if(!ords.length){c.innerHTML='<div class="adm-no-data">No orders</div>';return;}
+  c.innerHTML=ords.map(o=>`<div class="oa-item">
+    <div class="oa-top"><span class="oa-id">${o.id}</span>
+    <select class="status-sel" onchange="chgStatus('${o.id}',this.value)">
+      <option value="pending" ${o.status==='pending'?'selected':''}>⏳ pending</option>
+      <option value="completed" ${o.status==='completed'?'selected':''}>✅ completed</option>
+      <option value="cancelled" ${o.status==='cancelled'?'selected':''}>❌ cancelled</option>
+    </select></div>
+    <div class="oa-rows">👤 <span>${sanitize(o.userName)}</span> (${o.userPhone})<br>
+    📦 <span>${sanitize(o.pkgName)}</span> · <span>৳${o.price}</span> · 🎮 <span>${o.uid}</span><br>
+    💳 <span>${o.method}</span>${o.trx&&o.trx!=='WALLET'?' · TrxID: <span>'+sanitize(o.trx)+'</span>':''}<br>
+    🕐 ${o.date}</div>
+  </div>`).join('');
+}
+function chgStatus(id,s){const o=D.orders.find(x=>x.id===id);if(o){o.status=s;sDB();toast('✅ Status: '+s);}}
+
+function renderAdmUsers(){
+  document.getElementById('uc').textContent=D.users.length;
+  const c=document.getElementById('a-usr-list');
+  if(!D.users.length){c.innerHTML='<div class="adm-no-data">No users</div>';return;}
+  c.innerHTML=D.users.map(u=>`<div class="user-item">
+    <div class="uav">${u.name[0].toUpperCase()}</div>
+    <div class="uinf"><h4>${sanitize(u.name)}</h4><p>${u.phone}${u.email?' · '+sanitize(u.email):''}<br>Orders: ${u.orders.length} · Last: ${u.lastLogin||'-'}</p></div>
+    <span class="ubal">৳${u.bal}</span>
+  </div>`).join('');
+}
+
+function givebal(){
+  const id=sanitize(document.getElementById('b-uid').value);
+  const amt=parseInt(document.getElementById('b-amt').value);
+  if(!id||!amt||amt<1){toast('সব সঠিকভাবে দিন');return;}
+  const u=D.users.find(x=>x.phone===id||x.email===id);
+  if(!u){toast('ইউজার পাওয়া যায়নি');return;}
+  u.bal+=amt;sDB();
+  document.getElementById('b-uid').value='';document.getElementById('b-amt').value='';
+  renderAdmUsers();if(D.cur&&D.cur.id===u.id)updUI();
+  toast('✅ ৳'+amt+' → '+sanitize(u.name));
+}
+
+function loadSetForm(){
+  document.getElementById('ss-nm').value=D.set.nm||'';
+  document.getElementById('ss-logo').value=D.set.logo||'';
+  document.getElementById('ss-nc').value=D.set.notice||'';
+  document.getElementById('ss-rules').value=D.set.rules||'';
+  document.getElementById('ss-bk').value=D.set.bk||'';
+  document.getElementById('ss-ng').value=D.set.ng||'';
+  document.getElementById('ss-rk').value=D.set.rk||'';
+  document.getElementById('ss-wa').value=D.set.wa||'';
+  document.getElementById('ss-tg').value=D.set.tg||'';
+}
+function saveSet(){
+  D.set.nm=sanitize(document.getElementById('ss-nm').value)||D.set.nm;
+  D.set.logo=sanitize(document.getElementById('ss-logo').value)||D.set.logo;
+  D.set.notice=sanitize(document.getElementById('ss-nc').value)||D.set.notice;
+  D.set.rules=document.getElementById('ss-rules').value.slice(0,1000)||D.set.rules;
+  sDB();
+  if(D.cur){
+    document.getElementById('nb-txt').textContent=D.set.notice;
+    const rl=document.getElementById('rules-list');
+    if(rl)rl.innerHTML=D.set.rules.split('\n').filter(r=>r.trim()).map(r=>`<li>${sanitize(r)}</li>`).join('');
+  }
+  toast('✅ Site settings সেভ!');
+}
+function savePaySet(){
+  const bk=sanitize(document.getElementById('ss-bk').value);
+  const ng=sanitize(document.getElementById('ss-ng').value);
+  const rk=sanitize(document.getElementById('ss-rk').value);
+  const wa=sanitize(document.getElementById('ss-wa').value);
+  const tg=sanitize(document.getElementById('ss-tg').value);
+  D.set.bk=bk||D.set.bk;D.set.ng=ng||D.set.ng;D.set.rk=rk||D.set.rk;D.set.wa=wa||D.set.wa;D.set.tg=tg||D.set.tg;
+  sDB();
+  // Update helpline popup
+  document.getElementById('hl-wa-num').textContent=D.set.wa+' · এখনই চ্যাট করুন';
+  document.getElementById('hl-tg-un').textContent='@'+D.set.tg+' · Message করুন';
+  toast('✅ Payment settings সেভ!');
+}
+function changeAdmCreds(){
+  const op=document.getElementById('ss-op').value;
+  const np=document.getElementById('ss-np').value;
+  const nu=sanitize(document.getElementById('ss-au').value);
+  if(op!==D.admP){toast('বর্তমান পাসওয়ার্ড ভুল');return;}
+  if(np&&np.length<6){toast('নতুন পাসওয়ার্ড ৬+ অক্ষর');return;}
+  if(nu&&nu.length<3){toast('Username ৩+ অক্ষর');return;}
+  if(nu)D.admU=nu;if(np)D.admP=np;sDB();
+  document.getElementById('ss-op').value='';document.getElementById('ss-np').value='';document.getElementById('ss-au').value='';
+  toast('✅ Credentials পরিবর্তন হয়েছে!');
+}
+
+// TOAST
+function toast(m){
+  const t=document.getElementById('toast');
+  t.textContent=m;t.className='toast-box on';
+  setTimeout(()=>t.className='toast-box',3200);
+}
+z
+// CLOSE MODAL ON BG
+document.getElementById('ov').addEventListener('click',function(e){if(e.target===this)closeOv();});
 </script>
-
 </body>
 </html>
