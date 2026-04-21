@@ -502,7 +502,7 @@ img{max-width:100%;display:block}
       <div class="shead"><div class="snum">1</div><span>Select Recharge</span></div>
       <div class="rgrid" id="rg"></div>
     </div>
-    <div class="stepsec">
+    <div class="stepsec" id="uid-step">
       <div class="shead"><div class="snum">2</div><span>Account Info</span></div>
       <div class="secbox">
         <label>Player Id</label>
@@ -678,21 +678,12 @@ img{max-width:100%;display:block}
         <div class="af2"><label>BG Colors</label><div class="colorow"><input id="np-c1" type="color" value="#052e16"><input id="np-c2" type="color" value="#16a34a"></div></div>
       </div>
       <div class="af2">
-        <label>Product Image — ফোন থেকে Upload করুন</label>
+        <label>Product Image</label>
         <div class="imgtabs">
-          <div class="imgtab on" id="it-up" onclick="setIT('upload')">📁 Upload</div>
-          <div class="imgtab" id="it-url" onclick="setIT('url')">🔗 URL</div>
+          <div class="imgtab on" id="it-url" onclick="setIT('url')">🔗 URL</div>
           <div class="imgtab" id="it-emoji" onclick="setIT('emoji')">😀 Emoji</div>
         </div>
-        <div id="is-upload">
-          <div class="uparea" onclick="document.getElementById('np-file').click()">
-            <div id="up-prev-wrap"><div style="font-size:28px">📁</div></div>
-            <p>ক্লিক করে ফোন থেকে ছবি বাছুন (max 5MB)</p>
-          </div>
-          <div class="up-prog" id="up-prog">⏳ imgbb তে upload হচ্ছে...</div>
-          <input type="file" id="np-file" accept="image/*" style="display:none" onchange="handleUpload(this)">
-        </div>
-        <div id="is-url" style="display:none">
+        <div id="is-url">
           <input id="np-url" placeholder="https://i.ibb.co/xxx/img.png" maxlength="500" style="background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 11px;font-size:11.5px;color:#e2e8f0;width:100%;outline:none" oninput="prevUrl(this)">
           <div id="url-prev" style="margin-top:6px;display:none"><img id="url-prev-img" src="" style="width:62px;height:62px;object-fit:cover;border-radius:8px"></div>
         </div>
@@ -704,6 +695,12 @@ img{max-width:100%;display:block}
         <select id="np-special" style="background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 11px;font-size:12px;color:#e2e8f0;width:100%;outline:none">
           <option value="no">না, সাধারণ product</option>
           <option value="yes">হ্যাঁ, Special Offer</option>
+        </select>
+      </div>
+      <div class="af2"><label>Player ID (UID) চাই?</label>
+        <select id="np-uid" style="background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 11px;font-size:12px;color:#e2e8f0;width:100%;outline:none">
+          <option value="yes">হ্যাঁ, UID / Player ID লাগবে (FREE FIRE)</option>
+          <option value="no">না, UID দরকার নেই</option>
         </select>
       </div>
       <button class="asave" onclick="addProd()">✅ Product যোগ করুন</button>
@@ -720,6 +717,7 @@ img{max-width:100%;display:block}
       <h3><span id="pkg-pn">-</span> — Packages</h3>
       <div class="af2"><label>Package Name</label><input id="npk-n" placeholder="50 Diamond" maxlength="50"></div>
       <div class="af2"><label>মূল্য (৳)</label><input id="npk-p" type="number" placeholder="38" max="999999"></div>
+      <div class="af2"><label>Package Icon URL (ঐচ্ছিক)</label><input id="npk-img" placeholder="https://i.ibb.co/..." maxlength="500" style="background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 11px;font-size:11.5px;color:#e2e8f0;width:100%;outline:none"></div>
       <button class="asave" onclick="addPkg()">➕ Package যোগ</button>
     </div>
     <div class="acard"><h3>📋 Packages</h3><div id="pkg-list"><div class="admno">No packages</div></div></div>
@@ -758,17 +756,13 @@ img{max-width:100%;display:block}
       <h3><span class="ah3i">⚙️</span>Site Settings</h3>
       <div class="af2"><label>Site Name</label><input id="ss-nm" maxlength="50"></div>
       <div class="af2"><label>Tagline</label><input id="ss-tag" maxlength="80"></div>
-      <div class="af2"><label>Logo URL (imgbb থেকে)</label><input id="ss-logo" maxlength="400"></div>
-      <div class="af2"><label>অথবা Logo Upload করুন</label>
-        <div class="uparea" onclick="document.getElementById('logo-file').click()">
-          <div id="logo-prev-wrap"><div style="font-size:24px">🖼️</div></div>
-          <p>Logo ছবি upload করুন</p>
-        </div>
-        <div class="up-prog" id="logo-up-prog">⏳ upload হচ্ছে...</div>
-        <input type="file" id="logo-file" accept="image/*" style="display:none" onchange="handleLogoUpload(this)">
-      </div>
+      <div class="af2"><label>Logo URL</label><input id="ss-logo" maxlength="400" placeholder="https://i.ibb.co/..."></div>
       <div class="af2"><label>Notice</label><textarea id="ss-nc" maxlength="300"></textarea></div>
       <div class="af2"><label>Rules (এক লাইন = এক নিয়ম)</label><textarea id="ss-rules" maxlength="1200" style="min-height:75px"></textarea></div>
+      <div style="margin:10px 0 6px;font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.7px">🖼️ Slider Banner Images (URL)</div>
+      <div class="af2"><label>Banner 1 - Image URL</label><input id="ss-sl0" maxlength="500" placeholder="https://i.ibb.co/..."></div>
+      <div class="af2"><label>Banner 2 - Image URL</label><input id="ss-sl1" maxlength="500" placeholder="https://i.ibb.co/..."></div>
+      <div class="af2"><label>Banner 3 - Image URL</label><input id="ss-sl2" maxlength="500" placeholder="https://i.ibb.co/..."></div>
       <button class="asave" onclick="saveSet()">✅ সেভ করুন</button>
     </div>
     <div class="acard">
@@ -801,28 +795,7 @@ import{getDatabase,ref,set,get,push,update,remove,onValue}from"https://www.gstat
 const FC={apiKey:"AIzaSyAhIDSpsUuuZG-tYNhlMqmaeK6a0ER1rVs",authDomain:"imtiaz-topup-454be.firebaseapp.com",databaseURL:"https://imtiaz-topup-454be-default-rtdb.firebaseio.com",projectId:"imtiaz-topup-454be",storageBucket:"imtiaz-topup-454be.firebasestorage.app",messagingSenderId:"303372965234",appId:"1:303372965234:web:f8c88bbcda2df79b6af9eb"};
 const app=initializeApp(FC);
 const db=getDatabase(app);
-const IMGBB="2c4e2cc97a3a5b4cc1a9dbfb9cadf27e";
 
-async function imgUp(file){
-  const fd=new FormData();fd.append('image',file);fd.append('key',IMGBB);
-  try{const r=await fetch('https://api.imgbb.com/1/upload',{method:'POST',body:fd});const d=await r.json();return d.success?d.data.url:null;}catch(e){return null;}
-}
-
-window.handleUpload=async function(inp){
-  const f=inp.files[0];if(!f)return;
-  if(f.size>5*1024*1024){toast('ছবি 5MB এর বেশি নয়');return;}
-  const pg=document.getElementById('up-prog');pg.classList.add('on');pg.textContent='⏳ upload হচ্ছে...';
-  const url=await imgUp(f);pg.classList.remove('on');
-  if(url){window._upUrl=url;document.getElementById('up-prev-wrap').innerHTML=`<img src="${url}" style="width:70px;height:70px;object-fit:cover;border-radius:9px;margin:0 auto;display:block"><p style="font-size:10px;color:rgba(255,255,255,.4);margin-top:4px">✅ Upload সফল!</p>`;toast('✅ ছবি upload হয়েছে!');}
-  else toast('❌ Upload ব্যর্থ। আবার চেষ্টা করুন।');
-};
-window.handleLogoUpload=async function(inp){
-  const f=inp.files[0];if(!f)return;
-  const pg=document.getElementById('logo-up-prog');pg.style.display='block';pg.textContent='⏳ upload হচ্ছে...';
-  const url=await imgUp(f);pg.style.display='none';
-  if(url){document.getElementById('ss-logo').value=url;document.getElementById('logo-prev-wrap').innerHTML=`<img src="${url}" style="width:55px;height:55px;object-fit:cover;border-radius:50%;margin:0 auto;display:block">`;toast('✅ Logo upload হয়েছে!');}
-  else toast('❌ Upload ব্যর্থ');
-};
 
 // RATE LIMIT
 let lAt=0,lLk=0,aAt=0,aLk=0;
@@ -884,6 +857,8 @@ function updateMeta(){
   if(s.notice&&s.notice.trim()){nb.style.display='block';document.getElementById('nb-txt').textContent=s.notice;}else nb.style.display='none';
   const rl=document.getElementById('rules-list');
   if(rl)rl.innerHTML=(s.rules||'').split('\n').filter(r=>r.trim()).map(r=>`<li>${sx(r)}</li>`).join('');
+  // SLIDER BANNERS
+  [0,1,2].forEach(i=>{const url=s['sl'+i]||'';const bg=document.getElementById('slbg'+i);if(bg){if(url){bg.style.backgroundImage=`url('${url}')`;bg.style.backgroundSize='cover';bg.style.backgroundPosition='center';}else{bg.style.backgroundImage='';}}}); 
 }
 
 window.show=function(id){
@@ -1036,9 +1011,15 @@ window.openProd=async function(id){
   document.getElementById('pd-cat').textContent=sx(p.cat)+' / Topup';
   const pkgs=p.pkgs?Object.values(p.pkgs):[];
   document.getElementById('pd-price').textContent=pkgs.length?'৳'+Math.min(...pkgs.map(k=>k.p))+' থেকে':'-';
+  // Show/hide UID field
+  const uidStep=document.getElementById('uid-step');
+  if(uidStep) uidStep.style.display=(p.requireUID==='no')?'none':'block';
   document.getElementById('pid').value='';document.getElementById('sel-pr').textContent='৳0';
   document.getElementById('rg').innerHTML=p.pkgs&&Object.keys(p.pkgs).length
-    ?Object.entries(p.pkgs).map(([k,pk])=>`<div class="ri" onclick="sPkg(this,'${id}','${k}')"><span class="rn">${sx(pk.n)}</span><span class="rp">৳${pk.p}</span></div>`).join('')
+    ?Object.entries(p.pkgs).map(([k,pk])=>`<div class="ri" onclick="sPkg(this,'${id}','${k}')">
+        ${pk.imgUrl&&pk.imgUrl.length>5?`<img src="${pk.imgUrl}" style="width:24px;height:24px;object-fit:cover;border-radius:5px;flex-shrink:0;margin-right:4px">`:''}
+        <span class="rn">${sx(pk.n)}</span><span class="rp">৳${pk.p}</span>
+      </div>`).join('')
     :'<p style="color:var(--t2);font-size:11px;grid-column:span 2;padding:7px">Package নেই</p>';
   goP('product');
 };
@@ -1052,8 +1033,10 @@ window.selPM=function(el,m){document.querySelectorAll('.pmcard').forEach(x=>x.cl
 
 window.doBuy=async function(){
   if(!curSelPkg){toast('প্যাকেজ সিলেক্ট করুন');return;}
-  const uid=sx(document.getElementById('pid').value);
-  if(!uid||uid.length<5){toast('Player ID দিন (কমপক্ষে ৫ ডিজিট)');return;}
+  const uidStep=document.getElementById('uid-step');
+  const uidRequired=!uidStep||uidStep.style.display!=='none';
+  const uid=uidRequired?sx(document.getElementById('pid').value):'N/A';
+  if(uidRequired&&(!uid||uid.length<5)){toast('Player ID দিন (কমপক্ষে ৫ ডিজিট)');return;}
   const prod=await dbGet('products/'+curSelProd);
   const pkg=await dbGet('products/'+curSelProd+'/pkgs/'+curSelPkg);
   if(!prod||!pkg){toast('Error! আবার চেষ্টা করুন');return;}
@@ -1061,7 +1044,7 @@ window.doBuy=async function(){
   document.getElementById('csum').innerHTML=`
     <div class="csrow"><span class="cskey">পণ্য</span><span class="csval">${sx(prod.name)}</span></div>
     <div class="csrow"><span class="cskey">প্যাকেজ</span><span class="csval">${sx(pkg.n)}</span></div>
-    <div class="csrow"><span class="cskey">Player ID</span><span class="csval">${sx(uid)}</span></div>
+    ${uid!=='N/A'?`<div class="csrow"><span class="cskey">Player ID</span><span class="csval">${sx(uid)}</span></div>`:''}
     <div class="csrow"><span class="cskey">মূল্য</span><span class="csval big">৳${pkg.p}</span></div>`;
   const s=SET;
   if(curPM==='wallet'){
@@ -1128,11 +1111,12 @@ async function renderOrders(){
   c.innerHTML=ords.map(o=>`<div class="ocard">
     <div class="ocard-h"><span class="oid">${o.id}</span><span class="badge ${o.status}">${o.status}</span></div>
     <div class="orw"><span class="ok">পণ্য</span><span class="ov">${o.pkgName}</span></div>
-    <div class="orw"><span class="ok">Player ID</span><span class="ov">${o.uid}</span></div>
+    ${o.uid&&o.uid!=='N/A'?`<div class="orw"><span class="ok">Player ID</span><span class="ov">${o.uid}</span></div>`:''}
     <div class="orw"><span class="ok">মূল্য</span><span class="ov">৳${o.price}</span></div>
     <div class="orw"><span class="ok">পদ্ধতি</span><span class="ov">${o.method}</span></div>
     ${o.trx&&o.trx!=='WALLET'?`<div class="orw"><span class="ok">TrxID</span><span class="ov">${o.trx}</span></div>`:''}
     <div class="orw"><span class="ok">তারিখ</span><span class="ov">${o.date}</span></div>
+    ${o.adminNote?`<div class="orw" style="background:#f0fdf4;border-radius:7px;padding:7px 10px;margin-top:5px"><span class="ok" style="color:var(--g)">📝 Admin Note</span><span class="ov" style="color:var(--g);font-weight:700">${sx(o.adminNote)}</span></div>`:''}
   </div>`).join('');
 }
 
@@ -1246,7 +1230,7 @@ window.aTab=function(el,id){
   document.getElementById('at-pkg').style.display='none';
   const pg=document.getElementById(id);if(pg){if(id==='at-pkg')pg.style.display='block';pg.classList.add('on');}
   if(id==='at-dash')renderAdmDash();
-  if(id==='at-prods'){renderAdmProds();setIT('upload');}
+  if(id==='at-prods'){renderAdmProds();setIT('url');}
   if(id==='at-orders')renderAOrds();
   if(id==='at-deps')renderAdmDeps();
   if(id==='at-users')renderAdmUsers();
@@ -1277,7 +1261,7 @@ async function renderAdmDash(){
 
 window._upUrl='';
 window.setIT=function(t){
-  ['upload','url','emoji'].forEach(tp=>{document.getElementById('it-'+tp).classList.toggle('on',tp===t);document.getElementById('is-'+tp).style.display=tp===t?'block':'none';});
+  ['url','emoji'].forEach(tp=>{document.getElementById('it-'+tp).classList.toggle('on',tp===t);document.getElementById('is-'+tp).style.display=tp===t?'block':'none';});
 };
 window.prevUrl=function(inp){const url=inp.value.trim();const pv=document.getElementById('url-prev');const img=document.getElementById('url-prev-img');if(url){pv.style.display='block';img.src=url;img.onerror=()=>pv.style.display='none';}else pv.style.display='none';};
 
@@ -1296,23 +1280,22 @@ window.addProd=async function(){
   const ct=sx(document.getElementById('np-ct').value)||'OTHER';
   const c1=document.getElementById('np-c1').value,c2=document.getElementById('np-c2').value;
   const special=document.getElementById('np-special').value;
+  const requireUID=document.getElementById('np-uid').value||'yes';
   let icon='📦',imgUrl='';
-  if(document.getElementById('it-up').classList.contains('on')){imgUrl=window._upUrl||'';if(!imgUrl){toast('ছবি আপলোড করুন');return;}}
-  else if(document.getElementById('it-url').classList.contains('on')){imgUrl=sx(document.getElementById('np-url').value);if(!imgUrl){toast('Image URL দিন');return;}}
+  if(document.getElementById('it-url').classList.contains('on')){imgUrl=sx(document.getElementById('np-url').value);if(!imgUrl){toast('Image URL দিন');return;}}
   else{icon=sx(document.getElementById('np-ic').value)||'📦';}
   const pid='p'+Date.now();
-  const ok=await dbSet('products/'+pid,{name:nm,icon,imgUrl,cat:ct,c1,c2,special});
+  const ok=await dbSet('products/'+pid,{name:nm,icon,imgUrl,cat:ct,c1,c2,special,requireUID});
   if(!ok){toast('❌ Error! আবার চেষ্টা করুন');return;}
   window._upUrl='';
   document.getElementById('np-nm').value='';document.getElementById('np-ic').value='';document.getElementById('np-ct').value='';document.getElementById('np-url').value='';document.getElementById('url-prev').style.display='none';
-  document.getElementById('up-prev-wrap').innerHTML='<div style="font-size:28px">📁</div>';
   renderAdmProds();if(CUR)renderHomeProds();toast('✅ Product যোগ হয়েছে!');
 };
 window.delProd=async function(id){if(!confirm('মুছবেন?'))return;await dbRemove('products/'+id);renderAdmProds();if(CUR)renderHomeProds();};
 window.delAllProds=async function(){if(!confirm('সব মুছবেন?'))return;if(!confirm('নিশ্চিত?'))return;await dbRemove('products');renderAdmProds();if(CUR)renderHomeProds();toast('🗑️ সব মুছা হয়েছে');};
 window.openPkg=async function(pid){curPkgProd=pid;const p=await dbGet('products/'+pid);document.getElementById('pkg-pn').textContent=sx(p.name);document.getElementById('at-pkg').style.display='block';document.querySelectorAll('.admpg').forEach(x=>x.classList.remove('on'));document.getElementById('at-pkg').classList.add('on');renderPkgList();};
-async function renderPkgList(){const pkgs=await dbGet('products/'+curPkgProd+'/pkgs')||{};const arr=Object.entries(pkgs);const c=document.getElementById('pkg-list');if(!arr.length){c.innerHTML='<div class="admno">No packages</div>';return;}c.innerHTML=arr.map(([k,pk])=>`<div class="pkgitem"><span class="pkgn">${sx(pk.n)}</span><span class="pkgp">৳${pk.p}</span><div class="pkgacts"><button class="aedit" onclick="editPkg('${k}')">✏️</button><button class="adel" onclick="delPkg('${k}')">🗑️</button></div></div>`).join('');}
-window.addPkg=async function(){const n=sx(document.getElementById('npk-n').value),p=parseInt(document.getElementById('npk-p').value);if(!n||!p||p<1){toast('নাম ও মূল্য দিন');return;}const kid='k'+Date.now();await dbSet('products/'+curPkgProd+'/pkgs/'+kid,{n,p});document.getElementById('npk-n').value='';document.getElementById('npk-p').value='';renderPkgList();renderAdmProds();if(CUR)renderHomeProds();toast('✅ Package যোগ!');};
+async function renderPkgList(){const pkgs=await dbGet('products/'+curPkgProd+'/pkgs')||{};const arr=Object.entries(pkgs);const c=document.getElementById('pkg-list');if(!arr.length){c.innerHTML='<div class="admno">No packages</div>';return;}c.innerHTML=arr.map(([k,pk])=>`<div class="pkgitem">${pk.imgUrl&&pk.imgUrl.length>5?`<img src="${pk.imgUrl}" style="width:30px;height:30px;object-fit:cover;border-radius:6px;flex-shrink:0">`:''}<span class="pkgn">${sx(pk.n)}</span><span class="pkgp">৳${pk.p}</span><div class="pkgacts"><button class="aedit" onclick="editPkg('${k}')">✏️</button><button class="adel" onclick="delPkg('${k}')">🗑️</button></div></div>`).join('');}
+window.addPkg=async function(){const n=sx(document.getElementById('npk-n').value),p=parseInt(document.getElementById('npk-p').value);if(!n||!p||p<1){toast('নাম ও মূল্য দিন');return;}const imgUrl=sx(document.getElementById('npk-img')?.value||'');const kid='k'+Date.now();await dbSet('products/'+curPkgProd+'/pkgs/'+kid,{n,p,imgUrl});document.getElementById('npk-n').value='';document.getElementById('npk-p').value='';if(document.getElementById('npk-img'))document.getElementById('npk-img').value='';renderPkgList();renderAdmProds();if(CUR)renderHomeProds();toast('✅ Package যোগ!');};
 window.delPkg=async function(id){await dbRemove('products/'+curPkgProd+'/pkgs/'+id);renderPkgList();renderAdmProds();if(CUR)renderHomeProds();};
 window.editPkg=async function(id){const pk=await dbGet('products/'+curPkgProd+'/pkgs/'+id);if(!pk)return;const np=prompt('"'+pk.n+'" নতুন মূল্য:',pk.p);if(np!==null&&parseInt(np)>0){await dbUpdate('products/'+curPkgProd+'/pkgs/'+id,{p:parseInt(np)});renderPkgList();renderAdmProds();if(CUR)renderHomeProds();}};
 
@@ -1331,11 +1314,18 @@ async function renderAOrds(){
       <option value="confirmed" ${o.status==='confirmed'?'selected':''}>✅ Confirmed</option>
       <option value="cancelled" ${o.status==='cancelled'?'selected':''}>❌ Cancelled</option>
     </select></div>
-    <div class="oainfo">👤 <span>${sx(o.userName)}</span> · 📞 ${o.userPhone}<br>📦 <span>${sx(o.pkgName)}</span> · <span>৳${o.price}</span> · 🎮 <span>${o.uid}</span><br>💳 <span>${o.method}</span> · TrxID: <span>${o.trx!=='WALLET'?o.trx:'Wallet'}</span><br>🕐 ${o.date}</div>
+    <div class="oainfo">👤 <span>${sx(o.userName)}</span> · 📞 ${o.userPhone}<br>📦 <span>${sx(o.pkgName)}</span> · <span>৳${o.price}</span>${o.uid&&o.uid!=='N/A'?' · 🎮 <span>'+o.uid+'</span>':''}<br>💳 <span>${o.method}</span> · TrxID: <span>${o.trx!=='WALLET'?o.trx:'Wallet'}</span><br>🕐 ${o.date}${o.adminNote?`<br>📝 <span style="color:#4ade80">${sx(o.adminNote)}</span>`:''}</div>
   </div>`).join('');
   updNotif();
 }
-window.chgSt=async function(id,s){await dbUpdate('orders/'+id,{status:s});toast('✅ Status: '+s);updNotif();};
+window.chgSt=async function(id,s){
+  let adminNote='';
+  if(s==='confirmed'){
+    adminNote=prompt('📝 ইউজারকে কাস্টম নোট পাঠান (ঐচ্ছিক, Enter চাপুন):','') || '';
+  }
+  await dbUpdate('orders/'+id,{status:s,adminNote:sx(adminNote)});
+  toast('✅ Status: '+s);updNotif();renderAOrds();
+};
 
 // DEPOSITS ADMIN
 async function renderAdmDeps(){
@@ -1387,10 +1377,10 @@ window.givebal=async function(){
 
 async function loadSetForm(){
   const s=await dbGet('settings')||{};
-  ['nm','tag','logo','nc','rules','bk','ng','rk','wa','tg'].forEach(k=>{const el=document.getElementById('ss-'+k);if(el)el.value=s[k]||'';});
+  ['nm','tag','logo','nc','rules','bk','ng','rk','wa','tg','sl0','sl1','sl2'].forEach(k=>{const el=document.getElementById('ss-'+k);if(el)el.value=s[k]||'';});
 }
 window.saveSet=async function(){
-  const s={};['nm','tag','logo','nc','rules'].forEach(k=>{const el=document.getElementById('ss-'+k);if(el)s[k]=k==='rules'?el.value.slice(0,1200):sx(el.value);});
+  const s={};['nm','tag','logo','nc','rules','sl0','sl1','sl2'].forEach(k=>{const el=document.getElementById('ss-'+k);if(el)s[k]=k==='rules'?el.value.slice(0,1200):sx(el.value);});
   await dbUpdate('settings',s);Object.assign(SET,s);updateMeta();toast('✅ Settings সেভ!');
 };
 window.savePaySet=async function(){
