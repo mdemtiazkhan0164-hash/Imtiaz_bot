@@ -1,4 +1,38 @@
 <!DOCTYPE html>
+<!--
+=============================================================
+  FIREBASE REALTIME DATABASE RULES — এটা Firebase Console এ দিন
+  Database → Rules → নিচের কোড paste করুন → Publish
+=============================================================
+{
+  "rules": {
+    "settings": { ".read": true, ".write": false },
+    "products": { ".read": true, ".write": false },
+    "phoneIndex": { ".read": false, ".write": false,
+      "$key": { ".read": true } },
+    "emailIndex": { ".read": false, ".write": false,
+      "$key": { ".read": true } },
+    "users": {
+      ".read": false, ".write": false,
+      "$uid": {
+        ".read": "auth == null && data.exists() == false || $uid == 'lookup'",
+        ".write": false,
+        ".validate": "newData.hasChildren(['name','phone','pass','bal'])"
+      }
+    },
+    "orders": {
+      ".read": false, ".write": false,
+      "$oid": { ".read": false, ".write": false }
+    },
+    "deposits": {
+      ".read": false, ".write": false
+    },
+    "admcreds": { ".read": false, ".write": false }
+  }
+}
+NOTE: Firebase Authentication চালু করলে আরও ভালো security পাবেন।
+=============================================================
+-->
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
@@ -485,7 +519,8 @@ let ca1=0,ca2=0;
 function gCap(id){const a=Math.floor(Math.random()*9)+1,b=Math.floor(Math.random()*9)+1,op=Math.random()>.5?'+':'-',ans=op==='+'?a+b:a-b;document.getElementById(id).textContent=a+op+b+'=?';return ans;}
 function initCaps(){ca1=gCap('cap-q');ca2=gCap('cap-q2');}
 initCaps();
-const sx=s=>String(s||'').replace(/[<>"'`\\]/g,'').trim().slice(0,500);
+const sx=s=>String(s||'').replace(/[<>"'\`\\]/g,'').trim().slice(0,500);
+async function hashPass(pw){const enc=new TextEncoder();const buf=await crypto.subtle.digest('SHA-256',enc.encode(pw+'imtiaz_salt_2024'));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');}
 async function dbGet(path){try{const s=await get(ref(db,path));return s.exists()?s.val():null;}catch(e){return null;}}
 async function dbSet(path,val){try{await set(ref(db,path),val);return true;}catch(e){return false;}}
 async function dbUpdate(path,val){try{await update(ref(db,path),val);return true;}catch(e){return false;}}
@@ -526,11 +561,12 @@ window.doLogin=async function(){
   if(isNaN(ca)||ca!==ca1){ca1=gCap('cap-q');document.getElementById('cap-a').value='';err.textContent='❌ ক্যাপচা ভুল';err.style.display='block';return;}
   if(!u||!p){err.textContent='সব ফিল্ড পূরণ করুন';err.style.display='block';return;}
   err.style.display='none';toast('⏳ লগইন হচ্ছে...');
-  const users=await dbGet('users');
-  if(!users){rFail();ca1=gCap('cap-q');document.getElementById('cap-a').value='';err.textContent='ফোন/পাসওয়ার্ড ভুল';err.style.display='block';return;}
-  const found=Object.entries(users).find(([k,v])=>(v.phone===u||v.email===u)&&v.pass===p);
-  if(!found){rFail();ca1=gCap('cap-q');document.getElementById('cap-a').value='';err.textContent='ফোন/পাসওয়ার্ড ভুল';err.style.display='block';return;}
-  lAt=0;const[uid,usr]=found;usr.id=uid;
+  const idxKey=u.replace(/[^a-zA-Z0-9]/g,'_');
+  let foundUid=await dbGet('phoneIndex/'+idxKey)||await dbGet('emailIndex/'+idxKey);
+  let foundUsr=foundUid?await dbGet('users/'+foundUid):null;
+  const hp=await hashPass(p);
+  if(!foundUsr||(foundUsr.phone!==u&&foundUsr.email!==u)||(foundUsr.pass!==hp&&foundUsr.pass!==p)){rFail();ca1=gCap('cap-q');document.getElementById('cap-a').value='';err.textContent='ফোন/পাসওয়ার্ড ভুল';err.style.display='block';return;}
+  lAt=0;const uid=foundUid,usr=foundUsr;usr.id=uid;
   usr.lastLogin=new Date().toLocaleString('en-GB').replace(',',' ');usr.loginCount=(usr.loginCount||0)+1;
   await dbUpdate('users/'+uid,{lastLogin:usr.lastLogin,loginCount:usr.loginCount});
   CUR=usr;await loadApp();show('s-app');
@@ -547,11 +583,18 @@ window.doReg=async function(){
   if(pw!==pw2){err.textContent='পাসওয়ার্ড মিলছে না';err.style.display='block';return;}
   if(ph.length<10||!/^\d+$/.test(ph)){err.textContent='সঠিক ফোন নম্বর দিন';err.style.display='block';return;}
   err.style.display='none';if(btn){btn.disabled=true;btn.textContent='⏳ তৈরি হচ্ছে...';}toast('⏳ তৈরি হচ্ছে...');
-  const users=await dbGet('users')||{};
-  if(Object.values(users).find(x=>x.phone===ph)){err.textContent='এই নম্বরে আগেই অ্যাকাউন্ট আছে';err.style.display='block';if(btn){btn.disabled=false;btn.textContent='অ্যাকাউন্ট তৈরি করুন →';}return;}
+  const phKey=ph.replace(/[^a-zA-Z0-9]/g,'_');
+  const existPhone=await dbGet('phoneIndex/'+phKey);
+  if(existPhone){err.textContent='এই নম্বরে আগেই অ্যাকাউন্ট আছে';err.style.display='block';if(btn){btn.disabled=false;btn.textContent='অ্যাকাউন্ট তৈরি করুন →';}return;}
   const uid='u'+Date.now();
-  const usr={id:uid,name:n,phone:ph,email:em||'',pass:pw,bal:0,spent:0,pin:Math.floor(1000+Math.random()*9000),loginCount:1,lastLogin:new Date().toLocaleString('en-GB').replace(',',' ')};
+  const hp=await hashPass(pw);
+  const usr={id:uid,name:n,phone:ph,email:em||'',pass:hp,bal:0,spent:0,pin:Math.floor(1000+Math.random()*9000),loginCount:1,lastLogin:new Date().toLocaleString('en-GB').replace(',',' ')};
   const ok=await dbSet('users/'+uid,usr);
+  if(ok){
+    const pKey=ph.replace(/[^a-zA-Z0-9]/g,'_');
+    await dbSet('phoneIndex/'+pKey,uid);
+    if(em){const eKey=em.replace(/[^a-zA-Z0-9]/g,'_');await dbSet('emailIndex/'+eKey,uid);}
+  }
   if(!ok){err.textContent='❌ Error। Internet check করুন।';err.style.display='block';if(btn){btn.disabled=false;btn.textContent='অ্যাকাউন্ট তৈরি করুন →';}return;}
   CUR=usr;await loadApp();show('s-app');toast('✅ অ্যাকাউন্ট তৈরি হয়েছে!');if(btn){btn.disabled=false;btn.textContent='অ্যাকাউন্ট তৈরি করুন →';}
 };
@@ -623,12 +666,25 @@ window.cpNum=n=>{try{navigator.clipboard.writeText(n).then(()=>toast('✅ কপ
 window.confWallet=async function(uid,prodId,pkgId){closeOv();await placeOrder(uid,prodId,pkgId,'wallet','WALLET');};
 window.confPay=async function(uid,prodId,pkgId){const trx=sx(document.getElementById('trx-i')?.value||'');if(!trx||trx.length<4){toast('TrxID লিখুন');return;}closeOv();await placeOrder(uid,prodId,pkgId,'bkash/nagad',trx);};
 window.closeOv=()=>document.getElementById('ov').classList.remove('on');
+let lastOrderTime=0;
 async function placeOrder(uid,prodId,pkgId,method,trx){
+  const now=Date.now();if(now-lastOrderTime<5000){toast('⚠️ একটু অপেক্ষা করুন...');return;}lastOrderTime=now;
   toast('⏳ অর্ডার হচ্ছে...');
   const prod=await dbGet('products/'+prodId);const pkg=await dbGet('products/'+prodId+'/pkgs/'+pkgId);
   if(!prod||!pkg){toast('❌ Error! আবার চেষ্টা করুন');return;}
-  if(method==='wallet'){CUR.bal=(CUR.bal||0)-pkg.p;await dbUpdate('users/'+CUR.id,{bal:CUR.bal});}
+  if(method==='wallet'){
+    const freshUser=await dbGet('users/'+CUR.id);
+    const realBal=freshUser?freshUser.bal||0:0;
+    if(realBal<pkg.p){toast('❌ ব্যালেন্স কম! Add Fund করুন।');return;}
+    CUR.bal=realBal-pkg.p;
+    await dbUpdate('users/'+CUR.id,{bal:CUR.bal});
+  }
   CUR.spent=(CUR.spent||0)+pkg.p;await dbUpdate('users/'+CUR.id,{spent:CUR.spent});
+  // Duplicate TrxID check for manual payment
+  if(method!=='wallet'&&trx!=='WALLET'){
+    const existOrds=await dbGet('orders')||{};
+    if(Object.values(existOrds).find(o=>o.trx===trx&&o.userId===CUR.id)){toast('❌ এই TrxID আগেই ব্যবহার হয়েছে!');return;}
+  }
   const oid='ORD'+Date.now();
   const ord={id:oid,uid:sx(uid),prodId,prodName:sx(prod.name),pkgId,pkgName:sx(pkg.n),price:pkg.p,method,trx:sx(trx),status:'pending',date:new Date().toLocaleString('en-GB').replace(',',' '),userName:sx(CUR.name),userPhone:CUR.phone,userId:CUR.id};
   const ok=await dbSet('orders/'+oid,ord);
@@ -665,6 +721,9 @@ window.reqFund=async function(){
 window.confFund=async function(a){
   const trx=sx(document.getElementById('fund-trx')?.value||'');if(!trx||trx.length<4){toast('TrxID লিখুন');return;}
   toast('⏳ Save হচ্ছে...');
+  // Duplicate TrxID check
+  const existingDeps=await dbGet('deposits')||{};
+  if(Object.values(existingDeps).find(d=>d.trx===trx&&d.userId===CUR.id)){toast('❌ এই TrxID আগেই ব্যবহার হয়েছে!');return;}
   const dep={id:'DEP'+Date.now(),amount:a,trx,status:'pending',date:new Date().toLocaleString('en-GB').replace(',',' '),userId:CUR.id,userName:sx(CUR.name),userPhone:CUR.phone};
   const ok=await dbSet('deposits/'+dep.id,dep);if(!ok){toast('❌ Error! Internet check করুন।');return;}
   await dbSet('users/'+CUR.id+'/deps/'+dep.id,true);closeOv();document.getElementById('fa').value='';renderDeps();toast('✅ Fund request পাঠানো হয়েছে! Admin নিশ্চিত করবেন।');
