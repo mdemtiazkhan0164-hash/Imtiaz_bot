@@ -38,7 +38,9 @@ NOTE: Firebase Authentication চালু করলে আরও ভালো s
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Imtiaz TopUp</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
 :root{--g:#16a34a;--gd:#15803d;--gl:#22c55e;--g2:#4ade80;--bg:#f0fdf4;--brd:#dcfce7;--t2:#64748b;--nav:62px;--bot:66px;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -648,7 +650,9 @@ async function dbUpdate(path,val){try{await update(ref(db,path),val);return true
 let CUR=null,SET={};
 let curSelProd=null,curSelPkg=null,curPM='manual',csl=0;
 async function initApp(){
-  let s=await dbGet('settings');
+  let s=null;
+  try{const cached=sessionStorage.getItem('_set');if(cached)s=JSON.parse(cached);}catch(e){}
+  if(!s){s=await dbGet('settings');if(s)try{sessionStorage.setItem('_set',JSON.stringify(s));}catch(e){}}
   if(!s)s={nm:'Imtiaz TopUp',tag:'A TRUSTED GAME TOPUP WEBSITE',logo:'',notice:'',rules:'',bk:'01612788539',ng:'01612788539',rk:'01612788539',wa:'01612788539',tg:'emtiaz0099'};
   SET=s;updateMeta();
   document.getElementById('loading').style.display='none';
@@ -735,7 +739,7 @@ async function loadApp(){
   const init=CUR.name[0].toUpperCase();
   document.getElementById('tav-el').textContent=init;document.getElementById('a-av').textContent=init;
   document.getElementById('a-nm').textContent=sx(CUR.name);document.getElementById('pp').value=CUR.phone;document.getElementById('pe').value=CUR.email||'';document.getElementById('s-pin').textContent=CUR.pin;
-  updUI();await renderHomeProds();await renderFeed();goP('home');
+  updUI();goP('home');renderHomeProds();setTimeout(()=>renderFeed(),300);
 }
 function updUI(){
   const bal=CUR.bal||0;
@@ -753,7 +757,9 @@ window.openWA=()=>window.open('https://wa.me/88'+(SET.wa||'01612788539'),'_blank
 window.openTG=()=>window.open('https://t.me/'+(SET.tg||'emtiaz0099'),'_blank');
 window.openDL=()=>{const url=SET['dl-url']||'';if(url)window.open(url,'_blank');else toast('App coming soon!');};
 async function renderHomeProds(){
-  const prods=await dbGet('products')||{};
+  let prods={};
+  try{const cp=sessionStorage.getItem('_prods');if(cp)prods=JSON.parse(cp);}catch(e){}
+  if(!Object.keys(prods).length){prods=await dbGet('products')||{};try{sessionStorage.setItem('_prods',JSON.stringify(prods));}catch(e){}}
   const arr=Object.entries(prods).map(([k,v])=>({...v,id:k}));
   const special=arr.filter(p=>p.special==='yes');
   const regular=arr.filter(p=>p.special!=='yes');
@@ -833,10 +839,13 @@ async function placeOrder(uid,prodId,pkgId,method,trx){
     await dbUpdate('users/'+CUR.id,{bal:CUR.bal});
   }
   CUR.spent=(CUR.spent||0)+pkg.p;await dbUpdate('users/'+CUR.id,{spent:CUR.spent});
-  // Duplicate TrxID check for manual payment
+  // Duplicate TrxID check — শুধু user-এর নিজের orders দেখে
   if(method!=='wallet'&&trx!=='WALLET'){
-    const existOrds=await dbGet('orders')||{};
-    if(Object.values(existOrds).find(o=>o.trx===trx&&o.userId===CUR.id)){toast('❌ এই TrxID আগেই ব্যবহার হয়েছে!');return;}
+    const myOrdKeys=await dbGet('users/'+uid+'/orders')||{};
+    for(const oid of Object.keys(myOrdKeys)){
+      const o=await dbGet('orders/'+oid+'/trx');
+      if(o===trx){toast('❌ এই TrxID আগেই ব্যবহার হয়েছে!');return;}
+    }
   }
   const oid='ORD'+Date.now();
   const ord={id:oid,uid:sx(uid),prodId,prodName:sx(prod.name),pkgId,pkgName:sx(pkg.n),price:pkg.p,method,trx:sx(trx),status:'pending',date:new Date().toLocaleString('en-GB').replace(',',' '),userName:sx(CUR.name),userPhone:CUR.phone,userId:CUR.id};
@@ -980,8 +989,11 @@ window.pgVerify=async function(){
 // Helper for fund confirm via gateway
 async function doFundConfirm(a,trx,method){
   toast('⏳ Save হচ্ছে...');
-  const existingDeps=await dbGet('deposits')||{};
-  if(Object.values(existingDeps).find(d=>d.trx===trx&&d.userId===CUR.id)){toast('❌ এই TrxID আগেই ব্যবহার হয়েছে!');return;}
+  const myDepKeys=await dbGet('users/'+CUR.id+'/deps')||{};
+  for(const did of Object.keys(myDepKeys)){
+    const dt=await dbGet('deposits/'+did+'/trx');
+    if(dt===trx){toast('❌ এই TrxID আগেই ব্যবহার হয়েছে!');return;}
+  }
   const dep={id:'DEP'+Date.now(),amount:a,trx,method,status:'pending',date:new Date().toLocaleString('en-GB').replace(',',' '),userId:CUR.id,userName:sx(CUR.name),userPhone:CUR.phone};
   const ok=await dbSet('deposits/'+dep.id,dep);
   if(!ok){toast('❌ Error! Internet check করুন।');return;}
@@ -992,18 +1004,16 @@ async function doFundConfirm(a,trx,method){
 
 // Live stats from Firebase
 async function updateStats(){
+  // শুধু stats counter node fetch — সব data load করে না
   try{
-    const orders=await dbGet('orders')||{};
-    const users=await dbGet('users')||{};
-    const oc=Object.keys(orders).length;
-    const uc=Object.keys(users).length;
+    const st=await dbGet('stats')||{};
     const so=document.getElementById('stat-orders');
     const su=document.getElementById('stat-users');
-    if(so)so.textContent=(oc>0?oc+'+ ':'500+');
-    if(su)su.textContent=(uc>0?uc+'+ ':'200+');
+    if(so)so.textContent=(st.orders||500)+'+';
+    if(su)su.textContent=(st.users||200)+'+';
   }catch(e){}
 }
-setTimeout(updateStats,2000);
+setTimeout(updateStats,3000);
 
 initApp();
 </script>
