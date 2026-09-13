@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
 <meta name="theme-color" content="#3d0a1a" />
-<title>Special Place ✨💖</title>
+<title>শৈশবের প্রেম কাহিনী 💖</title>
 <style>
 /* ================= RESET & GLOBAL ================= */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','Poppins',system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
@@ -17,9 +17,6 @@
   --gold:#ffd97a;
   --gold-deep:#ffb347;
   --diamond:#fff4d6;
-  --burgundy-deep:#1a0308;
-  --burgundy:#3d0a1a;
-  --crimson:#5c0f22;
 }
 html{scroll-behavior:smooth}
 body{
@@ -40,7 +37,6 @@ body{
   position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
   transform:translateZ(0);
 }
-/* Soft glowing bokeh circles */
 .bokeh{
   position:absolute;
   border-radius:50%;
@@ -61,7 +57,6 @@ body{
   100%{transform:translate3d(30px,-40px,0) scale(1.15);opacity:.3}
 }
 
-/* Subtle floral pattern (SVG inline as data URI - lightweight) */
 .floral-pattern{
   position:absolute;inset:0;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><g fill='none' stroke='%23ff8fb8' stroke-width='0.6' opacity='0.13'><circle cx='50' cy='50' r='8'/><circle cx='50' cy='50' r='14'/><circle cx='50' cy='50' r='20'/><circle cx='150' cy='150' r='10'/><circle cx='150' cy='150' r='18'/><circle cx='150' cy='150' r='26'/><path d='M100 20 Q110 40 100 60 Q90 40 100 20 Z'/><path d='M20 100 Q40 110 60 100 Q40 90 20 100 Z'/><path d='M140 100 Q160 110 180 100 Q160 90 140 100 Z'/></g></svg>");
@@ -74,7 +69,6 @@ body{
   100%{background-position:280px 280px}
 }
 
-/* Rose petals floating */
 .petal{
   position:absolute;
   width:14px;height:14px;
@@ -92,7 +86,6 @@ body{
   100%{transform:translate3d(-60px,110vh,0) rotate(720deg) scale(1);opacity:0}
 }
 
-/* Sparkles */
 .sparkle{
   position:absolute;
   width:4px;height:4px;
@@ -134,7 +127,7 @@ body{
   gap:2.6rem;padding:1rem;
 }
 
-/* ================= ✨ HERO SECTION (Floral Luxury) ✨ ================= */
+/* ================= ✨ HERO SECTION ✨ ================= */
 .hero{
   width:100%;
   display:flex;
@@ -174,7 +167,6 @@ body{
   50%{transform:translate3d(0,-6px,0) rotateX(.6deg)}
 }
 
-/* Glowing floral border ring */
 .hero-card::before{
   content:'';
   position:absolute;inset:-2px;
@@ -203,7 +195,6 @@ body{
   to{transform:rotate(360deg)}
 }
 
-/* Ambient inner light sweeps */
 .hero-card::after{
   content:'';
   position:absolute;
@@ -223,7 +214,6 @@ body{
   100%{transform:translate3d(3%,2%,0) rotate(6deg)}
 }
 
-/* Floral corner accents on card */
 .hero-floral{
   position:absolute;
   font-size:clamp(1.6rem,4vw,2.6rem);
@@ -242,7 +232,6 @@ body{
   100%{opacity:1;transform:scale(1.12) rotate(8deg)}
 }
 
-/* Sparkles on card */
 .hero-spark{
   position:absolute;
   width:10px;height:10px;
@@ -264,7 +253,6 @@ body{
   50%{opacity:1;transform:scale(1.4)}
 }
 
-/* --- HERO TEXT (Gold & Diamond Shine) --- */
 .hero-title{
   position:relative;
   z-index:2;
@@ -327,7 +315,6 @@ body{
   }
 }
 
-/* Subtitle (elegant curved style) */
 .hero-subtitle-wrap{
   position:relative;
   z-index:2;
@@ -443,7 +430,6 @@ body{
   100%{transform:translate3d(0,-12px,0) rotateY(1.5deg)}
 }
 
-/* Floral rose decoration on folder */
 .folder-floral{
   position:absolute;
   font-size:1.5rem;
@@ -593,20 +579,53 @@ body{
   transition:width .15s ease-out;will-change:width;
 }
 .story-text{
-  font-size:1.22rem;line-height:1.95;color:#fff4d6;overflow-y:auto;
-  padding:1.2rem 1.3rem 1.2rem 1.6rem;max-height:52vh;
+  font-size:1.18rem;line-height:2;color:#fff4d6;overflow-y:auto;
+  padding:1.3rem 1.4rem 1.3rem 1.7rem;max-height:52vh;
   font-family:'Georgia','Cormorant Garamond','Times New Roman',serif;
   letter-spacing:.35px;
-  text-shadow:0 0 6px rgba(255,215,140,.5),0 0 14px rgba(255,143,184,.3);
+  text-shadow:0 0 6px rgba(255,215,140,.45),0 0 14px rgba(255,143,184,.3);
   scrollbar-width:thin;scrollbar-color:var(--red) #2a0a1a;
-  white-space:pre-wrap;word-break:break-word;
   background:rgba(255,255,255,.03);border-radius:22px;
   border:1px solid rgba(255,215,140,.28);
   -webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
 }
-.story-text p{margin-bottom:1.5rem;text-indent:1.5rem}
-.story-text p:first-of-type{text-indent:0}
+.story-text p{margin-bottom:1.6rem;text-align:justify;word-break:break-word}
+.story-text p:first-of-type::first-letter{
+  font-size:3.2rem;
+  float:left;
+  line-height:.9;
+  padding:.1rem .55rem 0 0;
+  color:#ffd97a;
+  font-family:'Georgia','Playfair Display',serif;
+  font-weight:700;
+  text-shadow:0 0 15px #ffd97a,0 0 30px #ff4d6d;
+}
+.story-text .sumaiya{
+  display:inline-block;
+  font-weight:700;
+  font-style:italic;
+  font-family:'Georgia','Playfair Display',serif;
+  background:linear-gradient(135deg,#fff4d6,#ffd97a,#ffb347,#ff8fb8);
+  background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+  text-shadow:0 0 15px rgba(255,215,140,.9),0 0 30px rgba(255,143,184,.7);
+  filter:drop-shadow(0 0 8px rgba(255,215,140,.8));
+  animation:sumaiyaShine 3s ease-in-out infinite alternate;
+  letter-spacing:.5px;
+  padding:0 .15rem;
+}
+@keyframes sumaiyaShine{
+  0%{
+    background-position:0% 50%;
+    text-shadow:0 0 12px rgba(255,215,140,.8),0 0 24px rgba(255,143,184,.6);
+  }
+  100%{
+    background-position:200% 50%;
+    text-shadow:0 0 22px rgba(255,244,214,1),0 0 44px rgba(255,215,140,.9);
+  }
+}
 .story-text::-webkit-scrollbar{width:8px}
 .story-text::-webkit-scrollbar-track{background:#1e0a1a;border-radius:20px}
 .story-text::-webkit-scrollbar-thumb{
@@ -734,7 +753,7 @@ body{
   .open-btn{font-size:1rem;padding:.85rem 1.9rem}
   .modal-content{padding:1.6rem;border-radius:40px}
   .close-btn{width:44px;height:44px;font-size:1.7rem}
-  .story-text{font-size:1.06rem;line-height:1.85}
+  .story-text{font-size:1.04rem;line-height:1.9}
   .admin-panel{padding:1.5rem;border-radius:32px}
   .admin-trigger{width:44px;height:44px;font-size:1.2rem}
   .hero-floral{font-size:1.4rem}
@@ -772,7 +791,7 @@ body{
   </div>
 
   <main class="app-container">
-    <!-- ✨ HERO SECTION (Floral Luxury) ✨ -->
+    <!-- ✨ HERO SECTION ✨ -->
     <section class="hero" aria-label="Welcome">
       <div class="hero-card">
         <span class="hero-floral tl">❀</span>
@@ -829,7 +848,6 @@ body{
   <!-- ADMIN PANEL -->
   <div class="admin-panel-overlay" id="adminPanelOverlay" role="dialog" aria-modal="true" aria-label="Admin panel">
     <div class="admin-panel">
-      <!-- LOGIN VIEW -->
       <div id="adminLoginView">
         <h2>🔐 Admin Access</h2>
         <div style="margin-top:1.2rem">
@@ -847,7 +865,6 @@ body{
         </div>
       </div>
 
-      <!-- DASHBOARD VIEW -->
       <div id="adminEditorView" class="hidden">
         <h2>⚙️ Admin Dashboard</h2>
 
@@ -856,7 +873,6 @@ body{
           <button class="admin-tab" data-tab="story" role="tab">📖 Story</button>
         </div>
 
-        <!-- Welcome Tab -->
         <div class="admin-tab-panel active" id="tab-welcome">
           <label for="welcomeTitleInput">Welcome Heading</label>
           <input type="text" id="welcomeTitleInput" placeholder="Welcome, Akhi Moni ✨💖" />
@@ -873,7 +889,6 @@ body{
           </div>
         </div>
 
-        <!-- Story Tab -->
         <div class="admin-tab-panel" id="tab-story">
           <label for="storyInput">Story Text (HTML supported)</label>
           <textarea id="storyInput" placeholder="Write your beautiful story here..."></textarea>
@@ -901,16 +916,22 @@ body{
   const ADMIN_EMAIL = "okjan218@gmail.com";
   const ADMIN_PASSWORD = "016450";
 
-  const KEY_WELCOME_TITLE = 'sp_welcome_title_v2';
-  const KEY_WELCOME_SUB   = 'sp_welcome_sub_v2';
-  const KEY_STORY         = 'sp_story_v2';
+  const KEY_WELCOME_TITLE = 'sp_welcome_title_v3';
+  const KEY_WELCOME_SUB   = 'sp_welcome_sub_v3';
+  const KEY_STORY         = 'sp_story_v3';
 
   const DEFAULT_TITLE = 'Welcome, Akhi Moni ✨💖';
   const DEFAULT_SUB   = 'বন্ধুর তৈরি করা এই বিশেষ কোণে তোমাকে স্বাগতম!';
+
+  // ================= FULL EMBEDDED STORY =================
   const DEFAULT_STORY = `
-<p>✨ এক ছিল ছোট্ট রাজকুমারী, নাম তার আখি মনি... ✨</p>
-<p>🌸 শৈশবের সেই মিষ্টি দিনগুলো, প্রথম দেখা, লুকিয়ে তাকানো, আর মনের কোণে গোপন ভালোবাসা — সব এখানে ফুটে উঠবে।</p>
-<p>💖 এই গল্পটি এখনো লেখা হয়নি। অ্যাডমিন পোর্টাল থেকে গল্প লিখে সেভ করুন।</p>
+<p>তখন আমার বয়স হয়তো নয়, আর ওর আট। আমাদের বাসাগুলো ছিল পাশাপাশি। বাড়ির উঠোন কিংবা খেলার মাঠে দূর থেকে সে আমাকে বারবার ডাকতো। ছোট মানুষ, অত কিছু বুঝতাম না, কিন্তু তার ওই ডাকার মাঝে এক অদ্ভুত চঞ্চলতা ছিল। কোনো না কোনো বাহানায় সে সবসময় চেষ্টা করতো আমার নজর যেন শুধু তারই দিকে থাকে।</p>
+<p>ধীরে ধীরে সে আমাদের সাথেই খেলায় মেতে উঠলো। প্রতিদিন নিয়ম করে আমাকে খেলতে ডাকার জন্য বাসায় চলে আসতো। দেখতে দেখতে দু-তিনটে বছর কেটে গেল। খেলার ছলেই কত মিষ্টি দুষ্টুমি! কখনো ছুতো করে একটু মেরে দেওয়া, আবার কখনো চোখ মারা—অসংখ্য ছোট ছোট স্মৃতি জমে উঠছিল প্রতিদিন। আমি হয়তো চুপচাপ সব দেখতাম, কখনো মুখে কিছু বলতাম না। এমনকি সে-ও কখনো সরাসরি কিছু বলেনি। তার নাম ছিল <span class="sumaiya">সুমাইয়া</span>।</p>
+<p>আমরা একই গ্রামে বড় হচ্ছিলাম। মনে মনে হয়তো এক অপরকে খুব গভীরভাবে চাইতাম, কিন্তু প্রকাশ করার সাহস বা বোঝার মতো বয়স তখনো হয়নি। তাছাড়া গ্রামে নানা মানুষের চোখ থাকে, তাই লোকচক্ষুর অন্তরালে নিজেদের এই আলতো অনুভূতিগুলোকে আড়ালেই রাখতে চেয়েছিলাম।</p>
+<p>প্রতিদিনের এই হাসিখুশি দিনগুলোর মাঝে হঠাৎ করেই একদিন শুনলাম <span class="sumaiya">সুমাইয়া</span> চট্টগ্রাম চলে যাচ্ছে তার বোনের বাসায়। যেদিন সে চলে গেল, সেদিন প্রথম বুঝতে পারলাম জীবনের কতটা গভীরে সে শিকড় চালিয়ে দিয়েছিল। বুকের ভেতরটা কেমন যেন খালি হয়ে গিয়েছিল, মনে হচ্ছিল নিঃশ্বাস নিতেও যেন কষ্ট হচ্ছে। একটা মানুষকে হারিয়ে ফেলার আসল বেদনা যে কী, তা সেদিন প্রথম হাড়গেড়ে উপলব্ধি করেছিলাম।</p>
+<p>প্রায় এক বছর সে চট্টগ্রামে ছিল। এই দীর্ঘ বিচ্ছেদের সময়ে আমার মনের ভেতর একটা গভীর পরিবর্তন এসে যায়। সেই কষ্ট পাওয়ার পর থেকে মনে মনে স্থির করেছিলাম, <span class="sumaiya">সুমাইয়া</span> ছাড়া আর অন্য কোনো মেয়ের সাথে এভাবে কখনো মিশবো না।</p>
+<p>একবছর পর যখন সে ফিরে এলো, ততদিনে আমরা দুজনেই আরেকটু বড় ও প্রাপ্তবয়স্ক হয়ে উঠেছি। আগের মতো আর খেলায় মেতে ওঠার দিন ছিল না, তাও সম্পর্কের সেই সুতোটা পুরোপুরি ছিঁড়ে যায়নি। সে আগের মতোই আমার কাছে এসে অনেক কিছু শেয়ার করতো, তার মাঝে কোনো লুকোচুরি বা হিংসা ছিল না। তবে ভালোবাসার সেই না-বলা প্রকাশগুলো আড়ালেই রয়েগেল।</p>
+<p>পারিবারিক নিয়ম ও পরিস্থিতির টানে আস্তে আস্তে কথা কমে আসতে লাগলো। জীবনের সেই মিষ্টি শৈশবটা স্মৃতির পাতায় বন্দি হয়ে গেল, আর রয়ে গেল এক মায়াবী অনুভূতির গল্প—যা কখনো মুখে বলা হয়নি, কিন্তু হৃদয়ে লেখা রয়ে গেছে সারাজীবনের জন্য।</p>
 `.trim();
 
   // ================= STORAGE HELPERS =================
@@ -959,14 +980,13 @@ body{
   const tabs = document.querySelectorAll('.admin-tab');
   const tabPanels = document.querySelectorAll('.admin-tab-panel');
 
-  // ================= CSS-ONLY PARTICLES (Rose petals & sparkles) =================
+  // ================= CSS-ONLY PARTICLES =================
   function createPetalsAndSparkles(){
     const bg = document.querySelector('.bg-floral');
     const isMobile = window.innerWidth < 600;
     const petalCount = isMobile ? 8 : 14;
     const sparkleCount = isMobile ? 12 : 22;
 
-    // Rose petals
     for(let i = 0; i < petalCount; i++){
       const p = document.createElement('div');
       p.className = 'petal';
@@ -981,7 +1001,6 @@ body{
       bg.appendChild(p);
     }
 
-    // Sparkles
     for(let i = 0; i < sparkleCount; i++){
       const s = document.createElement('div');
       s.className = 'sparkle';
@@ -1003,7 +1022,7 @@ body{
     const sub   = safeGet(KEY_WELCOME_SUB,   DEFAULT_SUB);
     heroTitle.textContent = title;
     heroSubtitle.textContent = sub;
-    document.title = title.replace(/[^\w\s\u0980-\u09FF]/g,'').trim() || 'Special Place';
+    document.title = title.replace(/[^\w\s\u0980-\u09FF]/g,'').trim() || 'শৈশবের প্রেম কাহিনী 💖';
   }
 
   function renderStory(){
